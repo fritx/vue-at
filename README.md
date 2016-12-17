@@ -35,8 +35,8 @@ npm i vue-at@1.x  # for Vue1
 </style>
 
 <template>
-  <at members={members}>
-    <div contentEditable />
+  <at :members="members">
+    <div contenteditable></div>
   </at>
 </template>
 
