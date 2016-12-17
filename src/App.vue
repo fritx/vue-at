@@ -9,6 +9,7 @@
 </template>
 
 <script>
+// import At from '../dist'
 import At from './At.vue'
 
 export default {
