@@ -17,9 +17,10 @@ See also: [react-at][react-at]
 [At.js][at.js] is awesome (4000+ stars), but:
 
 - It is [buggy][buggy].
-- It seems like out of maintainment.
-- It is based on jQuery.
-- Its code is like "Spaghetti" and hard to read.
+- It is based on jQuery and jQuery-Caret.
+- It introduces extra node wrappers.
+- It is unstable on content edit/copy/paste.
+- Its code is hard to learn.
 
 Finally I lost interest in [patching it][buggy] and ended up creating this.
 
@@ -30,8 +31,8 @@ npm i vue-at@1.x  # for Vue1
 
 ```vue
 <style>
-.atwho-view { /* more styles */ }
-.atwho-view ul { /* more styles */ }
+#app .atwho-view { /* more */ }
+#app .atwho-ul { /* more */ }
 </style>
 
 <template>
