@@ -23,7 +23,7 @@
               @mouseenter="handleItemHover"
               @click="handleItemClick"
             >
-              <span v-text="item"></span>
+              <span v-text="itemName(item)"></span>
             </li>
           </ul>
         </div>
@@ -39,14 +39,38 @@ import {
   getRange, applyRange
 } from './util'
 
-const at = '@'
-
 export default {
   name: 'At',
   props: {
+    at: {
+      type: String,
+      default: '@'
+    },
+    avoidEmail: {
+      type: Boolean,
+      default: true
+    },
     members: {
-      required: true,
-      type: Array
+      type: Array,
+      default: []
+    },
+    nameKey: {
+      type: String,
+      default: ''
+    },
+    filterMatch: {
+      type: Function,
+      default: (name, chunk) => {
+        // match at lower-case
+        return name.toLowerCase()
+          .indexOf(chunk.toLowerCase()) > -1
+      }
+    },
+    deleteMatch: {
+      type: Function,
+      default: (name, chunk) => {
+        return name === chunk
+      }
     }
   },
 
@@ -73,6 +97,10 @@ export default {
   },
 
   methods: {
+    itemName (v) {
+      const { nameKey } = this
+      return nameKey ? v[nameKey] : v
+    },
     isCur (index) {
       return index === this.atwho.cur
     },
@@ -91,12 +119,15 @@ export default {
     handleDelete (e) {
       const range = getPrecedingRange()
       if (range) {
+        const { at, members, deleteMatch, itemName } = this
         const text = range.toString()
         const index = text.lastIndexOf(at)
         if (index > -1) {
           const chunk = text.slice(index + 1, -1)
-          const { members } = this
-          const has = members.indexOf(chunk) > -1
+          const has = members.some(v => {
+            const name = itemName(v)
+            return deleteMatch(name, chunk)
+          })
           if (has) {
             e.preventDefault()
             e.stopPropagation()
@@ -161,26 +192,30 @@ export default {
       if (this.hasComposition) return
       const range = getPrecedingRange()
       if (range) {
+        const { at, avoidEmail } = this
         let show = true
         const text = range.toString()
         const index = text.lastIndexOf(at)
         if (index < 0) show = false
         const prev = text[index - 1]
-
-        // 上一个字符不能为字母数字 避免与邮箱冲突
-        if (/^[a-z0-9]$/i.test(prev)) show = false
         const chunk = text.slice(index + 1)
+
+        if (avoidEmail) {
+          // 上一个字符不能为字母数字 避免与邮箱冲突
+          // 微信则是避免 所有字母数字及半角符号
+          if (/^[a-z0-9]$/i.test(prev)) show = false
+        }
+
         // chunk以空白字符开头不匹配 避免`@ `也匹配
         if (/^\s/.test(chunk)) show = false
 
         if (!show) {
           this.closePanel()
         } else {
-          const chunk_l = chunk.toLowerCase()
-          const { members } = this
-          const matched = members.filter(item => {
-            // match at lower-case
-            return item.toLowerCase().indexOf(chunk_l) > -1
+          const { members, filterMatch, itemName } = this
+          const matched = members.filter(v => {
+            const name = itemName(v)
+            return filterMatch(name, chunk)
           })
           if (matched.length) {
             this.openPanel(matched, range, index)
@@ -220,12 +255,13 @@ export default {
 
     selectItem () {
       const { range, offset, list, cur } = this.atwho
+      const { itemName } = this
       const r = range.cloneRange()
       r.setStart(r.endContainer, offset + 1) // 从@后第一位开始
       // hack: 连续两次 可以确保click后 focus回来 range真正生效
       applyRange(r)
       applyRange(r)
-      document.execCommand('insertText', 0, list[cur] + ' ')
+      document.execCommand('insertText', 0, itemName(list[cur]) + ' ')
     }
   }
 }
