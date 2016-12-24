@@ -1,12 +1,12 @@
 # vue-at
 
-<img width="400" height="335" src="https://raw.githubusercontent.com/fritx/react-at/dev/shot.png">
+<img width="262" height="218" src="https://raw.githubusercontent.com/fritx/vue-at/master/WechatIMG1.jpeg">&nbsp;&nbsp;<img width="262" height="218" src="https://raw.githubusercontent.com/fritx/vue-at/master/WechatIMG2.jpeg">
 
 - [x] Filter/Scroll/Insert/Delete
 - [x] Keyboard/Mouse events
 - [x] Plain-text based, no jQuery, no extra nodes
 - [x] ContentEditable
-- [ ] Avatar
+- [x] Avatars, custom templates
 - [x] Vue2
 - [ ] Vue1
 
@@ -51,6 +51,37 @@ export default {
     }
   }
 }
+</script>
+```
+
+## Custom Templates
+
+```vue
+<style>
+#app .atwho-li { /* more */ }
+#app .atwho-li img { /* more */ }
+#app .atwho-li span { /* more */ }
+</style>
+
+<template>
+  <at :members="members" nameKey="name">
+    <template slot="item" scope="s">
+      <img :src="s.item.avatar">
+      <span v-text="s.item.name"></span>
+    </template>
+    <div contenteditable></div>
+  </at>
+</template>
+
+<script>
+// ...
+members: [{
+  avatar: 'https://randomuser.me/api/portraits/men/2.jpg',
+  name: 'myrtie.green'
+}, {
+  avatar: 'https://randomuser.me/api/portraits/men/8.jpg',
+  name: '椿木'
+}]
 </script>
 ```
 
