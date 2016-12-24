@@ -13,11 +13,7 @@
     min-width: 120px;
     z-index: 11110 !important;
 }
-.atwho-view .cur {
-    background: #3366FF;
-    color: white;
-}
-.atwho-view ul {
+.atwho-ul {
     /* width: 100px; */
     list-style:none;
     // padding:0;
@@ -25,7 +21,7 @@
     // max-height: 200px;
     // overflow-y: auto;
 }
-.atwho-view ul li {
+.atwho-li {
     display: block;
     // padding: 5px 10px;
     // border-bottom: 1px solid #DDD;
@@ -42,12 +38,12 @@
   // overflow: hidden;
   box-shadow: 0 0 10px 0 rgba(101, 111, 122, .5);
 }
-.atwho-view ul {
+.atwho-ul {
   max-height: 135px;
   padding: 0;
   margin: 0;
 }
-.atwho-view ul li {
+.atwho-li {
   box-sizing: border-box;
   height: 27px;
   padding: 0 12px;
@@ -59,9 +55,10 @@
     text-overflow: ellipsis;
   }
 }
-.atwho-view .cur {
+.atwho-cur {
   // background: #44a8f2;
   background: #5BB8FF;
+  color: white;
 }
 
 ////// added 2

@@ -14,9 +14,10 @@
     >
       <div class="atwho-inner">
         <div class="atwho-view">
-          <ul class="atwho-view-ul">
+          <ul class="atwho-ul">
             <li v-for="(item, index) in atwho.list"
-              :class="isCur(index) && 'cur'"
+              class="atwho-li"
+              :class="isCur(index) && 'atwho-cur'"
               :ref="isCur(index) && 'cur'"
               :data-index="index"
               @mouseenter="handleItemHover"
