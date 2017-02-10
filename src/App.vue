@@ -20,6 +20,7 @@
 </template>
 
 <script>
+// import At from 'vue-at'
 // import At from '../dist'
 import At from './At.vue'
 
