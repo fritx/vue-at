@@ -17,9 +17,10 @@ Object.assign(config, {
         NODE_ENV: '"production"'
       }
     }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true
-    }),
+    // new webpack.LoaderOptionsPlugin({
+    //   minimize: true
+    // }),
+    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.ExternalsPlugin('commonjs2', [
       'vue',
     ])
@@ -30,7 +31,6 @@ Object.assign(config, {
 //   // http://vue-loader.vuejs.org/en/workflow/production.html
 //   module.exports.plugins = (module.exports.plugins || []).concat([
 //     new webpack.optimize.UglifyJsPlugin({
-//       sourceMap: true,
 //       compress: {
 //         warnings: false
 //       }
