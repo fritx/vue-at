@@ -34,13 +34,16 @@ export function closest (el, predicate) {
   while (el = el && el.parentNode);
 }
 // http://stackoverflow.com/questions/15157435/get-last-character-before-caret-position-in-javascript
+// 修复 "空格+表情+空格+@" range报错 应设(endContainer, 0)
+// stackoverflow上的这段代码有bug
 export function getPrecedingRange() {
   const r = getRange()
   if (r) {
     const range = r.cloneRange()
     range.collapse(true)
-    var el = closest(range.endContainer, d => d.contentEditable)
-    range.setStart(el, 0)
+    // var el = closest(range.endContainer, d => d.contentEditable)
+    // range.setStart(el, 0)
+    range.setStart(range.endContainer, 0)
     return range
   }
 }
