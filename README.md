@@ -65,7 +65,7 @@ export default {
 </style>
 
 <template>
-  <at :members="members" nameKey="name">
+  <at :members="members" name-key="name">
     <template slot="item" scope="s">
       <img :src="s.item.avatar">
       <span v-text="s.item.name"></span>

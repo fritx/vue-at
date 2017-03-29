@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <at :members="members" nameKey="name">
+    <at :members="members" name-key="name">
       <!-- custom: same as default slot -->
       <!-- <template slot="item" scope="s">
         <span v-text="s.item"></span>
