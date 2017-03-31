@@ -1,7 +1,7 @@
 <style lang="scss" src="./At.scss"></style>
 
 <template>
-  <div ref="wrap"
+  <div v-el:wrap
     class="atwho-wrap"
     @compositionstart="handleCompositionStart"
     @compositionend="handleCompositionEnd"
@@ -14,11 +14,10 @@
     >
       <div class="atwho-inner">
         <div class="atwho-view">
-          <ul class="atwho-ul">
-            <li v-for="(item, index) in atwho.list"
+          <ul class="atwho-ul" v-el:list>
+            <li v-for="(index, item) in atwho.list"
               class="atwho-li"
               :class="isCur(index) && 'atwho-cur'"
-              :ref="isCur(index) && 'cur'"
               :data-index="index"
               @mouseenter="handleItemHover"
               @click="handleItemClick"
@@ -86,7 +85,7 @@ export default {
     style () {
       if (this.atwho) {
         const { list, cur, x, y } = this.atwho
-        const { wrap } = this.$refs
+        const { wrap } = this.$els
         if (wrap) {
           const offset = getOffset(wrap)
           const left = x - offset.left + 'px'
@@ -158,8 +157,8 @@ export default {
               cur: (cur + offset + members.length ) % members.length,
             }
             this.$nextTick(() => {
-              // this.$refs.cur.scrollIntoViewIfNeeded()
-              this.$refs.cur[0].scrollIntoViewIfNeeded()
+              this.$els.list.querySelector('.atwho-cur')
+                .scrollIntoViewIfNeeded()
             })
           }
           return
