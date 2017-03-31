@@ -22,7 +22,7 @@
               @mouseenter="handleItemHover"
               @click="handleItemClick"
             >
-              <slot name="item" :item="item">
+              <slot name="item">
                 <span v-text="itemName(item)"></span>
               </slot>
             </li>
