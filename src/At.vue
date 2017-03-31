@@ -36,7 +36,7 @@
 
 <script>
 import {
-  closest, getOffset, getPrecedingRange,
+  forEach, closest, getOffset, getPrecedingRange,
   getRange, applyRange
 } from './util'
 
@@ -96,6 +96,9 @@ export default {
       return null
     }
   },
+  watch: {
+    atwho: 'handleStateChange'
+  },
 
   methods: {
     itemName (v) {
@@ -104,6 +107,34 @@ export default {
     },
     isCur (index) {
       return index === this.atwho.cur
+    },
+
+    itemExpr (item, expr) {
+      const segs = expr.split('.')
+      return segs.reduce((acc, seg) => {
+        return acc[seg]
+      }, { item })
+    },
+    handleStateChange (state) {
+      if (!state) return
+      if (!state.list.length) return
+      this.$nextTick(() => {
+        const els = this.$els.list.children
+        forEach.call(els, el => {
+          const index = +el.getAttribute('data-index')
+          const item = state.list[index]
+          const textNode = el.querySelector('[data-text]')
+          if (textNode) {
+            const textExpr = textNode.getAttribute('data-text')
+            textNode.textContent = this.itemExpr(item, textExpr)
+          }
+          const imgNode = el.querySelector('[data-src]')
+          if (imgNode) {
+            const imgExpr = imgNode.getAttribute('data-src')
+            imgNode.src = this.itemExpr(item, imgExpr)
+          }
+        })
+      })
     },
 
     handleItemClick () {

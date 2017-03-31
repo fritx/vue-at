@@ -1,3 +1,5 @@
+export const forEach = Array.prototype.forEach
+
 export function applyRange(range) {
   const selection = window.getSelection()
   if (selection) { // 容错
