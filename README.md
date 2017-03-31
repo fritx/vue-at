@@ -8,7 +8,7 @@
 - [x] ContentEditable
 - [x] Avatars, custom templates
 - [x] Vue2
-- [ ] Vue1
+- [x] Vue1
 
 See also: [react-at][react-at]
 
@@ -84,6 +84,19 @@ members: [{
   name: '椿木'
 }]
 </script>
+```
+
+### Custom Templates with Vue 1.x
+
+There is no "scoped slot" feature in Vue 1.<br>
+Use a "normal slot" with `data-` attribute instead.
+
+```vue
+<!-- vue-at@1.x for vue@1.x -->
+<template slot="item">
+  <img data-src="item.avatar">
+  <span data-text="item.name"></span>
+</template>
 ```
 
 [react-at]: https://github.com/fritx/react-at
