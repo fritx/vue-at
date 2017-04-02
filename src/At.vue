@@ -97,7 +97,7 @@ export default {
     }
   },
   watch: {
-    atwho: 'handleStateChange'
+    'atwho.list': 'handleListChange'
   },
 
   methods: {
@@ -115,14 +115,14 @@ export default {
         return acc[seg]
       }, { item })
     },
-    handleStateChange (state) {
-      if (!state) return
-      if (!state.list.length) return
+    handleListChange (list) {
+      if (!list) return
+      if (!list.length) return
       this.$nextTick(() => {
         const els = this.$els.list.children
         forEach.call(els, el => {
           const index = +el.getAttribute('data-index')
-          const item = state.list[index]
+          const item = list[index]
           const textNode = el.querySelector('[data-text]')
           if (textNode) {
             const textExpr = textNode.getAttribute('data-text')
