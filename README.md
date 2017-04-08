@@ -2,6 +2,8 @@
 
 <img width="262" height="218" src="https://raw.githubusercontent.com/fritx/vue-at/master/WechatIMG1.jpeg">&nbsp;&nbsp;<img width="262" height="218" src="https://raw.githubusercontent.com/fritx/vue-at/master/WechatIMG2.jpeg">
 
+Demo: https://fritx.github.io/vue-at/
+
 - [x] Filter/Scroll/Insert/Delete
 - [x] Keyboard/Mouse events
 - [x] Plain-text based, no jQuery, no extra nodes
