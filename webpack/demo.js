@@ -6,7 +6,7 @@ var config = module.exports = Object.assign({}, base)
 Object.assign(config, {
   entry: './src/main.js',
   output: {
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(__dirname, '../dist'),
     publicPath: '/dist/',
     filename: 'demo.js'
   },
