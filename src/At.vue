@@ -89,8 +89,8 @@ export default {
         const { wrap } = this.$refs
         if (wrap) {
           const offset = getOffset(wrap)
-          const left = x - offset.left + 'px'
-          const top = y - offset.top + 'px'
+          const left = x + window.pageXOffset - offset.left + 'px'
+          const top = y + window.pageYOffset - offset.top + 'px'
           return { left, top }
         }
       }
