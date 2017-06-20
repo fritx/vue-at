@@ -38,7 +38,8 @@
 <script>
 import {
   closest, getOffset, getPrecedingRange,
-  getRange, applyRange
+  getRange, applyRange, 
+  scrollIntoView
 } from './util'
 
 export default {
@@ -158,8 +159,9 @@ export default {
               cur: (cur + offset + members.length ) % members.length,
             }
             this.$nextTick(() => {
-              // this.$refs.cur.scrollIntoViewIfNeeded()
-              this.$refs.cur[0].scrollIntoViewIfNeeded()
+              const curEl = this.$refs.cur[0]
+              const scrollParent = curEl.parentElement.parentElement // .atwho-view
+              scrollIntoView(curEl, scrollParent)
             })
           }
           return
