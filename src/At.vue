@@ -53,6 +53,10 @@ export default {
       type: Boolean,
       default: true
     },
+    hoverSelect: {
+      type: Boolean,
+      default: true
+    },
     members: {
       type: Array,
       default: []
@@ -98,6 +102,15 @@ export default {
       return null
     }
   },
+  watch: {
+    'atwho.cur' (index) {
+      if (index != null) { // cur index exists
+        this.$nextTick(() => {
+          this.scrollToCur()
+        })
+      }
+    }
+  },
 
   methods: {
     itemName (v) {
@@ -108,16 +121,14 @@ export default {
       return index === this.atwho.cur
     },
 
-    handleItemClick () {
-      this.selectItem()
-    },
     handleItemHover (e) {
-      const el = closest(e.target, d => d.dataset.index)
-      const cur = +el.dataset.index
-      this.atwho ={
-        ...this.atwho,
-        cur
+      if (this.hoverSelect) {
+        this.selectByMouse(e)
       }
+    },
+    handleItemClick (e) {
+      this.selectByMouse(e)
+      this.insertItem()
     },
     handleDelete (e) {
       const range = getPrecedingRange()
@@ -151,23 +162,12 @@ export default {
           if (!(e.metaKey || e.ctrlKey)) {
             e.preventDefault()
             e.stopPropagation()
-            const offset = e.keyCode === 38 ? -1 : 1
-            const { members } = this
-            const { cur } = atwho
-            this.atwho = {
-              ...this.atwho,
-              cur: (cur + offset + members.length ) % members.length,
-            }
-            this.$nextTick(() => {
-              const curEl = this.$refs.cur[0]
-              const scrollParent = curEl.parentElement.parentElement // .atwho-view
-              scrollIntoView(curEl, scrollParent)
-            })
+            this.selectByKeyboard(e)
           }
           return
         }
         if (e.keyCode === 13) { // enter
-          this.selectItem()
+          this.insertItem()
           e.preventDefault()
           e.stopPropagation()
           return
@@ -261,7 +261,29 @@ export default {
       }
     },
 
-    selectItem () {
+    scrollToCur () {
+      const curEl = this.$refs.cur[0]
+      const scrollParent = curEl.parentElement.parentElement // .atwho-view
+      scrollIntoView(curEl, scrollParent)
+    },
+    selectByMouse (e) {
+      const el = closest(e.target, d => d.dataset.index)
+      const cur = +el.dataset.index
+      this.atwho = {
+        ...this.atwho,
+        cur
+      }
+    },
+    selectByKeyboard (e) {
+      const offset = e.keyCode === 38 ? -1 : 1
+      const { atwho, members } = this
+      const { cur } = atwho
+      this.atwho = {
+        ...this.atwho,
+        cur: (cur + offset + members.length ) % members.length,
+      }
+    },
+    insertItem () {
       const { range, offset, list, cur } = this.atwho
       const { itemName } = this
       const r = range.cloneRange()
