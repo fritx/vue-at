@@ -112,12 +112,8 @@ export default {
       this.insertItem()
     },
     handleItemHover (e) {
-      const el = closest(e.target, d => d.dataset.index)
-      const cur = +el.dataset.index
-      this.atwho ={
-        ...this.atwho,
-        cur
-      }
+      this.selectByMouse(e)
+    },
     },
     handleDelete (e) {
       const range = getPrecedingRange()
@@ -254,6 +250,14 @@ export default {
       const curEl = this.$refs.cur[0]
       const scrollParent = curEl.parentElement.parentElement // .atwho-view
       scrollIntoView(curEl, scrollParent)
+    },
+    selectByMouse (e) {
+      const el = closest(e.target, d => d.dataset.index)
+      const cur = +el.dataset.index
+      this.atwho = {
+        ...this.atwho,
+        cur
+      }
     },
     selectByKeyboard (e) {
       const offset = e.keyCode === 38 ? -1 : 1
