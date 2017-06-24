@@ -59,7 +59,7 @@ export default {
     },
     members: {
       type: Array,
-      default: []
+      default: () => []
     },
     nameKey: {
       type: String,
