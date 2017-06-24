@@ -53,6 +53,10 @@ export default {
       type: Boolean,
       default: true
     },
+    hoverSelect: {
+      type: Boolean,
+      default: true
+    },
     members: {
       type: Array,
       default: []
@@ -117,12 +121,14 @@ export default {
       return index === this.atwho.cur
     },
 
-    handleItemClick () {
-      this.insertItem()
-    },
     handleItemHover (e) {
-      this.selectByMouse(e)
+      if (this.hoverSelect) {
+        this.selectByMouse(e)
+      }
     },
+    handleItemClick (e) {
+      this.selectByMouse(e)
+      this.insertItem()
     },
     handleDelete (e) {
       const range = getPrecedingRange()
