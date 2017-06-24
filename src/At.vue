@@ -151,18 +151,7 @@ export default {
           if (!(e.metaKey || e.ctrlKey)) {
             e.preventDefault()
             e.stopPropagation()
-            const offset = e.keyCode === 38 ? -1 : 1
-            const { members } = this
-            const { cur } = atwho
-            this.atwho = {
-              ...this.atwho,
-              cur: (cur + offset + members.length ) % members.length,
-            }
-            this.$nextTick(() => {
-              const curEl = this.$refs.cur[0]
-              const scrollParent = curEl.parentElement.parentElement // .atwho-view
-              scrollIntoView(curEl, scrollParent)
-            })
+            this.selectByKeyboard(e)
           }
           return
         }
@@ -261,6 +250,23 @@ export default {
       }
     },
 
+    scrollToCur () {
+      const curEl = this.$refs.cur[0]
+      const scrollParent = curEl.parentElement.parentElement // .atwho-view
+      scrollIntoView(curEl, scrollParent)
+    },
+    selectByKeyboard (e) {
+      const offset = e.keyCode === 38 ? -1 : 1
+      const { atwho, members } = this
+      const { cur } = atwho
+      this.atwho = {
+        ...this.atwho,
+        cur: (cur + offset + members.length ) % members.length,
+      }
+      this.$nextTick(() => {
+        this.scrollToCur()
+      })
+    },
     insertItem () {
       const { range, offset, list, cur } = this.atwho
       const { itemName } = this
