@@ -109,7 +109,7 @@ export default {
     },
 
     handleItemClick () {
-      this.selectItem()
+      this.insertItem()
     },
     handleItemHover (e) {
       const el = closest(e.target, d => d.dataset.index)
@@ -167,7 +167,7 @@ export default {
           return
         }
         if (e.keyCode === 13) { // enter
-          this.selectItem()
+          this.insertItem()
           e.preventDefault()
           e.stopPropagation()
           return
@@ -261,7 +261,7 @@ export default {
       }
     },
 
-    selectItem () {
+    insertItem () {
       const { range, offset, list, cur } = this.atwho
       const { itemName } = this
       const r = range.cloneRange()
