@@ -98,6 +98,15 @@ export default {
       return null
     }
   },
+  watch: {
+    'atwho.cur' (index) {
+      if (index != null) { // cur index exists
+        this.$nextTick(() => {
+          this.scrollToCur()
+        })
+      }
+    }
+  },
 
   methods: {
     itemName (v) {
@@ -267,9 +276,6 @@ export default {
         ...this.atwho,
         cur: (cur + offset + members.length ) % members.length,
       }
-      this.$nextTick(() => {
-        this.scrollToCur()
-      })
     },
     insertItem () {
       const { range, offset, list, cur } = this.atwho
