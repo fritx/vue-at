@@ -137,7 +137,7 @@ export default {
         const text = range.toString()
         const index = text.lastIndexOf(at)
         if (index > -1) {
-          const chunk = text.slice(index + 1, -1)
+          const chunk = text.slice(index + at.length, -1)
           const has = members.some(v => {
             const name = itemName(v)
             return deleteMatch(name, chunk)
@@ -206,7 +206,7 @@ export default {
         const index = text.lastIndexOf(at)
         if (index < 0) show = false
         const prev = text[index - 1]
-        const chunk = text.slice(index + 1)
+        const chunk = text.slice(index + at.length)
 
         if (avoidEmail) {
           // 上一个字符不能为字母数字 避免与邮箱冲突
@@ -242,7 +242,7 @@ export default {
     openPanel (list, range, offset) {
       const fn = () => {
         const r = range.cloneRange()
-        r.setStart(r.endContainer, offset + 1) // 从@后第一位开始
+        r.setStart(r.endContainer, offset + this.at.length) // 从@后第一位开始
         // todo: 根据窗口空间 判断向上或是向下展开
         const rect = r.getClientRects()[0]
         this.atwho = {
@@ -285,9 +285,9 @@ export default {
     },
     insertItem () {
       const { range, offset, list, cur } = this.atwho
-      const { itemName } = this
+      const { at, itemName } = this
       const r = range.cloneRange()
-      r.setStart(r.endContainer, offset + 1) // 从@后第一位开始
+      r.setStart(r.endContainer, offset + at.length) // 从@后第一位开始
       // hack: 连续两次 可以确保click后 focus回来 range真正生效
       applyRange(r)
       applyRange(r)
