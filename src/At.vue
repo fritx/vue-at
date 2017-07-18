@@ -109,6 +109,9 @@ export default {
           this.scrollToCur()
         })
       }
+    },
+    atwho (val) {
+      this.$emit('has-at', !!val)
     }
   },
 
