@@ -49,6 +49,10 @@ export default {
       type: String,
       default: '@'
     },
+    allowSpaces: {
+      type: Boolean,
+      default: true
+    },
     avoidEmail: {
       type: Boolean,
       default: true
@@ -214,6 +218,10 @@ export default {
           if (/^[a-z0-9]$/i.test(prev)) show = false
         }
 
+        if (!allowSpaces && /\s/.test(chunk)) {
+          show = false
+        }
+      
         // chunk以空白字符开头不匹配 避免`@ `也匹配
         if (/^\s/.test(chunk)) show = false
 
