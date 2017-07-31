@@ -39,7 +39,7 @@
 import {
   closest, getOffset, getPrecedingRange,
   getRange, applyRange, 
-  scrollIntoView
+  scrollIntoView, getAtAndIndex
 } from './util'
 
 export default {
@@ -47,7 +47,11 @@ export default {
   props: {
     at: {
       type: String,
-      default: '@'
+      default: null
+    },
+    ats: {
+      type: Array,
+      default: () => ['@']
     },
     avoidEmail: {
       type: Boolean,
@@ -67,7 +71,7 @@ export default {
     },
     filterMatch: {
       type: Function,
-      default: (name, chunk) => {
+      default: (name, chunk, at) => {
         // match at lower-case
         return name.toLowerCase()
           .indexOf(chunk.toLowerCase()) > -1
@@ -88,6 +92,10 @@ export default {
     }
   },
   computed: {
+    atItems () {
+      return this.at ? [this.at] : this.ats
+    },
+    
     style () {
       if (this.atwho) {
         const { list, cur, x, y } = this.atwho
@@ -133,9 +141,9 @@ export default {
     handleDelete (e) {
       const range = getPrecedingRange()
       if (range) {
-        const { at, members, deleteMatch, itemName } = this
+        const { atItems, members, deleteMatch, itemName } = this
         const text = range.toString()
-        const index = text.lastIndexOf(at)
+        const { at, index } = getAtAndIndex(text, atItems)
         if (index > -1) {
           const chunk = text.slice(index + at.length, -1)
           const has = members.some(v => {
@@ -200,13 +208,17 @@ export default {
       if (this.hasComposition) return
       const range = getPrecedingRange()
       if (range) {
-        const { at, avoidEmail } = this
+        const { atItems, avoidEmail, allowSpaces } = this
+        
         let show = true
         const text = range.toString()
-        const index = text.lastIndexOf(at)
+  
+        const { at, index } = getAtAndIndex(text, atItems)
+
         if (index < 0) show = false
         const prev = text[index - 1]
-        const chunk = text.slice(index + at.length)
+
+        const chunk = text.slice(index + 1, text.length)
 
         if (avoidEmail) {
           // 上一个字符不能为字母数字 避免与邮箱冲突
@@ -223,10 +235,10 @@ export default {
           const { members, filterMatch, itemName } = this
           const matched = members.filter(v => {
             const name = itemName(v)
-            return filterMatch(name, chunk)
+            return filterMatch(name, chunk, at)
           })
           if (matched.length) {
-            this.openPanel(matched, range, index)
+            this.openPanel(matched, range, index, at)
           } else {
             this.closePanel()
           }
@@ -239,10 +251,10 @@ export default {
         this.atwho = null
       }
     },
-    openPanel (list, range, offset) {
+    openPanel (list, range, offset, at) {
       const fn = () => {
         const r = range.cloneRange()
-        r.setStart(r.endContainer, offset + this.at.length) // 从@后第一位开始
+        r.setStart(r.endContainer, offset + at.length) // 从@后第一位开始
         // todo: 根据窗口空间 判断向上或是向下展开
         const rect = r.getClientRects()[0]
         this.atwho = {
@@ -285,9 +297,12 @@ export default {
     },
     insertItem () {
       const { range, offset, list, cur } = this.atwho
-      const { at, itemName } = this
+      const { atItems, itemName } = this
       const r = range.cloneRange()
-      r.setStart(r.endContainer, offset + at.length) // 从@后第一位开始
+      const text = range.toString()
+      const { at, index } = getAtAndIndex(text, atItems)
+
+      r.setStart(r.endContainer, index + at.length) // 从@后第一位开始
       // hack: 连续两次 可以确保click后 focus回来 range真正生效
       applyRange(r)
       applyRange(r)
