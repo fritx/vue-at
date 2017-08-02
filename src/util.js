@@ -28,6 +28,14 @@ export function getRange() {
   }
 }
 
+export function getAtAndIndex(text, ats) {
+  return ats.map((at) => {
+    return { at, index: text.lastIndexOf(at) }
+  }).reduce((a, b) => {
+    return a.index > b.index ? a : b
+  })
+}
+
 /* eslint-disable */
 // http://stackoverflow.com/questions/26747240/plain-javascript-replication-to-offset-and-position
 export function getOffset(element, target) {
