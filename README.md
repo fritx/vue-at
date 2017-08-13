@@ -8,6 +8,7 @@ Demo: https://fritx.github.io/vue-at/
 - [x] Keyboard/Mouse events
 - [x] Plain-text based, no jQuery, no extra nodes
 - [x] ContentEditable
+- [x] Textarea
 - [x] Avatars, custom templates
 - [x] Vue2
 - [x] Vue1
@@ -53,6 +54,25 @@ export default {
       members: ['Roxie Miles', 'grace.carroll', '小浩']
     }
   }
+}
+</script>
+```
+
+## Textarea (New!)
+
+```vue
+<template>
+  <at-textarea>
+    <textarea></textarea>
+  </at-textarea>
+</template>
+
+<script>
+// import At from 'vue-at' // for content-editable
+import AtTextarea from 'vue-at/dist/vue-at-textarea' // for textarea
+
+export default {
+  components: { AtTextarea }
 }
 </script>
 ```
