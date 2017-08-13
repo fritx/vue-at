@@ -77,6 +77,10 @@ export default {
 </script>
 ```
 
+```plain
+npm i -S textarea-caret  # also, for textarea
+```
+
 ## Custom Templates
 
 ```vue
