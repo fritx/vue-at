@@ -1,3 +1,19 @@
+// bug report: https://github.com/vuejs/awesome-vue/pull/1028
+// https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoViewIfNeeded
+export function scrollIntoView(el, scrollParent) {
+  if (el.scrollIntoViewIfNeeded) {
+    el.scrollIntoViewIfNeeded(false) // alignToCenter=false
+  } else {
+    // should not use `el.scrollIntoView(false)` // alignToTop=false
+    // bug report: https://stackoverflow.com/questions/11039885/scrollintoview-causing-the-whole-page-to-move
+    const diff = el.offsetTop - scrollParent.scrollTop
+    if (diff < 0 || diff > scrollParent.offsetHeight - el.offsetHeight) {
+      scrollParent = scrollParent || el.parentElement
+      scrollParent.scrollTop = el.offsetTop
+    }
+  }
+}
+
 export function applyRange(range) {
   const selection = window.getSelection()
   if (selection) { // 容错
@@ -10,6 +26,14 @@ export function getRange() {
   if (selection && selection.rangeCount > 0) {
     return selection.getRangeAt(0)
   }
+}
+
+export function getAtAndIndex(text, ats) {
+  return ats.map((at) => {
+    return { at, index: text.lastIndexOf(at) }
+  }).reduce((a, b) => {
+    return a.index > b.index ? a : b
+  })
 }
 
 /* eslint-disable */

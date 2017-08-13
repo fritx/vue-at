@@ -1,18 +1,20 @@
 {
   "name": "vue-at",
   "description": "At.js for Vue",
-  "version": "2.0.5",
+  "version": "2.2.0",
   "author": "Fritz Lin <uxfritz@163.com>",
+  "repository": "https://github.com/fritx/vue-at",
   "scripts": {
     "dev": "webpack-dev-server --config webpack/demo --open --inline --hot",
     "demo": "webpack --config webpack/demo --progress --hide-modules",
     "build": "webpack --config webpack/prod --progress --hide-modules",
     "prepublish": "npm run build"
   },
-  "main": "dist/index.js",
+  "main": "dist/vue-at.js",
   "dependencies": {},
   "peerDependencies": {
-    "vue": "2.x"
+    "vue": "2.x",
+    "textarea-caret": "3.x"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
@@ -24,6 +26,7 @@
     "file-loader": "^0.9.0",
     "node-sass": "^4.0.0",
     "sass-loader": "^4.1.0",
+    "textarea-caret": "^3.0.2",
     "vue": "^2.1.0",
     "vue-loader": "^10.3.0",
     "vue-style-loader": "^1.0.0",

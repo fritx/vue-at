@@ -4,10 +4,13 @@ var base = require('./base')
 var config = module.exports = Object.assign({}, base)
 
 Object.assign(config, {
-  entry: './src/At.vue',
+  entry: {
+    'vue-at': './src/At.vue',
+    'vue-at-textarea': './src/AtTextarea.vue'
+  },
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: 'index.js',
+    filename: '[name].js',
     libraryTarget: 'commonjs2'
   },
   devtool: '#source-map',
@@ -22,6 +25,7 @@ Object.assign(config, {
     }),
     new webpack.ExternalsPlugin('commonjs2', [
       'vue',
+      'textarea-caret'
     ])
   ]
 })
