@@ -12,9 +12,8 @@
         <span v-text="s.item.name"></span>
       </template>
 
-      <div class="editor"
-        contenteditable
-        v-html="html"></div>
+      <textarea class="editor"
+        v-text="html"></textarea>
     </at>
   </div>
 </template>
@@ -49,7 +48,15 @@ export default {
     return {
       members,
       html: `
-        <div>Awesome Electron&nbsp;<img src="static/awesome.svg"></div><div><img src="static/electron.svg"></div><div>Useful resources for creating apps with&nbsp;Electron</div><div>Inspired by the&nbsp;awesome&nbsp;list thing. You might also like&nbsp;awesome-nodejs.</div><div>Example apps</div><div>Some good apps written with Electron.</div><div>Open Source</div><div>Atom&nbsp;- Code editor.</div><div>Nuclide&nbsp;- Unified IDE.</div><div>Playback&nbsp;- Video player.</div>
+Awesome Electron 
+Useful resources for creating apps with Electron
+Inspired by the awesome list thing. You might also like awesome-nodejs.
+Example apps
+Some good apps written with Electron.
+Open Source
+Atom - Code editor.
+Nuclide - Unified IDE.
+Playback - Video player.
       `.trim() // fix trailing abnormal nodes
     }
   }
@@ -74,6 +81,10 @@ export default {
 .editor img {
   max-width: 10em;
   vertical-align: bottom;
+}
+textarea {
+  font-size: inherit;
+  resize: none;
 }
 
 /* override styles */
