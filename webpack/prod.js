@@ -22,6 +22,7 @@ Object.assign(config, {
     }),
     new webpack.ExternalsPlugin('commonjs2', [
       'vue',
+      'textarea-caret'
     ])
   ]
 })
