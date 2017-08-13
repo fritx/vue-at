@@ -37,10 +37,9 @@
 
 <script>
 import {
-  closest, getOffset, getPrecedingRange,
-  getRange, applyRange, 
-  scrollIntoView, getAtAndIndex
+  closest, scrollIntoView, getAtAndIndex
 } from './util'
+import getCaretCoordinates from 'textarea-caret'
 
 export default {
   name: 'At',
@@ -105,9 +104,8 @@ export default {
         const { list, cur, x, y } = this.atwho
         const { wrap } = this.$refs
         if (wrap) {
-          const offset = getOffset(wrap)
-          const left = x + window.pageXOffset - offset.left + 'px'
-          const top = y + window.pageYOffset - offset.top + 'px'
+          const left = x + window.pageXOffset + 'px'
+          const top = y + window.pageYOffset + 'px'
           return { left, top }
         }
       }
@@ -143,10 +141,10 @@ export default {
       this.insertItem()
     },
     handleDelete (e) {
-      const range = getPrecedingRange()
-      if (range) {
+      const el = this.$el.querySelector('textarea')
+      const text = el.value.slice(0, el.selectionEnd)
+      if (text) {
         const { atItems, members, deleteMatch, itemName } = this
-        const text = range.toString()
         const { at, index } = getAtAndIndex(text, atItems)
         if (index > -1) {
           const chunk = text.slice(index + at.length, -1)
@@ -155,14 +153,9 @@ export default {
             return deleteMatch(name, chunk)
           })
           if (has) {
-            e.preventDefault()
-            e.stopPropagation()
-            const r = getRange()
-            if (r) {
-              r.setStart(r.endContainer, index)
-              r.deleteContents()
-              applyRange(r)
-            }
+            el.value = el.value.slice(0, index) + el.value.slice(el.selectionEnd - 1)
+            el.selectionStart = index + 1
+            el.selectionEnd = index + 1
           }
         }
       }
@@ -210,18 +203,15 @@ export default {
     },
     handleInput () {
       if (this.hasComposition) return
-      const range = getPrecedingRange()
-      if (range) {
+      const el = this.$el.querySelector('textarea')
+      const text = el.value.slice(0, el.selectionEnd)
+      if (text) {
         const { atItems, avoidEmail, allowSpaces } = this
-        
         let show = true
-        const text = range.toString()
-  
         const { at, index } = getAtAndIndex(text, atItems)
 
         if (index < 0) show = false
         const prev = text[index - 1]
-
         const chunk = text.slice(index + 1, text.length)
 
         if (avoidEmail) {
@@ -246,7 +236,7 @@ export default {
             return filterMatch(name, chunk, at)
           })
           if (matched.length) {
-            this.openPanel(matched, range, index, at)
+            this.openPanel(matched, chunk, index, at)
           } else {
             this.closePanel()
           }
@@ -259,14 +249,13 @@ export default {
         this.atwho = null
       }
     },
-    openPanel (list, range, offset, at) {
+    openPanel (list, chunk, offset, at) {
       const fn = () => {
-        const r = range.cloneRange()
-        r.setStart(r.endContainer, offset + at.length) // 从@后第一位开始
-        // todo: 根据窗口空间 判断向上或是向下展开
-        const rect = r.getClientRects()[0]
+        const el = this.$el.querySelector('textarea')
+        const end = offset + at.length // 从@后第一位开始
+        const rect = getCaretCoordinates(el, end)
         this.atwho = {
-          range,
+          chunk,
           offset,
           list,
           x: rect.left,
@@ -304,16 +293,20 @@ export default {
       }
     },
     insertItem () {
-      const { range, offset, list, cur } = this.atwho
+      const { chunk, offset, list, cur } = this.atwho
       const { atItems, itemName } = this
-      const r = range.cloneRange()
-      const text = range.toString()
-      const { at, index } = getAtAndIndex(text, atItems)
 
-      r.setStart(r.endContainer, index + at.length) // 从@后第一位开始
-      // hack: 连续两次 可以确保click后 focus回来 range真正生效
-      applyRange(r)
-      applyRange(r)
+      const el = this.$el.querySelector('textarea')
+      const text = el.value.slice(0, el.selectionEnd)
+
+      const { at, index } = getAtAndIndex(text, atItems)
+      const start = index + at.length // 从@后第一位开始
+
+      el.value = el.value.slice(0, start) + el.value.slice(start + chunk.length)
+      el.selectionStart = start
+      el.selectionEnd = start
+
+      el.focus()
       document.execCommand('insertText', 0, itemName(list[cur]) + ' ')
     }
   }

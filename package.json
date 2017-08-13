@@ -11,7 +11,9 @@
     "prepublish": "npm run build"
   },
   "main": "dist/index.js",
-  "dependencies": {},
+  "dependencies": {
+    "textarea-caret": "^3.0.2"
+  },
   "peerDependencies": {
     "vue": "2.x"
   },
