@@ -296,11 +296,10 @@ export default {
     },
     selectByKeyboard (e) {
       const offset = e.keyCode === 38 ? -1 : 1
-      const { atwho, members } = this
-      const { cur } = atwho
+      const { cur, list } = this.atwho
       this.atwho = {
         ...this.atwho,
-        cur: (cur + offset + members.length ) % members.length,
+        cur: (cur + offset + list.length) % list.length,
       }
     },
     insertItem () {
