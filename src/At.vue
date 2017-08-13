@@ -222,7 +222,7 @@ export default {
         if (index < 0) show = false
         const prev = text[index - 1]
 
-        const chunk = text.slice(index + 1, text.length)
+        const chunk = text.slice(index + at.length, text.length)
 
         if (avoidEmail) {
           // 上一个字符不能为字母数字 避免与邮箱冲突
