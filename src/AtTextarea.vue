@@ -1,16 +1,13 @@
 <script>
-import AtCore from './AtCore'
+import At from './At.vue'
 import getCaretCoordinates from 'textarea-caret'
 import { getAtAndIndex } from './util'
 
 export default {
-  ...AtCore,
-
+  extends: At,
   name: 'AtTextarea',
 
   computed: {
-    ...AtCore.computed,
-
     style () {
       if (this.atwho) {
         const { list, cur, x, y } = this.atwho
@@ -26,8 +23,6 @@ export default {
   },
 
   methods: {
-    ...AtCore.methods,
-
     handleDelete (e) {
       const el = this.$el.querySelector('textarea')
       const text = el.value.slice(0, el.selectionEnd)
