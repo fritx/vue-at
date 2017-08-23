@@ -15,9 +15,6 @@
   "peerDependencies": {
     "vue": "2.x"
   },
-  "optionalDependencies": {
-    "textarea-caret": "3.x"
-  },
   "devDependencies": {
     "babel-core": "^6.0.0",
     "babel-loader": "^6.0.0",
