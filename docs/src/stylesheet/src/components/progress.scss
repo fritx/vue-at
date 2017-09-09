@@ -1,0 +1,71 @@
+/**
+ * Progress Style
+ */
+@import '../variables/index.scss';
+
+.at-progress {
+  position: relative;
+  line-height: 1;
+
+  /* element */
+  &-bar {
+    display: inline-block;
+    width: 100%;
+    vertical-align: middle;
+    margin-right: -55px;
+    padding-right: 50px;
+
+    &__wraper {
+      position: relative;
+      height: $progress-height;
+      background-color: $progress-track-bg-color;
+      overflow: hidden;
+      vertical-align: middle;
+      border-radius: $progress-border-radius;
+    }
+    &__inner {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 0;
+      height: 100%;
+      border-radius: $progress-border-radius;
+      background-color: $progress-bar-bg-color;
+      line-height: 1;
+      text-align: right;
+      transition: width .3s;
+    }
+  }
+  &__text {
+    display: inline-block;
+    margin-left: 10px;
+    color: $progress-font-color;
+    font-size: $progress-font-size;
+    line-height: 1;
+    vertical-align: middle;
+
+    i {
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+  }
+
+  /* modifier */
+  &--success {
+    .at-progress-bar__inner {
+      background-color: $progress-bar-bg-color-success;
+    }
+    .at-progress__text {
+      color: $progress-bar-bg-color-success;
+    }
+  }
+  &--error {
+    .at-progress-bar__inner {
+      background-color: $progress-bar-bg-color-error;
+    }
+    .at-progress__text {
+      color: $progress-bar-bg-color-error;
+    }
+  }
+}

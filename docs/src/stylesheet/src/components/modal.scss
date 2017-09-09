@@ -1,0 +1,132 @@
+/**
+ * Modal Style
+ */
+@import '../variables/index.scss';
+
+.at-modal {
+  position: relative;
+  top: $modal-initial-top;
+  width: auto;
+  margin: 0 auto;
+  border: none;
+  border-radius: $border-radius-base;
+  background-color: $modal-bg-color;
+  outline: none;
+
+  /* elements */
+  &__mask {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    background-color: $modal-mask-bg-color;
+    z-index: $zindex-modal;
+
+    &--hidden {
+      display: none;
+    }
+  }
+  &__wrapper {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    outline: 0;
+    z-index: $zindex-modal;
+  }
+  &__header {
+    padding: $modal-header-padding;
+    color: $title-color;
+    font-size: $modal-header-font-size;
+    font-weight: bold;
+    line-height: 1.5;
+    border-bottom: 1px solid $modal-section-border-color;
+
+    p, .at-modal__title {
+      @include ellipsis();
+      vertical-align: middle;
+    }
+  }
+  &__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: $modal-close-font-size;
+    line-height: 1;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  &__body {
+    padding: $modal-body-padding;
+    font-size: $modal-body-font-size;
+    line-height: 1.5;
+
+    p {
+      font-size: $modal-body-font-size;
+    }
+  }
+  &__icon {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    font-size: $modal-icon-font-size;
+    vertical-align: middle;
+  }
+  &__input {
+    .at-input__original {
+      margin-top: 8px;
+      width: 100%;
+    }
+  }
+  &__footer {
+    padding: $modal-footer-padding;
+    border-top: 1px solid $modal-section-border-color;
+    text-align: right;
+
+    .at-btn + .at-btn {
+      margin-left: 8px;
+    }
+  }
+
+  /* modifiers */
+  &--hidden {
+    display: none !important;
+  }
+  &--confirm {
+    .at-modal__header {
+      padding: 16px 16px 4px 56px;
+      border: none;
+    }
+    .at-modal__body {
+      padding: 8px 16px 8px 56px;
+    }
+    .at-modal__footer {
+      padding: 16px;
+      border: none;
+    }
+
+    &-success {
+      .at-modal__icon {
+        color: $modal-icon-color-success;
+      }
+    }
+    &-error {
+      .at-modal__icon {
+        color: $modal-icon-color-error;
+      }
+    }
+    &-warning {
+      .at-modal__icon {
+        color: $modal-icon-color-warning;
+      }
+    }
+    &-info {
+      .at-modal__icon {
+        color: $modal-icon-color-info;
+      }
+    }
+  }
+}

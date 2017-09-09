@@ -1,0 +1,222 @@
+/**
+ * Select Style
+ */
+@import '../variables/index.scss';
+@import '../mixins/index.scss';
+
+/**
+ * AtSelect
+ */
+.at-select {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  min-width: 80px;
+  color: $select-font-color;
+  font-size: $select-font-size-base;
+  line-height: 1.5;
+  vertical-align: middle;
+
+  .at-select__input {
+    width: 100%;
+    border: none;
+    outline: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 0 24px 0 8px;
+    background-color: transparent;
+
+    &::placeholder {
+      color: $input-placeholder-color;
+    }
+  }
+
+  /* element */
+  &__selection {
+    position: relative;
+    display: block;
+    padding: $select-padding-base;
+    outline: none;
+    line-height: $select-selection-height-base;
+    border: 1px solid $border-color-base;
+    border-radius: $border-radius-base;
+    background-color: $color-white;
+    transition: all .3s;
+    cursor: pointer;
+    overflow: hidden;
+
+    &:hover {
+      border-color: $select-border-c-hover;
+
+      .at-select__arrow {
+        display: inline-block;
+      }
+      .at-select__clear {
+        display: inline-block;
+      }
+    }
+  }
+  &__selected {
+    @include ellipsis();
+    display: block;
+  }
+  &__arrow {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    margin-top: -5px;
+    font-size: 10px;
+    cursor: pointer;
+    transition: transform .3s;
+  }
+  &__clear {
+    display: none;
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    margin-top: -5px;
+    font-size: 10px;
+    cursor: pointer;
+  }
+  &__placeholder {
+    color: $input-placeholder-color;
+  }
+  &__dropdown {
+    position: absolute;
+    width: 100%;
+    max-height: $select-dropdown-height;
+    font-size: $select-dropdown-font-size-base;
+    border-radius: $border-radius-base;
+    background-color: $select-dropdown-bg-color;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    z-index: $zindex-dropdown;
+
+    .at-select__list {
+      list-style: none;
+      padding: 0;
+      font-size: 0;
+    }
+    .at-select__not-found {
+      padding: $dropdown-option-padding-base;
+    }
+    .at-select__option {
+      @include ellipsis();
+      width: 100%;
+      padding: $dropdown-option-padding-base;
+      font-size: $select-dropdown-font-size-base;
+      line-height: 1.5;
+      white-space: nowrap;
+      transition: all .3s;
+      overflow: hidden;
+      cursor: pointer;
+
+      &--selected {
+        font-weight: bold;
+        background-color: $dropdown-option-bg-c-selected;
+      }
+      &:hover,
+      &--focus {
+        background-color: $dropdown-option-bg-c-hover;
+      }
+      &--disabled {
+        color: $input-placeholder-color-disabled;
+      }
+    }
+    &--bottom {
+      margin-top: 2px;
+    }
+    &--top {
+      margin-bottom: 2px;
+    }
+    &--left {
+      margin-right: 2px;
+    }
+    &--right {
+      margin-left: 2px;
+    }
+  }
+
+  /* modifier */
+  &--visible {
+    .at-select__arrow {
+      transform: rotate(180deg);
+    }
+  }
+  &--show-clear {
+    .at-select__selection:hover {
+      .at-select__arrow {
+        opacity: 0;
+      }
+    }
+  }
+  &--disabled {
+    .at-select__selection {
+      cursor: $cursor-disabled;
+      background-color: $select-selection-bg-color-disabled;
+
+      &:hover {
+        border-color: $select-border-c-disabled;
+      }
+    }
+    .at-select__placeholder,
+    .at-select__selected {
+      color: $input-placeholder-color-disabled;
+    }
+  }
+  &--multiple {
+    .at-tag {
+      margin: 4px 4px 0 0;
+    }
+    .at-tag__text {
+      font-size: 10px;
+    }
+  }
+  &--small {
+    font-size: $select-font-size-sm;
+
+    .at-select__selection {
+      height: $select-selection-height-sm;
+      line-height: $select-selection-height-sm;
+    }
+    .at-select__dropdown .at-select__option {
+      font-size: $select-dropdown-font-size-sm;
+    }
+  }
+  &--large {
+    font-size: $select-font-size-lg;
+
+    .at-select__selection {
+      height: $select-selection-height-lg;
+      line-height: $select-selection-height-lg - 2;
+    }
+    .at-select__dropdown .at-select__option {
+      font-size: $select-dropdown-font-size-lg;
+    }
+  }
+}
+
+/**
+ * AtOptionGroup
+ */
+.at-option-group {
+  padding: 0;
+
+  &__label {
+    @include ellipsis();
+    width: 100%;
+    padding: 8px;
+    color: $option-group-font-c;
+    font-size: $select-dropdown-font-size-base;
+    line-height: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: all .3s;
+    cursor: initial;
+  }
+  &__list {
+    padding: 0;
+  }
+}

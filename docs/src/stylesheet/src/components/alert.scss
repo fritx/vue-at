@@ -1,0 +1,111 @@
+/**
+ * Alert Style
+ */
+@import '../variables/index.scss';
+
+.at-alert {
+  position: relative;
+  display: flex;
+  width: 100%;
+  padding: $alert-padding;
+  color: $alert-text-color-success;
+  line-height: 1.5;
+  border: 1px solid #ccc;
+  border-radius: $alert-border-radius;
+  transition: opacity .3s;
+  overflow: hidden;
+  opacity: 1;
+
+  /* element */
+  &__icon {
+    margin-right: 8px;
+    color: $alert-icon-color-success;
+    font-size: $alert-icon-font-size;
+    line-height: 20px;
+    vertical-align: middle;
+  }
+  &__content {
+    flex: 1;
+    padding-right: 8px;
+  }
+  &__message {
+    color: $alert-text-color-success;
+    font-size: $alert-message-font-size;
+  }
+  &__description {
+    margin-top: 4px;
+    color: $alert-text-color-success;
+    font-size: $alert-description-font-size;
+  }
+  &__close {
+    color: $alert-icon-color-success;
+    font-size: $alert-close-font-size;
+    line-height: 20px;
+    opacity: 1;
+    cursor: pointer;
+  }
+
+  /* modifier */
+  &--success {
+    border-color: $alert-border-color-success;
+    background-color: $alert-bg-color-success;
+
+    .at-alert__message,
+    .at-alert__description,
+    .at-alert__icon {
+      color: $alert-text-color-success;
+    }
+    .at-alert__close {
+      color: $alert-icon-color-success;
+    }
+  }
+  &--error {
+    border-color: $alert-border-color-error;
+    background-color: $alert-bg-color-error;
+
+    .at-alert__message,
+    .at-alert__description,
+    .at-alert__icon {
+      color: $alert-text-color-error;
+    }
+    .at-alert__close {
+      color: $alert-icon-color-error;
+    }
+  }
+  &--warning {
+    border-color: $alert-border-color-warning;
+    background-color: $alert-bg-color-warning;
+
+    .at-alert__message,
+    .at-alert__description,
+    .at-alert__icon {
+      color: $alert-text-color-warning;
+    }
+    .at-alert__close {
+      color: $alert-icon-color-warning;
+    }
+  }
+  &--info {
+    border-color: $alert-border-color-info;
+    background-color: $alert-bg-color-info;
+
+    .at-alert__message,
+    .at-alert__description,
+    .at-alert__icon {
+      color: $alert-text-color-info;
+    }
+    .at-alert__close {
+      color: $alert-icon-color-info;
+    }
+  }
+  &--with-description {
+    padding: $alert-padding-lg;
+
+    .at-alert__icon {
+      font-size: 24px;
+    }
+    .at-alert__message {
+      font-weight: bold;
+    }
+  }
+}

@@ -1,0 +1,49 @@
+/**
+ * Message Style
+ */
+@import '../variables/index.scss';
+
+.at-message {
+  display: inline-block;
+  padding: $message-padding;
+  font-size: $message-font-size;
+  line-height: 1.5;
+  border-radius: $border-radius-base;
+  background-color: $message-bg-color;
+  box-shadow: $message-box-shadow;
+  z-index: $zindex-message;
+
+  /* element */
+  &__wrapper {
+    position: fixed;
+    left: 0;
+    top: 16px;
+    width: 100%;
+    text-align: center;
+    transition: opacity .3s, transform .3s, top .4s;
+    pointer-events: none;
+  }
+  &__icon {
+    display: inline-block;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+
+  /* modifier */
+  &--success .at-message__icon {
+    color: $message-icon-color-success;
+  }
+  &--error .at-message__icon {
+    color: $message-icon-color-error;
+  }
+  &--warning .at-message__icon {
+    color: $message-icon-color-warning;
+  }
+  &--info .at-message__icon {
+    color: $message-icon-color-info;
+  }
+  &--loading .at-message__icon {
+    color: $message-icon-color-loading;
+    animation: icon-loading 2s linear infinite both;
+  }
+}

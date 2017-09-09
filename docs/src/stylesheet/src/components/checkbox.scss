@@ -1,0 +1,105 @@
+/**
+ * Checkbox Style
+ */
+@import '../variables/index.scss';
+
+.at-checkbox {
+  position: relative;
+  display: inline-block;
+  font-size: 0;
+  line-height: 1.5;
+  white-space: nowrap;
+  user-select: none;
+  cursor: pointer;
+
+  & + .at-checkbox {
+    margin-left: 16px;
+  }
+
+  /* modifier */
+  &--checked {
+    .at-checkbox__inner {
+      border-color: $checkbox-border-c-checked;
+      background-color: $checkbox-border-c-checked;
+
+      &::after {
+        transform: rotate(45deg) scale(1);
+      }
+    }
+  }
+  &--disabled {
+    .at-checkbox__inner {
+      border-color: $checkbox-border-c-disabled;
+      background-color: $checkbox-bg-c-disabled;
+      cursor: $cursor-disabled;
+
+      &:hover {
+        border-color: $checkbox-border-c-disabled;
+      }
+      &::after {
+        border-color: $border-color-base;
+        cursor: $cursor-disabled;
+      }
+    }
+    .at-checkbox__label {
+      color: $checkbox-label-c-disabled;
+      cursor: $cursor-disabled;
+    }
+  }
+  &--focus {
+    border-color: $brand-color-light;
+  }
+
+  /* element */
+  &__input {
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    outline: none;
+  }
+  &__inner {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: $checkbox-size;
+    height: $checkbox-size;
+    border: 1px solid $checkbox-border-c;
+    border-radius: $border-radius-base;
+    background-color: $color-white;
+    transition: all .2s;
+    cursor: pointer;
+    z-index: 1;
+
+    &:hover {
+      border-color: $checkbox-border-c-hover;
+    }
+    &::after {
+      content: '';
+      width: 4px;
+      height: 8px;
+      border: 2px solid $color-white;
+      border-left: 0;
+      border-top: 0;
+      transform: rotate(45deg) scale(0);
+      transition: transform .2s;
+    }
+  }
+  &__original {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    outline: none;
+    z-index: -1;
+  }
+  &__label {
+    font-size: $checkbox-font-size;
+    padding-left: 8px;
+    vertical-align: middle;
+  }
+}

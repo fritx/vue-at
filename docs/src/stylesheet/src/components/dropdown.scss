@@ -1,0 +1,63 @@
+/**
+ * Dropdown Style
+ */
+@import '../variables/index.scss';
+@import '../mixins/index.scss';
+
+.at-dropdown {
+  display: inline-block;
+
+  &__popover {
+    position: absolute;
+    overflow: visible;
+    z-index: $zindex-dropdown;
+  }
+}
+
+.at-dropdown-menu {
+  position: relative;
+  padding: 0;
+  width: inherit;
+  max-height: $dropdown-max-height;
+  font-size: 0;
+  border-radius: $border-radius-base;
+  background-color: $dropdown-bg-color;
+  box-shadow: $dropdown-box-shadow;
+  list-style: none;
+  // overflow-y: auto;
+  z-index: $zindex-dropdown;
+
+  &__item {
+    @include ellipsis();
+    display: block;
+    padding: $dropdown-item-padding;
+    min-width: $dropdown-item-min-width;
+    font-size: $dropdown-font-size;
+    line-height: 1.5;
+    transition: all .3s;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $dropdown-item-bg-color-hover;
+    }
+    &--disabled {
+      color: $dropdown-item-bg-color-disabled;
+      cursor: $cursor-disabled;
+
+      &:hover {
+        background-color: $dropdown-bg-color;
+      }
+    }
+    &--divided {
+      position: relative;
+      margin-top: 6px;
+      border-top: 1px solid $dropdown-divided-color;
+
+      &:before {
+        content: '';
+        display: block;
+        height: 6px;
+      }
+    }
+  }
+}

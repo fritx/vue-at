@@ -1,0 +1,180 @@
+/**
+ * Input Style
+ */
+@import '../variables/index.scss';
+
+/**
+ * AtInput
+ */
+.at-input {
+  position: relative;
+  font-size: 0;
+  line-height: 1.5;
+  outline: 0;
+
+  /* element */
+  &__original {
+    display: block;
+    width: 100%;
+    padding: $input-padding-base;
+    color: $input-font-color;
+    font-size: $input-font-size-base;
+    background-color: $input-bg-color;
+    border: 1px solid $border-color-base;
+    border-radius: $border-radius-base;
+    transition: border .2s;
+    outline: none;
+
+    &::placeholder {
+      color: $input-placeholder-color;
+    }
+    &:hover {
+      border-color: $input-border-color-hover;
+    }
+    &:focus {
+      border-color: $input-border-color-focus;
+    }
+  }
+  &__icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0 6px 0 0;
+    width: 20px;
+    height: 100%;
+    color: $input-icon-color;
+    font-size: $input-icon-font-size;
+    text-align: center;
+
+    &:after {
+      content: '';
+      display: inline-block;
+      width: 0;
+      height: 100%;
+      vertical-align: middle;
+    }
+  }
+
+  /* Modifier */
+  &--disabled {
+    .at-input__original {
+      color: $input-font-color-disabled;
+      background-color: $input-bg-color-disabled;
+      border-color: $input-border-color-disabled;
+      cursor: $cursor-disabled;
+
+      &::placeholder {
+        color: $input-placeholder-color-disabled;
+      }
+    }
+  }
+  &--large {
+    font-size: $input-font-size-lg;
+
+    .at-input__original {
+      padding: $input-padding-lg;
+
+      &::placeholder {
+        font-size: $input-font-size-lg;
+      }
+    }
+  }
+  &--small {
+    font-size: $input-font-size-sm;
+
+    .at-input__original {
+      padding: $input-padding-sm;
+
+      &::placeholder {
+        font-size: $input-font-size-sm;
+      }
+    }
+  }
+  &--success {
+    .at-input__original {
+      border-color: $input-border-color-success;
+    }
+  }
+  &--error {
+    .at-input__original {
+      border-color: $input-border-color-error;
+    }
+  }
+  &--warning {
+    .at-input__original {
+      border-color: $input-border-color-warning;
+    }
+  }
+  &--info {
+    .at-input__original {
+      border-color: $input-border-color-info;
+    }
+  }
+  &--prepend {
+    .at-input__original {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+  &--append {
+    .at-input__original {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+  &--icon {
+    .at-input__original {
+      padding-right: 32px;
+    }
+  }
+}
+
+/**
+ * AtInputGroup
+ */
+.at-input-group {
+  display: flex;
+  line-height: normal;
+  border-collapse: separate;
+
+  /* element */
+  &__prepend,
+  &__append {
+    display: flex;
+    flex: 1;
+    padding: 0 10px;
+    color: $input-group-font-color;
+    font-size: $input-font-size-base;
+    border: 1px solid $border-color-base;
+    border-radius: $border-radius-base;
+    background-color: $input-group-bg-color;
+    align-items: center;
+    white-space: nowrap;
+  }
+  &__prepend {
+    border-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  &__append {
+    border-left: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  /* modifier */
+  &--button {
+    display: flex;
+    align-items: center;
+    transition: backgroud .2s;
+    user-select: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $input-group-bg-color-hover;
+    }
+    &:active {
+      background-color: $input-group-bg-color-active;
+    }
+  }
+}

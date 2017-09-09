@@ -1,0 +1,40 @@
+/**
+ * Breadcrumb Style
+ */
+@import '../variables/index.scss';
+@import '../mixins/index.scss';
+
+.at-breadcrumb {
+  @include clearfix();
+  font-size: $breadcrumb-font-size;
+  line-height: 1.5;
+
+  /* element */
+  &__separator {
+    margin: 0 8px;
+    color: $breadcrumb-separator-color;
+  }
+  &__item {
+    &:last-child {
+      color: $link-disabled-color;
+      cursor: text;
+
+      .at-breadcrumb__separator {
+        display: none;
+      }
+    }
+  }
+  &__link {
+    color: $link-color;
+    transition: color .3s;
+
+    &:hover {
+      color: $link-hover-color;
+      cursor: pointer;
+    }
+    &:active {
+      color: $link-active-color;
+      cursor: pointer;
+    }
+  }
+}

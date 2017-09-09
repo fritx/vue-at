@@ -1,0 +1,46 @@
+/**
+ * Textarea Style
+ */
+@import '../variables/index.scss';
+
+.at-textarea {
+
+  /* element */
+  &__original {
+    display: block;
+    width: 100%;
+    padding: $textarea-padding;
+    color: $input-font-color;
+    font-size: $input-font-size-base;
+    line-height: 1.5;
+    border: 1px solid $input-border-color;
+    border-radius: $border-radius-base;
+    background-color: $input-bg-color;
+    transition: border .3s;
+    outline: 0;
+
+    &::placeholder {
+      color: $input-placeholder-color;
+    }
+    &:hover {
+      border-color: $input-border-color-hover;
+    }
+    &:focus {
+      border-color: $input-border-color-focus;
+    }
+  }
+
+  /* modifier */
+  &--disabled {
+    .at-textarea__original {
+      color: $input-font-color-disabled;
+      border-color: $input-border-color-disabled;
+      background-color: $input-bg-color-disabled;
+      cursor: $cursor-disabled;
+
+      &::placeholder {
+        color: $input-placeholder-color-disabled;
+      }
+    }
+  }
+}

@@ -1,0 +1,80 @@
+/**
+ * Form Style
+ */
+@import '../variables/index.scss';
+@import '../mixins/index.scss';
+
+.at-form {
+  /* modifier */
+  &--label-left {
+    .at-form-item__label {
+      text-align: left;
+    }
+  }
+  &--label-right {
+    .at-form-item__label {
+      text-align: right;
+    }
+  }
+  &--label-top {
+    .at-form-item__label {
+      display: inline-block;
+      text-align: left;
+      padding: 0 0 10px 0;
+    }
+  }
+  &--inline {
+    .at-form-item {
+      display: inline-block;
+      margin-right: 8px;
+      vertical-align: top;
+    }
+    .at-form-item__label {
+      display: inline-block;
+    }
+    .at-form-item__content {
+      display: inline-block;
+      vertical-align: top;
+    }
+    &.at-form--label-top .at-form-item__content {
+      display: block;
+    }
+  }
+}
+
+.at-form-item {
+  margin-bottom: 24px;
+  @include clearfix;
+
+  .at-form-item {
+    margin-bottom: 0;
+
+    .at-form-item__content {
+      margin-left: 0;
+    }
+  }
+  &__label {
+    text-align: right;
+    vertical-align: middle;
+    float: left;
+    font-size: $font-size-base;
+    color: $color-normal;
+    line-height: 1;
+    padding: 10px 12px 10px 0;
+  }
+  &__content {
+    position: relative;
+    font-size: $font-size-base;
+    line-height: 36px;
+    @include clearfix;
+  }
+  &__error-tip {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    padding-top: 4px;
+    color: $color-error;
+    font-size: $font-size-smer;
+    line-height: 1;
+  }
+}

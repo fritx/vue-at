@@ -1,0 +1,101 @@
+/**
+ * Slider Style
+ */
+@import '../variables/index.scss';
+
+.at-slider {
+  position: relative;
+
+  /* element */
+  &__input {
+    float: right;
+    margin-top: 3px;
+  }
+  &__track {
+    position: relative;
+    margin: $slider-margin;
+    width: 100%;
+    height: $slider-bar-height;
+    vertical-align: middle;
+    border-radius: $slider-bar-border-radius;
+    background-color: $slider-track-bg-color;
+    user-select: none;
+    cursor: pointer;
+  }
+  &__bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: $slider-bar-height;
+    background-color: $slider-bar-bg-color;
+    border-radius: $slider-bar-border-radius;
+  }
+  &__dot-wrapper {
+    position: absolute;
+    top: $slider-dot-wrapper-offset;
+    width: $slider-dot-wrapper-size;
+    height: $slider-dot-wrapper-size;
+    text-align: center;
+    background-color: transparent;
+    transform: translateX(-50%);
+    user-select: none;
+
+    &:hover,
+    &.at-slider__dot-wrapper--hover {
+      cursor: grab;
+    }
+    &.at-slider__dot-wrapper--drag {
+      cursor: grabbing;
+    }
+    /* tooltip */
+    .at-tooltip {
+      display: block;
+      height: 100%;
+      line-height: 1;
+
+      &::after {
+        content: '';
+        display: inline-block;
+        width: 0;
+        height: 100%;
+        vertical-align: middle;
+      }
+    }
+    .at-tooltip__trigger {
+      vertical-align: middle;
+    }
+  }
+  &__dot {
+    width: $slider-dot-size;
+    height: $slider-dot-size;
+    border-radius: 50%;
+    background-color: $slider-dot-color;
+    transition: all .3s;
+
+    &:hover,
+    &--hover,
+    &--drag {
+      background-color: $slider-dot-color-hover;
+      transform: scale(1.3);
+    }
+
+    &:hover,
+    &--hover {
+      cursor: grab;
+    }
+
+    &--drag {
+      cursor: grabbing;
+    }
+  }
+
+  /* modifier */
+  &--disabled {
+    .at-slider__bar {
+      background-color: $slider-bar-bg-color-disabled;
+    }
+    .at-slider__dot {
+      background-color: $slider-dot-color-disabled;
+    }
+  }
+}
