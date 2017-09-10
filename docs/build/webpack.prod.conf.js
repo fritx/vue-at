@@ -28,12 +28,12 @@ const webpackConfig = merge(baseWebpackConfig, {
     chunkFilename: utils.assetsPath('js/[id].[chunkhash:6].js')
   },
   resolve: {
-    alias: {
-      'at-ui': path.resolve(__dirname, '../dist/at.js'),
-      'at-ui-style': 'stylesheet/css/at.css',
-      'at-ui-locale-zh': path.resolve(__dirname, '../dist/locale/zh-CN.js'),
-      'at-ui-locale-en': path.resolve(__dirname, '../dist/locale/en-US.js')
-    }
+    // alias: {
+    //   'at-ui': path.resolve(__dirname, '../dist/at.js'),
+    //   'at-ui-style': 'stylesheet/css/at.css',
+    //   'at-ui-locale-zh': path.resolve(__dirname, '../dist/locale/zh-CN.js'),
+    //   'at-ui-locale-en': path.resolve(__dirname, '../dist/locale/en-US.js')
+    // }
   },
   plugins: [
     // new BundleAnalyzerPlugin({
@@ -55,7 +55,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       processor: source => source.replace(/static\/fonts/g, '../fonts')
     }),
     new FaviconsWebpackPlugin({
-      logo: path.resolve(config.config.projectRoot, 'docs/assets/favicon.png'),
+      logo: path.resolve(config.config.projectRoot, 'assets/favicon.png'),
       prefix: 'favicons/'
     }),
     // generate dist index.html with correct asset hash for caching.
@@ -63,7 +63,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // see https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: config.build.index,
-      template: 'docs/index.html',
+      template: 'index.html',
       inject: true,
       minify: {
         removeComments: true,
