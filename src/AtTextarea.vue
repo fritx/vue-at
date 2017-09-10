@@ -13,8 +13,8 @@ export default {
         const { list, cur, x, y } = this.atwho
         const { wrap } = this.$refs
         if (wrap) {
-          const left = x + window.pageXOffset + 'px'
-          const top = y + window.pageYOffset + 'px'
+          const left = x + 'px'
+          const top = y + 'px'
           return { left, top }
         }
       }
