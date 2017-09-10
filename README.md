@@ -2,7 +2,9 @@
 
 <img width="262" height="218" src="https://raw.githubusercontent.com/fritx/vue-at/master/WechatIMG1.jpeg">&nbsp;&nbsp;<img width="262" height="218" src="https://raw.githubusercontent.com/fritx/vue-at/master/WechatIMG2.jpeg">
 
-Demo: https://fritx.github.io/vue-at/
+Live Demo & Documentation: https://fritx.github.io/vue-at
+
+*Docs is powered by [At-UI](https://github.com/AT-UI/at-ui).*
 
 - [x] Filter/Scroll/Insert/Delete
 - [x] Keyboard/Mouse events
