@@ -43,7 +43,7 @@ export default {
   },
   data () {
     return {
-      navs: navsConfig.zh.components
+      navs: navsConfig.en
     }
   },
   methods: {

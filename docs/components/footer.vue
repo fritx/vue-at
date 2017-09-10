@@ -1,11 +1,11 @@
 <template>
   <footer class="footer">
     <div class="container">
-      <div class="footer-logo"></div>
+      <!-- <div class="footer-logo"></div> -->
       <div class="footer-desc">
-        <div class="footer-copyright">© 2017 Created by<a href="//aotu.io" target="_blank"> 凹凸实验室</a></div>
+        <div class="footer-copyright">© 2017 Vue-At. (Docs is powered by <a href="https://github.com/at-ui/at-ui">At-UI</a>.)</div>
       </div>
-      <div class="github-logo"><a data-redirect="https://github.com/o2team">Github</a></div>
+      <div class="github-logo"><a href="https://github.com/fritx/vue-at">Github</a></div>
     </div>
   </footer>
 </template>
@@ -51,7 +51,8 @@
   .github-logo {
     position: absolute;
     right: 20px;
-    top: 20px;
+    // top: 20px;
+    top: -10px;
     width: 42px;
     height: 42px;
     @include image2x-background('github');

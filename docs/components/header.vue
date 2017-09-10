@@ -8,14 +8,14 @@
     <div class="nav-container">
       <div class="nav-left">
         <div class="logo">
-          <router-link :to="{ name: lang === 'en' ? 'Home-en' : 'Home' }">
+          <router-link :to="{ name: 'Docs' }">
             <img class="logo-img" src="../assets/logo-at@2x.png" preload="">
-            <span>AT UIKIT</span>
+            <span>Vue-At</span>
           </router-link>
         </div>
         <i class="icon icon-menu nav-icon" @click="toggleMenu"></i>
       </div>
-      <div v-if="lang === 'en'" class="nav-right">
+      <!-- <div v-if="lang === 'en'" class="nav-right">
         <ul class="navbar">
           <li><router-link :to="{ name: 'Guide-en' }">Guide</router-link></li>
           <li><router-link :to="{ name: 'Docs-en' }">Component</router-link></li>
@@ -30,7 +30,7 @@
           <li><router-link :to="{ name: 'Resource' }">资源</router-link></li>
         </ul>
         <div class="btn-language" @click="switchLang('en')">EN</div>
-      </div>
+      </div> -->
     </div>
   </header>
 </template>
