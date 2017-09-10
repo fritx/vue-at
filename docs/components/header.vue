@@ -8,9 +8,9 @@
     <div class="nav-container">
       <div class="nav-left">
         <div class="logo">
-          <router-link :to="{ name: 'Docs' }">
-            <img class="logo-img" src="../assets/logo-at@2x.png" preload="">
-            <span>Vue-At</span>
+          <router-link to="/">
+            <!-- <img class="logo-img" src="../assets/logo-at@2x.png" preload=""> -->
+            <span>Docs | Vue-At</span>
           </router-link>
         </div>
         <i class="icon icon-menu nav-icon" @click="toggleMenu"></i>
@@ -146,7 +146,7 @@ $header-height: 80px;
         height: 30px;
       }
       span {
-        margin-left: 40px;
+        // margin-left: 40px;
         color: #3473e7;
         font-weight: bold;
         font-size: 16px;

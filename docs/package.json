@@ -6,7 +6,7 @@
   },
   "scripts": {
     "dev": "node-dev build/dev-server",
-    "dist": "webpack --config build/webpack.prod.conf.js -p"
+    "build": "webpack --config build/webpack.prod.conf.js -p"
   },
   "license": "MIT",
   "dependencies": {

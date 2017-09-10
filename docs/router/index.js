@@ -34,7 +34,8 @@ function regeisterRoute (navConfig) {
 
   function addParentRoute (parentName, lang) {
     return {
-      path: `/${lang}/${parentName.toLowerCase()}`,
+      // path: `/${lang}/${parentName.toLowerCase()}`,
+      path: `/${lang}`,
       // component: require(`../views/${parentName.toLowerCase()}${lang === 'en' ? '' : `-${lang}`}.vue`),
       component: require(`../views/docs.vue`),
       children: []
@@ -69,21 +70,21 @@ let routes = regeisterRoute(NavConfig)
 
 routes = routes.concat([{
   path: '/',
-  redirect: { name: 'Docs' }
+  redirect: { name: 'Quickstart-en' }
 }, {
   path: '*',
-  redirect: { name: 'Docs' }
+  redirect: '/'
 }])
 
-routes.forEach(page => {
-  if (page.path === '/en/docs') {
-    page.children.push({
-      path: '',
-      name: 'Docs',
-      redirect: { name: page.children[0].name }
-    })
-  }
-})
+// routes.forEach(page => {
+//   if (page.path === '/en/docs') {
+//     page.children.push({
+//       path: '',
+//       name: 'Docs',
+//       redirect: { name: page.children[0].name }
+//     })
+//   }
+// })
 
 // routes.push({
 //   path: '*',

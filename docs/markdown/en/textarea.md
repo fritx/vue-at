@@ -3,76 +3,72 @@
 
 ----
 
-Textarea Input for multiline text, not for rich text entry.
+Feature request of textarea: [#11](https://github.com/fritx/vue-at/issues/11)
 
-## Basic
+## Import the textarea version
 
-The textarea is fixed as two lines default, similear to the `AtInput` component.
+```js
+import AtTa from 'vue-at/dist/vue-at-textarea'
+
+export default {
+  name: 'your-app',
+  components: { AtTa }
+}
+```
+
+## Wrap your textarea
+
+```html
+<template>
+  <at-ta>
+    <textarea class="your-editor"></textarea>
+  </at-ta>
+</template>
+```
+
+## Demo
 
 :::demo
 ```html
-<at-textarea v-model="inputValue" placeholder="Please input..."></at-textarea>
+<template>
+  <at-ta :members="members">
+    <textarea class="editor" v-text="text"></textarea>
+  </at-ta>
+</template>
+
+<script>
+import AtTa from 'vue-at/dist/vue-at-textarea'
+
+export default {
+  components: { AtTa },
+  data () {
+    return {
+      text: 'Hello World! @Roxie Miles<br>@grace.carroll @小浩 lol',
+      members: ['Roxie Miles', 'grace.carroll', '小浩']
+    }
+  }
+}
+</script>
 ```
 :::
-
-## Disabled
-
-To make textarea as disabled, add `disabled` property to the Textarea.
-
-:::demo
-```html
-<at-textarea v-model="inputValue" placeholder="Please input..." disabled></at-textarea>
-```
-:::
-
-## Adaptive Text Height (Limited)
-
-Automatically adjusted the height of textarea according to the number of lines. The minimum and maximum number of rows can be set by `minRows` and `maxRows` properties.
-
-:::demo
-```html
-<p class="demo-desc">minRows=2, maxRows=4</p>
-<at-textarea v-model="inputValue2" min-rows="2" max-rows="4" placeholder="Please input multiline text..."></at-textarea>
-```
-:::
-
-## Adaptive Text Height (Without Limited)
-
-Automatically adjusted the height of textarea according to the number of lines without limited. Use `autosize` property.
-
-:::demo
-```html
-<at-textarea v-model="inputValue3" autosize placeholder="Please input multiline text..."></at-textarea>
-```
-:::
-
-## Textarea Props
-
-| Property      | Description          | Type      | Accepted Values                           | Default  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
-| name | same as native textarea | String | - | - |
-| value | the value of textarea, use `v-model` to enable a two-way binding | String | - | - |
-| autosize | adaptive text height | Boolean | - | false |
-| placeholder | the text of placeholder | String | - | - |
-| disabled | whether the textarea is disabled | Boolean | - | false |
-| autofocus | same as native textarea | Boolean | - | false |
 
 <script>
 export default {
-  data() {
+  data () {
     return {
-      inputValue: '',
-      inputValue2: '',
-      inputValue3: ''
+      text: 'Hello World! @Roxie Miles\n@grace.carroll @小浩 lol',
+      members: ['Roxie Miles', 'grace.carroll', '小浩']
     }
   }
 }
 </script>
 
-<style lang="scss" scoped>
-  .at-textarea {
-    & + .at-textarea {
-      margin-top: 15px;
-    }
-  }
+<style scoped>
+.editor {
+  width: 400px;
+  min-height: 80px;
+  white-space: pre-wrap;
+  border: solid 1px rgba(0,0,0,.3);
+  padding: .4em;
+}
 </style>

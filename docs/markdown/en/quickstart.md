@@ -3,83 +3,76 @@
 
 ----
 
-## Before Start
+## Install from npm
 
-> Before using AT-UI, we recommend you to learn `Vue` and `ES2015`, and make sure that you had installed [Node.js](https://nodejs.org/en/) (≥ v6.x) correctly.
-
-`AT-UI` is based on the `Vue.js` 2.x+ version, so we encourage you to know the basics below:
-
-- [Vue Components](https://cn.vuejs.org/v2/guide/components.html)
-- [Single File Components](https://cn.vuejs.org/v2/guide/single-file-components.html)
-
-## Starter Kit
-
->  `Vue.js` provides an [official CLI](https://github.com/vuejs/vue-cli) for quickly scaffolding ambitious Single Page Applications. It provides batteries-included build setups for a modern frontend workflow. It takes only a few minutes to get up and running with hot-reload, lint-on-save, and production-ready builds.
-
-We provide a `vue cli template` for you to create SPA (Single Page Application) quickly.
-
-```shell
-vue init at-ui/at-template my-project
+```sh
+npm install -S vue-at@2.x  # for Vue 2.x
 ```
 
-If you prefer not to use `vue-cli`, we also provide Starter Kit: [at-webpack-boilerplate](https://github.com/at-ui/at-webpack-boilerplate)
-
-## Standard Development Flow
-
-In Production Project, often use `Webpack`, `Rollup` or `Gulp` workflow, most ot them can achieve loading components on demand. So it's not recommended to use `<script>` for global use.
-
-### Global Components Usage
-
-Import all components or required components in the entry file of the project.
+## Import to your app
 
 ```js
-import Vue from 'vue'
-import AtComponents from 'at-ui'
-import 'at-ui-style'    // Import CSS
-
-// import 'at-ui-style/src/index.scss'      // Or import the unbuilt version of SCSS
-
-Vue.use(AtComponents)
-```
-
-If you had imported all the components globally, you can use global instance methods of `AT-UI` directly, such as:
-
-```js
-this.$Loading.start()
-this.$Message.success(config)
-this.$Modal.alert(config)
-this.$Notify(config)
-```
-
-### Import On Demand
-
-The components that can be registered locally are applicable to scenarios that are used to combination with other frameworks.
-
-```js
-import { AtInput } from 'at-ui'
+import At from 'vue-at'
 
 export default {
-  components: {
-    AtInput
-  },
-  data () {
-    return {
-      value: 'O2Team'
-    }
-  }
+  name: 'your-app',
+  components: { At }
 }
 ```
 
-In template, use components with custom tag as `<at-input></at-input>`, use `v-model` to achieve data binding.
+## Wrap your editor
 
 ```html
 <template>
-  <div>
-    <at-input v-model="value" placeholder="Please input..."></at-input>
-  </div>
+  <at :members="members">
+    <div class="your-editor" contenteditable></div>
+  </at>
 </template>
 ```
 
-## Customize Theme
+## Demo
 
-The style of `AT-UI` is independent to a separate project [AT-UI-Style](https://github.com/at-ui/at-ui-style), The variables for each component are stored in the file `at-ui-style/src/variables/default.scss`. User can customize the style of components according to actual needs.
+:::demo
+```html
+<template>
+  <at :members="members">
+    <div class="editor" contenteditable v-html="html"></div>
+  </at>
+</template>
+
+<script>
+import At from 'vue-at'
+
+export default {
+  components: { At },
+  data () {
+    return {
+      html: 'Hello World! @Roxie Miles<br>@grace.carroll @小浩 lol',
+      members: ['Roxie Miles', 'grace.carroll', '小浩']
+    }
+  }
+}
+</script>
+```
+:::
+
+<script>
+export default {
+  data () {
+    return {
+      html: 'Hello World! @Roxie Miles<br>@grace.carroll @小浩 lol',
+      members: ['Roxie Miles', 'grace.carroll', '小浩']
+    }
+  }
+}
+</script>
+
+<style scoped>
+.editor {
+  width: 400px;
+  min-height: 80px;
+  white-space: pre-wrap;
+  border: solid 1px rgba(0,0,0,.3);
+  padding: .4em;
+}
+</style>

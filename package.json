@@ -5,6 +5,9 @@
   "author": "Fritz Lin <uxfritz@163.com>",
   "repository": "https://github.com/fritx/vue-at",
   "scripts": {
+    "docs:dev": "cd docs && npm run dev",
+    "docs:build": "cd docs && npm run build",
+    "deploy": "ghpages -p docs/dist",
     "dev": "webpack-dev-server --config webpack/demo --open --inline --hot",
     "demo": "webpack --config webpack/demo --progress --hide-modules",
     "build": "webpack --config webpack/prod --progress --hide-modules",
@@ -23,6 +26,7 @@
     "cross-env": "^3.0.0",
     "css-loader": "^0.25.0",
     "file-loader": "^0.9.0",
+    "ghpages": "0.0.10",
     "node-sass": "^4.0.0",
     "sass-loader": "^4.1.0",
     "textarea-caret": "^3.0.2",
