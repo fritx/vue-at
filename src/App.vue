@@ -72,8 +72,18 @@ Open Source
 Atom - Code editor.
 Nuclide - Unified IDE.
 Playback - Video player.
+Awesome Electron 
+Useful resources for creating apps with Electron
+Inspired by the awesome list thing. You might also like awesome-nodejs.
+Example apps
+Some good apps written with Electron.
+Open Source
+Atom - Code editor.
+Nuclide - Unified IDE.
+Playback - Video player.
       `.trim(), // fix trailing abnormal nodes
       html: `
+        <div>&lt;&lt;&lt; Content Editable Div &gt;&gt;&gt;</div><div>Awesome Electron&nbsp;<img src="static/awesome.svg"></div><div><img src="static/electron.svg"></div><div>Useful resources for creating apps with&nbsp;Electron</div><div>Inspired by the&nbsp;awesome&nbsp;list thing. You might also like&nbsp;awesome-nodejs.</div><div>Example apps</div><div>Some good apps written with Electron.</div><div>Open Source</div><div>Atom&nbsp;- Code editor.</div><div>Nuclide&nbsp;- Unified IDE.</div><div>Playback&nbsp;- Video player.</div>
         <div>&lt;&lt;&lt; Content Editable Div &gt;&gt;&gt;</div><div>Awesome Electron&nbsp;<img src="static/awesome.svg"></div><div><img src="static/electron.svg"></div><div>Useful resources for creating apps with&nbsp;Electron</div><div>Inspired by the&nbsp;awesome&nbsp;list thing. You might also like&nbsp;awesome-nodejs.</div><div>Example apps</div><div>Some good apps written with Electron.</div><div>Open Source</div><div>Atom&nbsp;- Code editor.</div><div>Nuclide&nbsp;- Unified IDE.</div><div>Playback&nbsp;- Video player.</div>
       `.trim() // fix trailing abnormal nodes
     }
@@ -92,7 +102,8 @@ Playback - Video player.
 
 .editor {
   width: 400px;
-  min-height: 200px;
+  height: 200px;
+  overflow: auto;
   white-space: pre-wrap;
   border: solid 2px rgba(0,0,0,.5);
 }

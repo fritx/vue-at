@@ -12,9 +12,10 @@ export default {
       if (this.atwho) {
         const { list, cur, x, y } = this.atwho
         const { wrap } = this.$refs
+        const el = this.$el.querySelector('textarea')
         if (wrap) {
-          const left = x + window.pageXOffset + 'px'
-          const top = y + window.pageYOffset + 'px'
+          const left = x - el.scrollLeft + 'px'
+          const top = y - el.scrollTop + 'px'
           return { left, top }
         }
       }
