@@ -73,7 +73,7 @@ let members = [{
 export default {
   data () {
     return {
-      html: 'Hello World! @myrtie.green<br> @椿木 lol',
+      html: 'Hello World! @myrtie.green .<br> @椿木 lol',
       members
     }
   }

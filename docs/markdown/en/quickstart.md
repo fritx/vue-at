@@ -47,7 +47,7 @@ export default {
   components: { At },
   data () {
     return {
-      html: 'Hello World! @Roxie Miles<br>@grace.carroll @小浩 lol',
+      html: 'Hello World! @Roxie Miles .<br>@grace.carroll @小浩 lol',
       members: ['Roxie Miles', 'grace.carroll', '小浩']
     }
   }
@@ -60,7 +60,7 @@ export default {
 export default {
   data () {
     return {
-      html: 'Hello World! @Roxie Miles<br>@grace.carroll @小浩 lol',
+      html: 'Hello World! @Roxie Miles .<br>@grace.carroll @小浩 lol',
       members: ['Roxie Miles', 'grace.carroll', '小浩']
     }
   }

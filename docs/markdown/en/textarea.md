@@ -43,7 +43,7 @@ export default {
   components: { AtTa },
   data () {
     return {
-      text: 'Hello World! @Roxie Miles\n@grace.carroll @小浩 lol',
+      text: 'Hello World! @Roxie Miles .\n@grace.carroll @小浩 lol',
       members: ['Roxie Miles', 'grace.carroll', '小浩']
     }
   }
@@ -56,7 +56,7 @@ export default {
 export default {
   data () {
     return {
-      text: 'Hello World! @Roxie Miles\n@grace.carroll @小浩 lol',
+      text: 'Hello World! @Roxie Miles .\n@grace.carroll @小浩 lol',
       members: ['Roxie Miles', 'grace.carroll', '小浩']
     }
   }
