@@ -43,7 +43,7 @@ export default {
   components: { AtTa },
   data () {
     return {
-      text: 'Hello World! @Roxie Miles<br>@grace.carroll @小浩 lol',
+      text: 'Hello World! @Roxie Miles\n@grace.carroll @小浩 lol',
       members: ['Roxie Miles', 'grace.carroll', '小浩']
     }
   }
@@ -66,7 +66,8 @@ export default {
 <style scoped>
 .editor {
   width: 400px;
-  min-height: 80px;
+  height: 80px;
+  overflow: auto;
   white-space: pre-wrap;
   border: solid 1px rgba(0,0,0,.3);
   padding: .4em;
