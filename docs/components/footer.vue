@@ -27,13 +27,13 @@
     position: relative;
     width: 90%;
   }
-  &-logo {
-    margin: 10px 0 14px;
-    width: 198px;
-    height: 40px;
-    @include image2x-background('o2logo');
-    background-size: 100% auto;
-  }
+  // &-logo {
+  //   margin: 10px 0 14px;
+  //   width: 198px;
+  //   height: 40px;
+  //   @include image2x-background('o2logo');
+  //   background-size: 100% auto;
+  // }
   &-desc {
     text-align: left;
     font-size: 12px;
