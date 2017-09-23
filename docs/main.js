@@ -10,6 +10,7 @@ import AtComponents from 'at-ui'
 import zhLocale from 'at-ui-locale-zh'
 import enLocale from 'at-ui-locale-en'
 import 'at-ui-style'
+import './style.scss'
 
 // Vue.use(VueI18n)
 Vue.use(AtComponents)
@@ -17,8 +18,10 @@ Vue.use(VueClipboard)
 Vue.component('demo-box', DemoBox)
 Vue.component('icon-list', IconList)
 
-import At from 'vue-at'
-import AtTa from 'vue-at/dist/vue-at-textarea'
+// import At from 'vue-at'
+// import AtTa from 'vue-at/dist/vue-at-textarea'
+import At from 'vue-at/src/At'
+import AtTa from 'vue-at/src/AtTextarea'
 Vue.component('at', At)
 Vue.component('at-ta', AtTa)
 

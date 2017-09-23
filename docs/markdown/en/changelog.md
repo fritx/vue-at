@@ -5,6 +5,15 @@
 
 `Vue-At` strictly follows [Semantic Versioning 2.0.0](http://semver.org/).
 
+## <span class="title-version">v2.2.4</span> - 2017-09-20
+
+- fix(textarea): at-panel offset when textarea shows scrollbar, ref [#21](https://github.com/fritx/vue-at/issues/21)
+
+## <span class="title-version">v2.2.3</span> - 2017-09-10
+
+- docs: added statement for new at-ui docs
+- ~~fix(textarea): correct at-panel offset calc~~ (not fixed)
+
 ## <span class="title-version">v2.2.2</span> - 2017-08-23
 
 - refactor(textarea): replaced object-spreading with vue-extends

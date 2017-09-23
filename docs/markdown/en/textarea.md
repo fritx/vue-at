@@ -62,14 +62,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.editor {
-  width: 400px;
-  height: 80px;
-  overflow: auto;
-  white-space: pre-wrap;
-  border: solid 1px rgba(0,0,0,.3);
-  padding: .4em;
-}
-</style>
