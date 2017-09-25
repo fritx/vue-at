@@ -14,8 +14,8 @@ export default {
         const { wrap } = this.$refs
         const el = this.$el.querySelector('textarea')
         if (wrap) {
-          const left = x - el.scrollLeft + 'px'
-          const top = y - el.scrollTop + 'px'
+          const left = x + el.offsetLeft - el.scrollLeft + 'px'
+          const top = y + el.offsetTop - el.scrollTop + 'px'
           return { left, top }
         }
       }
