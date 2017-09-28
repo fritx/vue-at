@@ -89,6 +89,9 @@ export default {
     },
     atwho (val) {
       this.$emit('has-at', !!val)
+    },
+    members () {
+      this.handleInput(true)
     }
   },
 
@@ -176,7 +179,7 @@ export default {
       this.hasComposition = false
       this.handleInput()
     },
-    handleInput () {
+    handleInput (keep) {
       if (this.hasComposition) return
       const range = getPrecedingRange()
       if (range) {
@@ -209,6 +212,9 @@ export default {
           this.closePanel()
         } else {
           const { members, filterMatch, itemName } = this
+          if (!keep) {
+            this.$emit('at', chunk)
+          }
           const matched = members.filter(v => {
             const name = itemName(v)
             return filterMatch(name, chunk, at)
@@ -239,7 +245,7 @@ export default {
           list,
           x: rect.left,
           y: rect.top - 4,
-          cur: 0, // todo: 尽可能记录
+          cur: 0 // todo: 尽可能记录
         }
       }
       if (this.atwho) {
