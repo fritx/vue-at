@@ -253,7 +253,7 @@ export default {
     },
     selectByMouse (e) {
       const el = closest(e.target, d => d.dataset.index)
-      const cur = +el.dataset.index
+      const cur = +el.getAttribute('data-index')
       this.atwho = {
         ...this.atwho,
         cur
