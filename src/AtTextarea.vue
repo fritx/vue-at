@@ -1,7 +1,7 @@
 <script>
 import At from './At.vue'
 import getCaretCoordinates from 'textarea-caret'
-import { getAtAndIndex } from './util'
+import { insertText, getAtAndIndex } from './util'
 
 export default {
   extends: At,
@@ -87,12 +87,13 @@ export default {
     openPanel (list, chunk, offset, at) {
       const fn = () => {
         const el = this.$el.querySelector('textarea')
-        const end = offset + at.length // 从@后第一位开始
-        const rect = getCaretCoordinates(el, end)
+        const atEnd = offset + at.length // 从@后第一位开始
+        const rect = getCaretCoordinates(el, atEnd)
         this.atwho = {
           chunk,
           offset,
           list,
+          atEnd,
           x: rect.left,
           y: rect.top - 4,
           cur: 0, // todo: 尽可能记录
@@ -106,17 +107,20 @@ export default {
     },
 
     insertItem () {
-      const { chunk, offset, list, cur } = this.atwho
+      const { chunk, offset, list, cur, atEnd } = this.atwho
       const { atItems, itemName } = this
       const el = this.$el.querySelector('textarea')
-      const text = el.value.slice(0, el.selectionEnd)
+      const text = el.value.slice(0, atEnd)
       const { at, index } = getAtAndIndex(text, atItems)
       const start = index + at.length // 从@后第一位开始
       el.value = el.value.slice(0, start) + el.value.slice(start + chunk.length)
       el.selectionStart = start
       el.selectionEnd = start
       el.focus()
-      document.execCommand('insertText', 0, itemName(list[cur]) + ' ')
+      const t = itemName(list[cur]) + ' '
+      // document.execCommand('insertText', 0, t)
+      insertText(t, el)
+      this.handleInput()
     }
   }
 }

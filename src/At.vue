@@ -1,8 +1,8 @@
 <script>
 import {
   closest, getOffset, getPrecedingRange,
-  getRange, applyRange, 
-  scrollIntoView, getAtAndIndex
+  getRange, applyRange,
+  scrollIntoView, getAtAndIndex, insertText
 } from './util'
 import AtTemplate from './AtTemplate.vue'
 
@@ -278,7 +278,10 @@ export default {
       // hack: 连续两次 可以确保click后 focus回来 range真正生效
       applyRange(r)
       applyRange(r)
-      document.execCommand('insertText', 0, itemName(list[cur]) + ' ')
+      const t = itemName(list[cur]) + ' '
+      // document.execCommand('insertText', 0, t)
+      insertText(t)
+      this.handleInput()
     }
   }
 }
