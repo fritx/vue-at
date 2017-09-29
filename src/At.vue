@@ -18,6 +18,10 @@ export default {
       type: Array,
       default: () => ['@']
     },
+    loop: {
+      type: Boolean,
+      default: true
+    },
     allowSpaces: {
       type: Boolean,
       default: true
@@ -262,9 +266,12 @@ export default {
     selectByKeyboard (e) {
       const offset = e.keyCode === 38 ? -1 : 1
       const { cur, list } = this.atwho
+      const nextCur = this.loop
+        ? (cur + offset + list.length) % list.length
+        : Math.max(0, Math.min(cur + offset, list.length - 1))
       this.atwho = {
         ...this.atwho,
-        cur: (cur + offset + list.length) % list.length,
+        cur: nextCur
       }
     },
     insertItem () {
