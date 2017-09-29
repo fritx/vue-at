@@ -87,9 +87,6 @@ export default {
         })
       }
     },
-    atwho (val) {
-      this.$emit('has-at', !!val)
-    },
     members () {
       this.handleInput(true)
     }
