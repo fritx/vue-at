@@ -5,6 +5,11 @@
 
 `Vue-At` strictly follows [Semantic Versioning 2.0.0](http://semver.org/).
 
+## <span class="title-version">v2.2.5</span> - 2017-09-30
+
+- feat(loop): add prop 'loop' while up/down selecting
+- fix(textarea): consider el.offset top/left also
+
 ## <span class="title-version">v2.2.4</span> - 2017-09-20
 
 - fix(textarea): at-panel offset when textarea shows scrollbar, ref [#21](https://github.com/fritx/vue-at/issues/21)

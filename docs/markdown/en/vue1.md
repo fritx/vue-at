@@ -3,7 +3,7 @@
 
 ----
 
-Original feature request: [#4](https://github.com/fritx/vue-at/issues/4)
+Feature request of Vue-1 support: [#4](https://github.com/fritx/vue-at/issues/4)
 
 ## Install from npm
 

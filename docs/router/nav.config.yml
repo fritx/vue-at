@@ -1,6 +1,6 @@
 en:
-  - title: Overview
-    name: Overview
+  - title: Guide
+    name: Guide
     items:
       - title: Quickstart
         name: Quickstart
@@ -10,14 +10,12 @@ en:
         name: Vue1
       - title: Textarea
         name: Textarea
+      - title: Props
+        name: Props
+  - title: Notes
+    name: Notes
+    items:
+      - title: FAQ
+        name: FAQ
       - title: Change Log
         name: Changelog
-  - title: Props
-    name: Props
-    items:
-    - title: Ats
-      name: PropsAts
-    - title: Matching
-      name: PropsMatching
-    - title: More
-      name: PropsMore
