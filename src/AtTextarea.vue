@@ -1,7 +1,7 @@
 <script>
 import At from './At.vue'
 import getCaretCoordinates from 'textarea-caret'
-import { insertText, getAtAndIndex } from './util'
+import { getAtAndIndex } from './util'
 
 export default {
   extends: At,
@@ -37,7 +37,8 @@ export default {
             return deleteMatch(name, chunk)
           })
           if (has) {
-            el.value = el.value.slice(0, index) + el.value.slice(el.selectionEnd - 1)
+            el.value = el.value.slice(0, index) +
+              el.value.slice(el.selectionEnd - 1)
             el.selectionStart = index + 1
             el.selectionEnd = index + 1
           }
@@ -106,6 +107,16 @@ export default {
       }
     },
 
+    // todo: 抽离成库并测试
+    insertText (text, ta) {
+      const start = ta.selectionStart
+      const end = ta.selectionEnd
+      ta.value = ta.value.slice(0, start) +
+        text + ta.value.slice(end)
+      const newEnd = start + text.length
+      ta.selectionStart = newEnd
+      ta.selectionEnd = newEnd
+    },
     insertItem () {
       const { chunk, offset, list, cur, atEnd } = this.atwho
       const { atItems, itemName } = this
@@ -113,13 +124,10 @@ export default {
       const text = el.value.slice(0, atEnd)
       const { at, index } = getAtAndIndex(text, atItems)
       const start = index + at.length // 从@后第一位开始
-      el.value = el.value.slice(0, start) + el.value.slice(start + chunk.length)
       el.selectionStart = start
-      el.selectionEnd = start
-      el.focus()
+      el.focus() // textarea必须focus回来
       const t = itemName(list[cur]) + ' '
-      // document.execCommand('insertText', 0, t)
-      insertText(t, el)
+      this.insertText(t, el)
       this.handleInput()
     }
   }

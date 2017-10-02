@@ -71,29 +71,4 @@ export function getPrecedingRange() {
     return range
   }
 }
-
-// https://stackoverflow.com/questions/2920150/insert-text-at-cursor-in-a-content-editable-div
-// ...
-// I've updated your fiddle to move the cursor to a position immediately after the inserted text:
-// jsfiddle.net/ww3Rk/1. Seems to be fine in IE 9.
-export function insertText(text, ta) {
-  if (ta) {
-    let cut = ta.selectionStart
-    ta.value = ta.value.slice(0, cut) +
-      text + ta.value.slice(cut)
-    let end = cut + text.length
-    ta.selectionStart = end
-    ta.selectionEnd = end
-  } else {
-    var sel, range, html;
-    sel = window.getSelection();
-    range = sel.getRangeAt(0);
-    range.deleteContents();
-    var textNode = document.createTextNode(text);
-    range.insertNode(textNode);
-    range.setStartAfter(textNode);
-    sel.removeAllRanges();
-    sel.addRange(range);
-  }
-}
 /* eslint-enable */

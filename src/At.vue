@@ -2,7 +2,7 @@
 import {
   closest, getOffset, getPrecedingRange,
   getRange, applyRange,
-  scrollIntoView, getAtAndIndex, insertText
+  scrollIntoView, getAtAndIndex
 } from './util'
 import AtTemplate from './AtTemplate.vue'
 
@@ -274,20 +274,36 @@ export default {
         cur: nextCur
       }
     },
+
+    // todo: 抽离成库并测试
+    insertText (text, r) {
+      r.deleteContents()
+      const node = r.endContainer
+      if (node.nodeType === Node.TEXT_NODE) {
+        const cut = r.endOffset
+        node.data = node.data.slice(0, cut) +
+          text + node.data.slice(cut)
+        r.setEnd(node, cut + text.length)
+      } else {
+        const t = document.createTextNode(text)
+        r.insertNode(t)
+        r.setEndAfter(t)
+      }
+      r.collapse(false) // 参数在IE下必传
+    },
     insertItem () {
       const { range, offset, list, cur } = this.atwho
       const { atItems, itemName } = this
       const r = range.cloneRange()
       const text = range.toString()
       const { at, index } = getAtAndIndex(text, atItems)
-
-      r.setStart(r.endContainer, index + at.length) // 从@后第一位开始
+      const start = index + at.length // 从@后第一位开始
+      r.setStart(r.endContainer, start)
       // hack: 连续两次 可以确保click后 focus回来 range真正生效
       applyRange(r)
       applyRange(r)
       const t = itemName(list[cur]) + ' '
-      // document.execCommand('insertText', 0, t)
-      insertText(t)
+      this.insertText(t, r)
       this.handleInput()
     }
   }
