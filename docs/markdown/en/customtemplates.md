@@ -73,7 +73,7 @@ let members = [{
 export default {
   data () {
     return {
-      html: 'Hello World! @myrtie.green .<br> @椿木 lol',
+      html: 'Hello World! @myrtie.green .<br>@椿木 lol',
       members
     }
   }
@@ -93,10 +93,6 @@ export default {
   }
   .atwho-li span {
     padding-left: 8px;
-  }
-  .atwho-wrap {
-    display: inline-block;
-    vertical-align: top;
   }
 }
 </style>
