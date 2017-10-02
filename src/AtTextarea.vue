@@ -28,13 +28,13 @@ export default {
       const el = this.$el.querySelector('textarea')
       const text = el.value.slice(0, el.selectionEnd)
       if (text) {
-        const { atItems, members, deleteMatch, itemName } = this
+        const { atItems, members, suffix, deleteMatch, itemName } = this
         const { at, index } = getAtAndIndex(text, atItems)
         if (index > -1) {
-          const chunk = text.slice(index + at.length, -1)
+          const chunk = text.slice(index + at.length)
           const has = members.some(v => {
             const name = itemName(v)
-            return deleteMatch(name, chunk)
+            return deleteMatch(name, chunk, suffix)
           })
           if (has) {
             el.value = el.value.slice(0, index) +
@@ -120,14 +120,14 @@ export default {
     },
     insertItem () {
       const { chunk, offset, list, cur, atEnd } = this.atwho
-      const { atItems, itemName } = this
+      const { suffix, atItems, itemName } = this
       const el = this.$el.querySelector('textarea')
       const text = el.value.slice(0, atEnd)
       const { at, index } = getAtAndIndex(text, atItems)
       const start = index + at.length // 从@后第一位开始
       el.selectionStart = start
       el.focus() // textarea必须focus回来
-      const t = itemName(list[cur]) + ' '
+      const t = itemName(list[cur]) + suffix
       this.insertText(t, el)
       this.handleInput()
     }

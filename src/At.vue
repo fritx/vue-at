@@ -18,6 +18,10 @@ export default {
       type: Array,
       default: () => ['@']
     },
+    suffix: {
+      type: String,
+      default: ' '
+    },
     loop: {
       type: Boolean,
       default: true
@@ -52,8 +56,8 @@ export default {
     },
     deleteMatch: {
       type: Function,
-      default: (name, chunk) => {
-        return name === chunk
+      default: (name, chunk, suffix) => {
+        return chunk === name + suffix
       }
     }
   },
@@ -114,14 +118,14 @@ export default {
     handleDelete (e) {
       const range = getPrecedingRange()
       if (range) {
-        const { atItems, members, deleteMatch, itemName } = this
+        const { atItems, members, suffix, deleteMatch, itemName } = this
         const text = range.toString()
         const { at, index } = getAtAndIndex(text, atItems)
         if (index > -1) {
-          const chunk = text.slice(index + at.length, -1)
+          const chunk = text.slice(index + at.length)
           const has = members.some(v => {
             const name = itemName(v)
-            return deleteMatch(name, chunk)
+            return deleteMatch(name, chunk, suffix)
           })
           if (has) {
             e.preventDefault()
@@ -297,7 +301,7 @@ export default {
     },
     insertItem () {
       const { range, offset, list, cur } = this.atwho
-      const { atItems, itemName } = this
+      const { suffix, atItems, itemName } = this
       const r = range.cloneRange()
       const text = range.toString()
       const { at, index } = getAtAndIndex(text, atItems)
@@ -306,7 +310,7 @@ export default {
       // hack: 连续两次 可以确保click后 focus回来 range真正生效
       applyRange(r)
       applyRange(r)
-      const t = itemName(list[cur]) + ' '
+      const t = itemName(list[cur]) + suffix
       this.insertText(t, r)
       this.handleInput()
     }
