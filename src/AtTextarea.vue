@@ -41,6 +41,7 @@ export default {
               el.value.slice(el.selectionEnd - 1)
             el.selectionStart = index + 1
             el.selectionEnd = index + 1
+            this.handleInput()
           }
         }
       }

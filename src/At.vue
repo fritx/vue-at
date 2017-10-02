@@ -131,6 +131,7 @@ export default {
               r.setStart(r.endContainer, index)
               r.deleteContents()
               applyRange(r)
+              this.handleInput()
             }
           }
         }
@@ -256,7 +257,9 @@ export default {
       scrollIntoView(curEl, scrollParent)
     },
     selectByMouse (e) {
-      const el = closest(e.target, d => d.dataset.index)
+      const el = closest(e.target, d => {
+        return d.getAttribute('data-index')
+      })
       const cur = +el.getAttribute('data-index')
       this.atwho = {
         ...this.atwho,
@@ -290,6 +293,7 @@ export default {
         r.setEndAfter(t)
       }
       r.collapse(false) // 参数在IE下必传
+      applyRange(r)
     },
     insertItem () {
       const { range, offset, list, cur } = this.atwho
