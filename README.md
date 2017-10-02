@@ -59,17 +59,17 @@ export default {
 
 ```vue
 <template>
-  <at-textarea>
+  <at-ta>
     <textarea></textarea>
-  </at-textarea>
+  </at-ta>
 </template>
 
 <script>
 // import At from 'vue-at' // for content-editable
-import AtTextarea from 'vue-at/dist/vue-at-textarea' // for textarea
+import AtTa from 'vue-at/dist/vue-at-textarea' // for textarea
 
 export default {
-  components: { AtTextarea }
+  components: { AtTa }
 }
 </script>
 ```

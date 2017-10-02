@@ -17,7 +17,7 @@
         v-html="html"></div>
     </at>
 
-    <at-textarea :members="members" name-key="name">
+    <at-ta :members="members" name-key="name">
       <!-- custom: with avatars -->
       <template slot="item" scope="s">
         <img :src="s.item.avatar">
@@ -26,16 +26,16 @@
 
       <textarea class="editor"
         v-text="text"></textarea>
-    </at-textarea>
+    </at-ta>
   </div>
 </template>
 
 <script>
 // import At from 'vue-at'
 // import At from '../dist/vue-at'
-// import AtTextarea from '../dist/vue-at-textarea'
+// import AtTa from '../dist/vue-at-textarea'
 import At from './At.vue'
-import AtTextarea from './AtTextarea.vue'
+import AtTa from './AtTextarea.vue'
 
 let members = [
   /* eslint-disable */
@@ -56,7 +56,7 @@ members = members.map((v, i) => {
 })
 
 export default {
-  components: { At, AtTextarea },
+  components: { At, AtTa },
   name: 'app',
   data () {
     return {
