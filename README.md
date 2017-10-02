@@ -6,28 +6,23 @@ Live Demo & Documentation: https://fritx.github.io/vue-at
 
 *Docs is powered by [At-UI](https://github.com/AT-UI/at-ui).*
 
-- [x] Filter/Scroll/Insert/Delete
-- [x] Keyboard/Mouse events
+- [x] Chrome/Firefox/Edge/IE9~IE11
 - [x] Plain-text based, no jQuery, no extra nodes
-- [x] ContentEditable
-- [x] Textarea
+- [x] ContentEditable/Textarea
 - [x] Avatars, custom templates
-- [x] Vue2
-- [x] Vue1
+- [x] Vue2/Vue1
 
 See also: [react-at][react-at]
 
 ## Motivation
 
-[At.js][at.js] is awesome (4000+ stars), but:
+[At.js][at.js] is awesome, but:
 
-- It is [buggy][buggy].
 - It is based on jQuery and jQuery-Caret.
 - It introduces extra node wrappers.
-- It is unstable on content edit/copy/paste.
-- Its code is hard to learn.
+- It could be unstable on content edit/copy/paste.
 
-Finally I lost interest in [patching it][buggy] and ended up creating this.
+Finally I ended up creating this.
 
 ```plain
 npm i vue-at@2.x  # for Vue2
@@ -35,11 +30,6 @@ npm i vue-at@1.x  # for Vue1
 ```
 
 ```vue
-<style>
-#app .atwho-view { /* more */ }
-#app .atwho-ul { /* more */ }
-</style>
-
 <template>
   <at :members="members">
     <div contenteditable></div>
@@ -58,9 +48,14 @@ export default {
   }
 }
 </script>
+
+<style>
+#app .atwho-view { /* more */ }
+#app .atwho-ul { /* more */ }
+</style>
 ```
 
-## Textarea (New!)
+## Textarea
 
 ```vue
 <template>
@@ -86,12 +81,6 @@ npm i -S textarea-caret  # also, for textarea
 ## Custom Templates
 
 ```vue
-<style>
-#app .atwho-li { /* more */ }
-#app .atwho-li img { /* more */ }
-#app .atwho-li span { /* more */ }
-</style>
-
 <template>
   <at :members="members" name-key="name">
     <template slot="item" scope="s">
@@ -112,6 +101,12 @@ members: [{
   name: '椿木'
 }]
 </script>
+
+<style>
+#app .atwho-li { /* more */ }
+#app .atwho-li img { /* more */ }
+#app .atwho-li span { /* more */ }
+</style>
 ```
 
 ### Custom Templates with Vue 1.x
@@ -129,4 +124,3 @@ Use a "normal slot" with `data-` attribute instead.
 
 [react-at]: https://github.com/fritx/react-at
 [at.js]: https://github.com/ichord/At.js
-[buggy]: https://github.com/ichord/At.js/issues/411#issuecomment-256662090
