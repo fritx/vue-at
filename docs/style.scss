@@ -1,5 +1,6 @@
 [contenteditable].editor, textarea.editor {
   width: 400px;
+  max-width: 100%;
   height: 80px;
   overflow: auto;
   white-space: pre-wrap;
