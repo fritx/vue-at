@@ -11,7 +11,9 @@
     "prepublish": "npm run build"
   },
   "main": "dist/vue-at.js",
-  "dependencies": {},
+  "dependencies": {
+    "insert-text-2": "0.0.4"
+  },
   "peerDependencies": {
     "vue": "2.x"
   },

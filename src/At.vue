@@ -5,6 +5,7 @@ import {
   scrollIntoView, getAtAndIndex
 } from './util'
 import AtTemplate from './AtTemplate.vue'
+import insertText from 'insert-text-2'
 
 export default {
   name: 'At',
@@ -83,7 +84,7 @@ export default {
     atItems () {
       return this.at ? [this.at] : this.ats
     },
-    
+
     style () {
       if (this.atwho) {
         const { list, cur, x, y } = this.atwho
@@ -226,10 +227,10 @@ export default {
       const range = getPrecedingRange()
       if (range) {
         const { atItems, avoidEmail, allowSpaces } = this
-        
+
         let show = true
         const text = range.toString()
-  
+
         const { at, index } = getAtAndIndex(text, atItems)
 
         if (index < 0) show = false
@@ -246,7 +247,7 @@ export default {
         if (!allowSpaces && /\s/.test(chunk)) {
           show = false
         }
-      
+
         // chunk以空白字符开头不匹配 避免`@ `也匹配
         if (/^\s/.test(chunk)) show = false
 
@@ -324,23 +325,6 @@ export default {
       }
     },
 
-    // todo: 抽离成库并测试
-    insertText (text, r) {
-      r.deleteContents()
-      const node = r.endContainer
-      if (node.nodeType === Node.TEXT_NODE) {
-        const cut = r.endOffset
-        node.data = node.data.slice(0, cut) +
-          text + node.data.slice(cut)
-        r.setEnd(node, cut + text.length)
-      } else {
-        const t = document.createTextNode(text)
-        r.insertNode(t)
-        r.setEndAfter(t)
-      }
-      r.collapse(false) // 参数在IE下必传
-      applyRange(r)
-    },
     insertItem () {
       const { range, offset, list, cur } = this.atwho
       const { suffix, atItems, itemName } = this
@@ -353,7 +337,7 @@ export default {
       applyRange(r)
       applyRange(r)
       const t = itemName(list[cur]) + suffix
-      this.insertText(t, r)
+      insertText(t)
       this.handleInput()
     }
   }
