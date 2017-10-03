@@ -47,7 +47,7 @@ export default {
       }
     },
 
-    handleInput () {
+    handleInput (keep) {
       if (this.hasComposition) return
       const el = this.$el.querySelector('textarea')
       const text = el.value.slice(0, el.selectionEnd)
@@ -73,12 +73,15 @@ export default {
           this.closePanel()
         } else {
           const { members, filterMatch, itemName } = this
+          if (!keep) {
+            this.$emit('at', chunk)
+          }
           const matched = members.filter(v => {
             const name = itemName(v)
             return filterMatch(name, chunk, at)
           })
           if (matched.length) {
-            this.openPanel(matched, chunk, index, at)
+            this.openPanel(matched, chunk, index, at, keep)
           } else {
             this.closePanel()
           }
