@@ -167,8 +167,10 @@ export default {
         }
       }
 
-      const isChar = e.keyCode >= 48 && e.keyCode <= 90
-      if (isChar) {
+      // 为了兼容ie ie9~11 editable无input事件 只能靠keydown触发 textarea正常
+      // 另 ie9 textarea的delete不触发input
+      const isValid = e.keyCode >= 48 && e.keyCode <= 90 || e.keyCode === 8
+      if (isValid) {
         setTimeout(() => {
           this.handleInput()
         }, 50)
