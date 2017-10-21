@@ -2,7 +2,7 @@
 import {
   closest, getOffset, getPrecedingRange,
   getRange, applyRange,
-  scrollIntoView, getAtAndIndex, insertText
+  scrollIntoView, getAtAndIndex
 } from './util'
 import AtTemplate from './AtTemplate.vue'
 
@@ -17,6 +17,10 @@ export default {
     ats: {
       type: Array,
       default: () => ['@']
+    },
+    suffix: {
+      type: String,
+      default: ' '
     },
     loop: {
       type: Boolean,
@@ -52,8 +56,8 @@ export default {
     },
     deleteMatch: {
       type: Function,
-      default: (name, chunk) => {
-        return name === chunk
+      default: (name, chunk, suffix) => {
+        return chunk === name + suffix
       }
     }
   },
@@ -90,6 +94,9 @@ export default {
           this.scrollToCur()
         })
       }
+    },
+    members () {
+      this.handleInput(true)
     }
   },
 
@@ -114,14 +121,14 @@ export default {
     handleDelete (e) {
       const range = getPrecedingRange()
       if (range) {
-        const { atItems, members, deleteMatch, itemName } = this
+        const { atItems, members, suffix, deleteMatch, itemName } = this
         const text = range.toString()
         const { at, index } = getAtAndIndex(text, atItems)
         if (index > -1) {
-          const chunk = text.slice(index + at.length, -1)
+          const chunk = text.slice(index + at.length)
           const has = members.some(v => {
             const name = itemName(v)
-            return deleteMatch(name, chunk)
+            return deleteMatch(name, chunk, suffix)
           })
           if (has) {
             e.preventDefault()
@@ -131,6 +138,7 @@ export default {
               r.setStart(r.endContainer, index)
               r.deleteContents()
               applyRange(r)
+              this.handleInput()
             }
           }
         }
@@ -177,7 +185,7 @@ export default {
       this.hasComposition = false
       this.handleInput()
     },
-    handleInput () {
+    handleInput (keep) {
       if (this.hasComposition) return
       const range = getPrecedingRange()
       if (range) {
@@ -210,6 +218,9 @@ export default {
           this.closePanel()
         } else {
           const { members, filterMatch, itemName } = this
+          if (!keep) {
+            this.$emit('at', chunk)
+          }
           const matched = members.filter(v => {
             const name = itemName(v)
             return filterMatch(name, chunk, at)
@@ -240,7 +251,7 @@ export default {
           list,
           x: rect.left,
           y: rect.top - 4,
-          cur: 0, // todo: 尽可能记录
+          cur: 0 // todo: 尽可能记录
         }
       }
       if (this.atwho) {
@@ -256,7 +267,9 @@ export default {
       scrollIntoView(curEl, scrollParent)
     },
     selectByMouse (e) {
-      const el = closest(e.target, d => d.dataset.index)
+      const el = closest(e.target, d => {
+        return d.getAttribute('data-index')
+      })
       const cur = +el.getAttribute('data-index')
       this.atwho = {
         ...this.atwho,
@@ -274,20 +287,37 @@ export default {
         cur: nextCur
       }
     },
+
+    // todo: 抽离成库并测试
+    insertText (text, r) {
+      r.deleteContents()
+      const node = r.endContainer
+      if (node.nodeType === Node.TEXT_NODE) {
+        const cut = r.endOffset
+        node.data = node.data.slice(0, cut) +
+          text + node.data.slice(cut)
+        r.setEnd(node, cut + text.length)
+      } else {
+        const t = document.createTextNode(text)
+        r.insertNode(t)
+        r.setEndAfter(t)
+      }
+      r.collapse(false) // 参数在IE下必传
+      applyRange(r)
+    },
     insertItem () {
       const { range, offset, list, cur } = this.atwho
-      const { atItems, itemName } = this
+      const { suffix, atItems, itemName } = this
       const r = range.cloneRange()
       const text = range.toString()
       const { at, index } = getAtAndIndex(text, atItems)
-
-      r.setStart(r.endContainer, index + at.length) // 从@后第一位开始
+      const start = index + at.length // 从@后第一位开始
+      r.setStart(r.endContainer, start)
       // hack: 连续两次 可以确保click后 focus回来 range真正生效
       applyRange(r)
       applyRange(r)
-      const t = itemName(list[cur]) + ' '
-      // document.execCommand('insertText', 0, t)
-      insertText(t)
+      const t = itemName(list[cur]) + suffix
+      this.insertText(t, r)
       this.handleInput()
     }
   }
