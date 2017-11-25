@@ -1,7 +1,7 @@
 <style lang="scss" src="./At.scss"></style>
 
 <template>
-  <div ref="wrap"
+  <div v-el:wrap
     class="atwho-wrap"
     @compositionstart="handleCompositionStart"
     @compositionend="handleCompositionEnd"
@@ -14,16 +14,15 @@
     >
       <div class="atwho-inner">
         <div class="atwho-view">
-          <ul class="atwho-ul">
-            <li v-for="(item, index) in atwho.list"
+          <ul class="atwho-ul" v-el:list>
+            <li v-for="(index, item) in atwho.list"
               class="atwho-li"
               :class="isCur(index) && 'atwho-cur'"
-              :ref="isCur(index) && 'cur'"
               :data-index="index"
               @mouseenter="handleItemHover"
               @click="handleItemClick"
             >
-              <slot name="item" :item="item">
+              <slot name="item">
                 <span v-text="itemName(item)"></span>
               </slot>
             </li>

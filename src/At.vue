@@ -72,11 +72,11 @@ export default {
     atItems () {
       return this.at ? [this.at] : this.ats
     },
-    
+
     style () {
       if (this.atwho) {
         const { list, cur, x, y } = this.atwho
-        const { wrap } = this.$refs
+        const { wrap } = this.$els
         if (wrap) {
           const offset = getOffset(wrap)
           const left = x + window.pageXOffset - offset.left + 'px'
@@ -88,13 +88,12 @@ export default {
     }
   },
   watch: {
-    'atwho.cur' (index) {
-      if (index != null) { // cur index exists
-        this.$nextTick(() => {
-          this.scrollToCur()
-        })
-      }
-    },
+    // [Vue warn]: Error when evaluating expression "atwho.cur":
+    // TypeError: Cannot read property 'cur' of null
+    // in Vue 1.x has to be tweaked
+    // `scrollToCur` merged into `handleStateChange`
+    // 'atwho.cur' (index) {
+    atwho: 'handleStateChange',
     members () {
       this.handleInput(true)
     }
@@ -107,6 +106,35 @@ export default {
     },
     isCur (index) {
       return index === this.atwho.cur
+    },
+
+    itemExpr (item, expr) {
+      const segs = expr.split('.')
+      return segs.reduce((acc, seg) => {
+        return acc[seg]
+      }, { item })
+    },
+    handleStateChange (state, oldState) {
+      if (!state) return
+      if (!state.list.length) return
+      this.$nextTick(() => {
+        const els = this.$els.list.children
+        Array.prototype.forEach.call(els, el => {
+          const index = +el.getAttribute('data-index')
+          const item = state.list[index]
+          const textNode = el.querySelector('[data-text]')
+          if (textNode) {
+            const textExpr = textNode.getAttribute('data-text')
+            textNode.textContent = this.itemExpr(item, textExpr)
+          }
+          const imgNode = el.querySelector('[data-src]')
+          if (imgNode) {
+            const imgExpr = imgNode.getAttribute('data-src')
+            imgNode.src = this.itemExpr(item, imgExpr)
+          }
+        })
+        this.scrollToCur()
+      })
     },
 
     handleItemHover (e) {
@@ -194,10 +222,10 @@ export default {
       const range = getPrecedingRange()
       if (range) {
         const { atItems, avoidEmail, allowSpaces } = this
-        
+
         let show = true
         const text = range.toString()
-  
+
         const { at, index } = getAtAndIndex(text, atItems)
 
         if (index < 0) show = false
@@ -214,7 +242,7 @@ export default {
         if (!allowSpaces && /\s/.test(chunk)) {
           show = false
         }
-      
+
         // chunk以空白字符开头不匹配 避免`@ `也匹配
         if (/^\s/.test(chunk)) show = false
 
@@ -266,7 +294,7 @@ export default {
     },
 
     scrollToCur () {
-      const curEl = this.$refs.cur[0]
+      const curEl = this.$els.list.querySelector('.atwho-cur')
       const scrollParent = curEl.parentElement.parentElement // .atwho-view
       scrollIntoView(curEl, scrollParent)
     },
