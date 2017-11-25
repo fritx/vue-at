@@ -2,14 +2,14 @@
   <div id="app">
     <at :members="members" name-key="name">
       <!-- custom: same as default slot -->
-      <!-- <template slot="item" scope="s">
-        <span v-text="s.item"></span>
+      <!-- <template slot="item">
+        <span data-text="item"></span>
       </template> -->
-      
+
       <!-- custom: with avatars -->
-      <template slot="item" scope="s">
-        <img :src="s.item.avatar">
-        <span v-text="s.item.name"></span>
+      <template slot="item">
+        <img data-src="item.avatar">
+        <span data-text="item.name"></span>
       </template>
 
       <div class="editor"
@@ -20,8 +20,8 @@
     <at-ta :members="members" name-key="name">
       <!-- custom: with avatars -->
       <template slot="item" scope="s">
-        <img :src="s.item.avatar">
-        <span v-text="s.item.name"></span>
+        <img data-src="item.avatar">
+        <span data-text="item.name"></span>
       </template>
 
       <textarea class="editor"

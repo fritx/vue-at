@@ -5,7 +5,9 @@ var config = module.exports = Object.assign({}, base)
 
 Object.assign(config, {
   entry: {
-    'vue-at': './src/At.vue',
+    // https://github.com/webpack/webpack/issues/300
+    // fixed in the webpack-2 branch
+    'vue-at': ['./src/At.vue'],
     'vue-at-textarea': './src/AtTextarea.vue'
   },
   output: {
@@ -20,9 +22,10 @@ Object.assign(config, {
         NODE_ENV: '"production"'
       }
     }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true
-    }),
+    // new webpack.LoaderOptionsPlugin({
+    //   minimize: true
+    // }),
+    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.ExternalsPlugin('commonjs2', [
       'vue',
       'textarea-caret'

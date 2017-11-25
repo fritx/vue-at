@@ -11,7 +11,7 @@ export default {
     style () {
       if (this.atwho) {
         const { list, cur, x, y } = this.atwho
-        const { wrap } = this.$refs
+        const { wrap } = this.$els
         const el = this.$el.querySelector('textarea')
         if (wrap) {
           const left = x + el.offsetLeft - el.scrollLeft + 'px'
@@ -66,7 +66,7 @@ export default {
         if (!allowSpaces && /\s/.test(chunk)) {
           show = false
         }
-      
+
         // chunk以空白字符开头不匹配 避免`@ `也匹配
         if (/^\s/.test(chunk)) show = false
         if (!show) {
