@@ -12,11 +12,11 @@ Live Demo & Documentation: https://fritx.github.io/vue-at
 - [x] Avatars, custom templates
 - [x] Vue2/Vue1
 
-See also: [react-at][react-at]
+See also: [react-at](https://github.com/fritx/react-at)
 
 ## Motivation
 
-[At.js][at.js] is awesome, but:
+[At.js](https://github.com/ichord/At.js) is awesome, but:
 
 - It is based on jQuery and jQuery-Caret.
 - It introduces extra node wrappers.
@@ -25,8 +25,9 @@ See also: [react-at][react-at]
 Finally I ended up creating this.
 
 ```plain
-npm i vue-at@2.x  # for Vue2
-npm i vue-at@1.x  # for Vue1
+npm i vue-at@2.x  # for Vue2  <----
+npm i vue-at@1.x  # for Vue1 (branch vue1-legacy)
+npm i vue1-at  # for Vue1 (branch vue1-new)
 ```
 
 ```vue
@@ -115,12 +116,9 @@ There is no "scoped slot" feature in Vue 1.<br>
 Use a "normal slot" with `data-` attribute instead.
 
 ```vue
-<!-- vue-at@1.x for vue@1.x -->
+<!-- vue1-at for vue@1.x -->
 <template slot="item">
   <img data-src="item.avatar">
   <span data-text="item.name"></span>
 </template>
 ```
-
-[react-at]: https://github.com/fritx/react-at
-[at.js]: https://github.com/ichord/At.js
