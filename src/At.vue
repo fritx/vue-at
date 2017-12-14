@@ -59,6 +59,10 @@ export default {
       default: (name, chunk, suffix) => {
         return chunk === name + suffix
       }
+    },
+    scrollRef: {
+      type: String,
+      default: ''
     }
   },
 
@@ -79,8 +83,10 @@ export default {
         const { wrap } = this.$refs
         if (wrap) {
           const offset = getOffset(wrap)
-          const left = x + window.pageXOffset - offset.left + 'px'
-          const top = y + window.pageYOffset - offset.top + 'px'
+          const scrollLeft = this.scrollRef ? document.querySelector(this.scrollRef).scrollLeft : 0
+          const scrollTop = this.scrollRef ? document.querySelector(this.scrollRef).scrollTop : 0
+          const left = x + scrollLeft + window.pageXOffset - offset.left + 'px'
+          const top = y + scrollTop + window.pageYOffset - offset.top + 'px'
           return { left, top }
         }
       }
