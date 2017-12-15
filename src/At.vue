@@ -228,7 +228,7 @@ export default {
           this.closePanel()
         } else {
           const { members, filterMatch, itemName } = this
-          if (!keep) {
+          if (!keep && chunk.length>0) {
             this.$emit('at', chunk)
           }
           const matched = members.filter(v => {
