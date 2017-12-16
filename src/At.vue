@@ -59,6 +59,10 @@ export default {
       default: (name, chunk, suffix) => {
         return chunk === name + suffix
       }
+    },
+    scrollRef: {
+      type: String,
+      default: ''
     }
   },
 
@@ -79,8 +83,10 @@ export default {
         const { wrap } = this.$refs
         if (wrap) {
           const offset = getOffset(wrap)
-          const left = x + window.pageXOffset - offset.left + 'px'
-          const top = y + window.pageYOffset - offset.top + 'px'
+          const scrollLeft = this.scrollRef ? document.querySelector(this.scrollRef).scrollLeft : 0
+          const scrollTop = this.scrollRef ? document.querySelector(this.scrollRef).scrollTop : 0
+          const left = x + scrollLeft + window.pageXOffset - offset.left + 'px'
+          const top = y + scrollTop + window.pageYOffset - offset.top + 'px'
           return { left, top }
         }
       }
@@ -167,9 +173,13 @@ export default {
         }
       }
 
-      const isChar = e.keyCode >= 48 && e.keyCode <= 90
-      if (isChar) {
-        setTimeout(this.handleInput, 50)
+      // 为了兼容ie ie9~11 editable无input事件 只能靠keydown触发 textarea正常
+      // 另 ie9 textarea的delete不触发input
+      const isValid = e.keyCode >= 48 && e.keyCode <= 90 || e.keyCode === 8
+      if (isValid) {
+        setTimeout(() => {
+          this.handleInput()
+        }, 50)
       }
 
       if (e.keyCode === 8) {
@@ -218,7 +228,7 @@ export default {
           this.closePanel()
         } else {
           const { members, filterMatch, itemName } = this
-          if (!keep) {
+          if (!keep && chunk.length>0) {
             this.$emit('at', chunk)
           }
           const matched = members.filter(v => {

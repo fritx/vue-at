@@ -5,7 +5,7 @@
     class="atwho-wrap"
     @compositionstart="handleCompositionStart"
     @compositionend="handleCompositionEnd"
-    @input="handleInput"
+    @input="handleInput()"
     @keydown="handleKeyDown"
   >
     <div v-if="atwho"
