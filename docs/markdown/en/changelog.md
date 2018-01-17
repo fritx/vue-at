@@ -5,6 +5,14 @@
 
 `Vue-At` strictly follows [Semantic Versioning 2.0.0](http://semver.org/).
 
+## <span class="title-version">v2.3.1</span> - 2017-12-16
+
+- Emit at event only when chunk isn't empty (by [@AlexanderMisel](https://github.com/fritx/vue-at/commits?author=AlexanderMisel))
+- Added support for vue-at inside scrolling elements (by [@jezzdk](https://github.com/fritx/vue-at/commits?author=jezzdk))
+- readme: recommend `vue1-at` for vue 1.x instead
+-	fix(ie): take 'backspace' in ie9 textarea, ref [#22](https://github.com/fritx/vue-at/issues/22)
+- fix(input): event passed as arg 'keep' in handleInput by mistake
+
 ## <span class="title-version">v2.3.0</span> - 2017-10-21
 
 - Merge branch 'feat/emit-at' into dev
