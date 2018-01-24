@@ -1,4 +1,4 @@
-<style lang="scss" src="./At.scss"></style>
+<style src="./At.css"></style>
 
 <template>
   <div ref="wrap"
