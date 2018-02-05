@@ -7,6 +7,9 @@ export default {
   extends: At,
   name: 'AtTextarea',
 
+  props: [
+    'value',
+  ],
   computed: {
     style () {
       if (this.atwho) {
@@ -22,7 +25,10 @@ export default {
       return null
     }
   },
-
+  mounted: function () {
+    var el = this.$el.querySelector('textarea')
+    el.value = this.value;
+  },
   methods: {
     handleDelete (e) {
       const el = this.$el.querySelector('textarea')
@@ -50,6 +56,7 @@ export default {
     handleInput (keep) {
       if (this.hasComposition) return
       const el = this.$el.querySelector('textarea')
+      this.$emit('input', el.value)
       const text = el.value.slice(0, el.selectionEnd)
       if (text) {
         const { atItems, avoidEmail, allowSpaces } = this
@@ -66,7 +73,7 @@ export default {
         if (!allowSpaces && /\s/.test(chunk)) {
           show = false
         }
-      
+
         // chunk以空白字符开头不匹配 避免`@ `也匹配
         if (/^\s/.test(chunk)) show = false
         if (!show) {
