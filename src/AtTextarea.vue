@@ -29,6 +29,12 @@ export default {
     var el = this.$el.querySelector('textarea')
     el.value = this.value;
   },
+  watch: {
+    value: function (newValue) {
+      var el = this.$el.querySelector('textarea')
+      el.value = newValue;
+    }
+  },
   methods: {
     handleDelete (e) {
       const el = this.$el.querySelector('textarea')
