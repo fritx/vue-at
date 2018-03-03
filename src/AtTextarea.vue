@@ -6,7 +6,9 @@ import { getAtAndIndex } from './util'
 export default {
   extends: At,
   name: 'AtTextarea',
-
+  props: {
+    value: String
+  },
   computed: {
     style () {
       if (this.atwho) {
@@ -22,7 +24,16 @@ export default {
       return null
     }
   },
-
+  mounted () {
+    const el = this.$el.querySelector('textarea')
+    el.value = this.value
+  },
+  watch: {
+    value (newValue) {
+      const el = this.$el.querySelector('textarea')
+      el.value = newValue
+    }
+  },
   methods: {
     handleDelete (e) {
       const el = this.$el.querySelector('textarea')
@@ -50,6 +61,7 @@ export default {
     handleInput (keep) {
       if (this.hasComposition) return
       const el = this.$el.querySelector('textarea')
+      this.$emit('input', el.value)
       const text = el.value.slice(0, el.selectionEnd)
       if (text) {
         const { atItems, avoidEmail, allowSpaces } = this
@@ -66,7 +78,7 @@ export default {
         if (!allowSpaces && /\s/.test(chunk)) {
           show = false
         }
-      
+
         // chunk以空白字符开头不匹配 避免`@ `也匹配
         if (/^\s/.test(chunk)) show = false
         if (!show) {
