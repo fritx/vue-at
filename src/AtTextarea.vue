@@ -7,7 +7,14 @@ export default {
   extends: At,
   name: 'AtTextarea',
   props: {
-    value: String
+    value: String// value not required
+  },
+  data () {
+    return {
+      // at[v-model] mode should be on only when
+      // initial :value/v-model is present (not nil)
+      bindsValue: this.value != null
+    }
   },
   computed: {
     style () {
@@ -25,13 +32,17 @@ export default {
     }
   },
   mounted () {
-    const el = this.$el.querySelector('textarea')
-    el.value = this.value
+    if (this.bindsValue) {
+      const el = this.$el.querySelector('textarea')
+      el.value = this.value
+    }
   },
   watch: {
     value (newValue) {
-      const el = this.$el.querySelector('textarea')
-      el.value = newValue
+      if (this.bindsValue) {
+        const el = this.$el.querySelector('textarea')
+        el.value = newValue
+      }
     }
   },
   methods: {
