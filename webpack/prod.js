@@ -1,3 +1,4 @@
+var UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 var path = require('path')
 var webpack = require('webpack')
 var base = require('./base')
@@ -26,18 +27,25 @@ Object.assign(config, {
     new webpack.ExternalsPlugin('commonjs2', [
       'vue',
       'textarea-caret'
-    ])
+    ]),
+    // todo: upgrade webpack to 3.x
+    // switched to uglifyjs-webpack-plugin
+    // https://github.com/vuejs-templates/webpack/blob/cd4d7d957c9af3d37092c79bf490b56b8d88b108/template/build/webpack.prod.conf.js#L37
+    new UglifyJsPlugin({
+      uglifyOptions: {
+        compress: {
+          warnings: false
+        }
+      },
+      sourceMap: true,
+      parallel: true
+    })
+    // http://vue-loader.vuejs.org/en/workflow/production.html
+    // new webpack.optimize.UglifyJsPlugin({
+    //   sourceMap: true,
+    //   compress: {
+    //     warnings: false
+    //   }
+    // })
   ]
 })
-
-// if (process.env.NODE_ENV === 'production') {
-//   // http://vue-loader.vuejs.org/en/workflow/production.html
-//   module.exports.plugins = (module.exports.plugins || []).concat([
-//     new webpack.optimize.UglifyJsPlugin({
-//       sourceMap: true,
-//       compress: {
-//         warnings: false
-//       }
-//     })
-//   ])
-// }
