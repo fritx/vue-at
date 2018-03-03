@@ -26,18 +26,15 @@ Object.assign(config, {
     new webpack.ExternalsPlugin('commonjs2', [
       'vue',
       'textarea-caret'
-    ])
+    ]),
+    // todo: upgrade webpack to 3.x
+    // and switch to uglifyjs-webpack-plugin
+    // http://vue-loader.vuejs.org/en/workflow/production.html
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      compress: {
+        warnings: false
+      }
+    })
   ]
 })
-
-// if (process.env.NODE_ENV === 'production') {
-//   // http://vue-loader.vuejs.org/en/workflow/production.html
-//   module.exports.plugins = (module.exports.plugins || []).concat([
-//     new webpack.optimize.UglifyJsPlugin({
-//       sourceMap: true,
-//       compress: {
-//         warnings: false
-//       }
-//     })
-//   ])
-// }

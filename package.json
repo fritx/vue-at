@@ -26,6 +26,7 @@
     "node-sass": "^4.0.0",
     "sass-loader": "^4.1.0",
     "textarea-caret": "^3.0.2",
+    "uglifyjs-webpack-plugin": "^1.2.2",
     "vue": "^2.1.0",
     "vue-loader": "^10.3.0",
     "vue-style-loader": "^1.0.0",
