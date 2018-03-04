@@ -18,7 +18,7 @@ members: [{
 
 ```html
 <at :members="members" name-key="name">
-  <template slot="item" scope="s">
+  <template slot="item" slot-scope="s">
     <img :src="s.item.avatar">
     <span v-text="s.item.name"></span>
   </template>
@@ -33,7 +33,7 @@ members: [{
 <template>
   <div class="demo-customtemplates">
     <at :members="members" name-key="name">
-      <template slot="item" scope="s">
+      <template slot="item" slot-scope="s">
         <img :src="s.item.avatar">
         <span v-text="s.item.name"></span>
       </template>
