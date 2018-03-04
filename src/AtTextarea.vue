@@ -6,16 +6,6 @@ import { getAtAndIndex } from './util'
 export default {
   extends: At,
   name: 'AtTextarea',
-  props: {
-    value: String// value not required
-  },
-  data () {
-    return {
-      // at[v-model] mode should be on only when
-      // initial :value/v-model is present (not nil)
-      bindsValue: this.value != null
-    }
-  },
   computed: {
     style () {
       if (this.atwho) {
@@ -31,21 +21,14 @@ export default {
       return null
     }
   },
-  mounted () {
-    if (this.bindsValue) {
-      const el = this.$el.querySelector('textarea')
-      el.value = this.value
-    }
-  },
-  watch: {
-    value (newValue) {
-      if (this.bindsValue) {
-        const el = this.$el.querySelector('textarea')
-        el.value = newValue
-      }
-    }
-  },
   methods: {
+    handleValueUpdate (value) {
+      const el = this.$el.querySelector('textarea')
+      if (value !== el.value) { // avoid range reset
+        el.value = value
+      }
+    },
+
     handleDelete (e) {
       const el = this.$el.querySelector('textarea')
       const text = el.value.slice(0, el.selectionEnd)
@@ -73,6 +56,7 @@ export default {
       if (this.hasComposition) return
       const el = this.$el.querySelector('textarea')
       this.$emit('input', el.value)
+
       const text = el.value.slice(0, el.selectionEnd)
       if (text) {
         const { atItems, avoidEmail, allowSpaces } = this
