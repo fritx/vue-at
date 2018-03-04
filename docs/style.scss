@@ -7,3 +7,10 @@
   border: solid 1px rgba(0,0,0,.3);
   padding: .4em;
 }
+
+pre.output {
+  white-space: pre-line;
+  code {
+    white-space: pre-wrap;
+  }
+}

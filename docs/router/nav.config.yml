@@ -10,6 +10,8 @@ en:
         name: Vue1
       - title: Textarea
         name: Textarea
+      - title: V-Model
+        name: vmodel
       - title: Props
         name: Props
   - title: Notes
