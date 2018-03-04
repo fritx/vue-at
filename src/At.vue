@@ -10,6 +10,10 @@ export default {
   name: 'At',
   mixins: [AtTemplate],
   props: {
+    value: {
+      type: String, // value not required
+      default: null
+    },
     at: {
       type: String,
       default: null
@@ -68,6 +72,9 @@ export default {
 
   data () {
     return {
+      // at[v-model] mode should be on only when
+      // initial :value/v-model is present (not nil)
+      bindsValue: this.value != null,
       hasComposition: false,
       atwho: null
     }
@@ -103,6 +110,16 @@ export default {
     },
     members () {
       this.handleInput(true)
+    },
+    value (value, oldValue) {
+      if (this.bindsValue) {
+        this.handleValueUpdate(value)
+      }
+    }
+  },
+  mounted () {
+    if (this.bindsValue) {
+      this.handleValueUpdate(this.value)
     }
   },
 
@@ -113,6 +130,12 @@ export default {
     },
     isCur (index) {
       return index === this.atwho.cur
+    },
+    handleValueUpdate (value) {
+      const el = this.$el.querySelector('[contenteditable]')
+      if (value !== el.innerHTML) { // avoid range reset
+        el.innerHTML = value
+      }
     },
 
     handleItemHover (e) {
@@ -197,6 +220,9 @@ export default {
     },
     handleInput (keep) {
       if (this.hasComposition) return
+      const el = this.$el.querySelector('[contenteditable]')
+      this.$emit('input', el.innerHTML)
+
       const range = getPrecedingRange()
       if (range) {
         const { atItems, avoidEmail, allowSpaces } = this
