@@ -56,6 +56,21 @@ export default {
 </style>
 ```
 
+## Using V-Model (Recommended)
+
+Notice that `<editor v-model>` could be buggy,<br>
+and should be like `<at v-model><editor></at>` instead.
+
+```vue
+<at v-model="html">
+  <div contenteditable></div>
+</at>
+
+<at-ta v-model="text">
+  <textarea></textarea>
+</at-ta>
+```
+
 ## Textarea
 
 ```vue
