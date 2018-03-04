@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <at :members="members" name-key="name">
+    <at :members="members" name-key="name" v-model="html">
       <!-- custom: same as default slot -->
       <!-- <template slot="item" scope="s">
         <span v-text="s.item"></span>
       </template> -->
-      
+
       <!-- custom: with avatars -->
       <template slot="item" scope="s">
         <img :src="s.item.avatar">
@@ -13,19 +13,17 @@
       </template>
 
       <div class="editor"
-        contenteditable
-        v-html="html"></div>
+        contenteditable></div>
     </at>
 
-    <at-ta :members="members" name-key="name">
+    <at-ta :members="members" name-key="name" v-model="text">
       <!-- custom: with avatars -->
       <template slot="item" scope="s">
         <img :src="s.item.avatar">
         <span v-text="s.item.name"></span>
       </template>
 
-      <textarea class="editor"
-        v-text="text"></textarea>
+      <textarea class="editor"></textarea>
     </at-ta>
   </div>
 </template>
