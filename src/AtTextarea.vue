@@ -1,6 +1,7 @@
 <script>
 import At from './At.vue'
 import getCaretCoordinates from 'textarea-caret'
+import insertText from 'insert-text-2'
 import { getAtAndIndex } from './util'
 
 export default {
@@ -118,16 +119,6 @@ export default {
       }
     },
 
-    // todo: 抽离成库并测试
-    insertText (text, ta) {
-      const start = ta.selectionStart
-      const end = ta.selectionEnd
-      ta.value = ta.value.slice(0, start) +
-        text + ta.value.slice(end)
-      const newEnd = start + text.length
-      ta.selectionStart = newEnd
-      ta.selectionEnd = newEnd
-    },
     insertItem () {
       const { chunk, offset, list, cur, atEnd } = this.atwho
       const { suffix, atItems, itemName } = this
@@ -138,7 +129,7 @@ export default {
       el.selectionStart = start
       el.focus() // textarea必须focus回来
       const t = itemName(list[cur]) + suffix
-      this.insertText(t, el)
+      insertText(t)
       this.handleInput()
     }
   }
