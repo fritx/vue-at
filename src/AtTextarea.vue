@@ -137,7 +137,7 @@ export default {
       const start = index + at.length // 从@后第一位开始
       el.selectionStart = start
       el.focus() // textarea必须focus回来
-      const t = itemName(list[cur]) + suffix
+      const t = processItem(list, cur, suffix)
       this.insertText(t, el)
       this.handleInput()
     }
