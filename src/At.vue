@@ -67,7 +67,12 @@ export default {
     scrollRef: {
       type: String,
       default: ''
-    }
+    },
+    processItem: {
+      type: Function,
+      default: (list, cur, suffix) => {
+        return itemName(list[cur]) + suffix
+      }
   },
 
   data () {
@@ -352,7 +357,7 @@ export default {
       // hack: 连续两次 可以确保click后 focus回来 range真正生效
       applyRange(r)
       applyRange(r)
-      const t = itemName(list[cur]) + suffix
+      const t = processItem(list, cur, suffix)
       this.insertText(t, r)
       this.handleInput()
     }
