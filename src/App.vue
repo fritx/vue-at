@@ -2,12 +2,12 @@
   <div id="app">
     <at :members="members" name-key="name" v-model="html">
       <!-- custom: same as default slot -->
-      <!-- <template slot="item" scope="s">
+      <!-- <template slot="item" slot-scope="s">
         <span v-text="s.item"></span>
       </template> -->
 
       <!-- custom: with avatars -->
-      <template slot="item" scope="s">
+      <template slot="item" slot-scope="s">
         <img :src="s.item.avatar">
         <span v-text="s.item.name"></span>
       </template>
@@ -18,7 +18,7 @@
 
     <at-ta :members="members" name-key="name" v-model="text">
       <!-- custom: with avatars -->
-      <template slot="item" scope="s">
+      <template slot="item" slot-scope="s">
         <img :src="s.item.avatar">
         <span v-text="s.item.name"></span>
       </template>
