@@ -20,6 +20,7 @@
               :class="isCur(index) && 'atwho-cur'"
               :ref="isCur(index) && 'cur'"
               :data-index="index"
+              :key="index"
               @mouseenter="handleItemHover"
               @click="handleItemClick"
             >
