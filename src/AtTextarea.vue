@@ -87,7 +87,6 @@ export default {
               }
             });
             this.$emit('at', memberObj);
-            console.log(memberObj);
           }
           const matched = members.filter(v => {
             const name = itemName(v)
