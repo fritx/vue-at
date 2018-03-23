@@ -17,6 +17,7 @@
           <ul class="atwho-ul">
             <li v-for="(item, index) in atwho.list"
               class="atwho-li"
+              :key="index"
               :class="isCur(index) && 'atwho-cur'"
               :ref="isCur(index) && 'cur'"
               :data-index="index"
