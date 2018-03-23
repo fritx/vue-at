@@ -256,7 +256,7 @@ export default {
           const { members, filterMatch, itemName } = this
           if (!keep && chunk.length>0) {
             const memberObj = Object.values(this.members).filter((i) => {
-              if(i.name.trim() === chunk.trim()) {
+              if(i[this.nameKey].trim() === chunk.trim()) {
                 return i;
               }
             });
