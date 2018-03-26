@@ -50,6 +50,10 @@ export default {
       type: String,
       default: ''
     },
+    showMemberObj: {
+      type: Boolean,
+      default: false
+    },
     filterMatch: {
       type: Function,
       default: (name, chunk, at) => {
@@ -254,13 +258,16 @@ export default {
           this.closePanel()
         } else {
           const { members, filterMatch, itemName } = this
-          if (!keep && chunk.length>0) {
-            const memberObj = Object.values(this.members).filter((i) => {
-              if(i[this.nameKey].trim() === chunk.trim()) {
-                return i;
+          if (!keep && chunk.length>0 && !this.showMemberObj) {
+            this.$emit('at', chunk)
+          } else if (this.showMemberObj) {
+            let memberObj
+            Object.keys(this.members).filter((i) => {
+              if(this.members[i][this.nameKey].trim() === chunk.trim()) {
+                return memberObj = this.members[i]
               }
             });
-            this.$emit('at', memberObj);
+            this.$emit('at', memberObj)
           }
           const matched = members.filter(v => {
             const name = itemName(v)
