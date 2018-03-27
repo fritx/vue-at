@@ -80,16 +80,14 @@ export default {
           this.closePanel()
         } else {
           const { members, filterMatch, itemName } = this
-          if (!keep && !this.showMemberObj) {
-            this.$emit('at', chunk)
-          }else if (this.showMemberObj) {
+          if (!keep) {
             let memberObj
             Object.keys(this.members).filter((i) => {
               if(this.members[i][this.nameKey].trim() === chunk.trim()) {
                 return memberObj = this.members[i]
               }
             });
-            this.$emit('at', memberObj)
+            this.$emit('at', chunk, memberObj)
           }
           const matched = members.filter(v => {
             const name = itemName(v)

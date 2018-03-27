@@ -16,7 +16,7 @@
         contenteditable></div>
     </at>
 
-    <at-ta :members="members" name-key="name" :show-member-obj="true" v-model="text">
+    <at-ta :members="members" name-key="name" v-model="text">
       <!-- custom: with avatars -->
       <template slot="item" scope="s">
         <img :src="s.item.avatar">
