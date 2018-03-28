@@ -80,14 +80,8 @@ export default {
           this.closePanel()
         } else {
           const { members, filterMatch, itemName } = this
-          if (!keep) {
-            let memberObj
-            Object.keys(this.members).filter((i) => {
-              if(this.members[i][this.nameKey].trim() === chunk.trim()) {
-                return memberObj = this.members[i]
-              }
-            });
-            this.$emit('at', chunk, memberObj)
+          if (!keep) { // fixme: should be consistent with At.vue
+            this.$emit('at', chunk)
           }
           const matched = members.filter(v => {
             const name = itemName(v)
@@ -143,8 +137,10 @@ export default {
       const start = index + at.length // 从@后第一位开始
       el.selectionStart = start
       el.focus() // textarea必须focus回来
-      const t = itemName(list[cur]) + suffix
+      const curItem = list[cur]
+      const t = itemName(curItem) + suffix
       this.insertText(t, el)
+      this.$emit('insert', curItem)
       this.handleInput()
     }
   }
