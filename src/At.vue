@@ -255,7 +255,13 @@ export default {
         } else {
           const { members, filterMatch, itemName } = this
           if (!keep && chunk.length>0) {
-            this.$emit('at', chunk)
+            let memberObj
+            Object.keys(this.members).filter((i) => {
+              if(this.members[i][this.nameKey].trim() === chunk.trim()) {
+                return memberObj = this.members[i]
+              }
+            });
+            this.$emit('at', chunk, memberObj)
           }
           const matched = members.filter(v => {
             const name = itemName(v)
