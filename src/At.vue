@@ -83,7 +83,14 @@ export default {
     atItems () {
       return this.at ? [this.at] : this.ats
     },
-    
+
+    currentItem () {
+      if (this.atwho) {
+        return this.atwho.list[this.atwho.cur];
+      }
+      return '';
+    },
+
     style () {
       if (this.atwho) {
         const { list, cur, x, y } = this.atwho
@@ -226,10 +233,10 @@ export default {
       const range = getPrecedingRange()
       if (range) {
         const { atItems, avoidEmail, allowSpaces } = this
-        
+
         let show = true
         const text = range.toString()
-  
+
         const { at, index } = getAtAndIndex(text, atItems)
 
         if (index < 0) show = false
@@ -246,7 +253,7 @@ export default {
         if (!allowSpaces && /\s/.test(chunk)) {
           show = false
         }
-      
+
         // chunk以空白字符开头不匹配 避免`@ `也匹配
         if (/^\s/.test(chunk)) show = false
 
@@ -325,16 +332,27 @@ export default {
     },
 
     // todo: 抽离成库并测试
-    insertText (text, r) {
+    insertText (text, r, suffix) {
       r.deleteContents()
       const node = r.endContainer
       if (node.nodeType === Node.TEXT_NODE) {
+
         const cut = r.endOffset
-        node.data = node.data.slice(0, cut) +
-          text + node.data.slice(cut)
-        r.setEnd(node, cut + text.length)
+
+        var secondPart = node.splitText(cut);
+        var newElement = this.htmlToElement(text);
+        if (newElement.setAttribute) {
+          newElement.setAttribute("contenteditable", false);
+        }
+        node.parentNode.insertBefore(newElement, secondPart);
+        secondPart.data = suffix + secondPart.data;
+
+         console.log('aaa', node, '"' + suffix + '"');
+         r.setEnd(secondPart, 1);
       } else {
         const t = document.createTextNode(text)
+        console.log('aaa', 'textnode');
+
         r.insertNode(t)
         r.setEndAfter(t)
       }
@@ -353,8 +371,16 @@ export default {
       applyRange(r)
       applyRange(r)
       const t = itemName(list[cur]) + suffix
-      this.insertText(t, r)
+      const { embeddedItem } = this.$refs;
+
+      this.insertText(embeddedItem.firstChild.innerHTML, r, suffix);
       this.handleInput()
+    },
+    htmlToElement (html) {
+        var template = document.createElement('template');
+        html = html.trim(); // Never return a text node of whitespace as the result
+        template.innerHTML = html;
+        return template.content.firstChild;
     }
   }
 }
