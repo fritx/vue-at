@@ -347,11 +347,9 @@ export default {
         node.parentNode.insertBefore(newElement, secondPart);
         secondPart.data = suffix + secondPart.data;
 
-         console.log('aaa', node, '"' + suffix + '"');
          r.setEnd(secondPart, 1);
       } else {
         const t = document.createTextNode(text)
-        console.log('aaa', 'textnode');
 
         r.insertNode(t)
         r.setEndAfter(t)
