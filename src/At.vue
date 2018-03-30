@@ -261,7 +261,7 @@ export default {
           this.closePanel()
         } else {
           const { members, filterMatch, itemName } = this
-          if (!keep && chunk.length>0) {
+          if (!keep && chunk) { // fixme: should be consistent with AtTextarea.vue
             this.$emit('at', chunk)
           }
           const matched = members.filter(v => {
@@ -368,10 +368,12 @@ export default {
       // hack: 连续两次 可以确保click后 focus回来 range真正生效
       applyRange(r)
       applyRange(r)
-      const t = itemName(list[cur]) + suffix
+      const curItem = list[cur]
+      const t = itemName(curItem) + suffix
       const { embeddedItem } = this.$refs;
 
       this.insertText(embeddedItem.firstChild.innerHTML, r, suffix);
+      this.$emit('insert', curItem)
       this.handleInput()
     },
     htmlToElement (html) {
