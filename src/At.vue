@@ -75,6 +75,7 @@ export default {
       // at[v-model] mode should be on only when
       // initial :value/v-model is present (not nil)
       bindsValue: this.value != null,
+      customsEmbedded: false,
       hasComposition: false,
       atwho: null
     }
@@ -125,6 +126,9 @@ export default {
     }
   },
   mounted () {
+    if (this.$scopedSlots.embeddedItem) {
+      this.customsEmbedded = true
+    }
     if (this.bindsValue) {
       this.handleValueUpdate(this.value)
     }
@@ -157,9 +161,45 @@ export default {
     handleDelete (e) {
       const range = getPrecedingRange()
       if (range) {
+        // fixme: Very bad code from me
+        if (this.customsEmbedded && range.endOffset >= 1) {
+          let a = range.endContainer.childNodes[range.endOffset]
+            || range.endContainer.childNodes[range.endOffset - 1]
+          if (!a || a.nodeType === Node.TEXT_NODE && !/^\s?$/.test(a.data)) {
+            return
+          } else if (a.nodeType === Node.TEXT_NODE) {
+            if (a.previousSibling) a = a.previousSibling
+          } else {
+            if (a.previousElementSibling) a = a.previousElementSibling
+          }
+          let ch = [].slice.call(a.childNodes)
+          ch = [].reverse.call(ch)
+          ch.unshift(a)
+          let last
+          ;[].some.call(ch, c => {
+            if (c.getAttribute && c.getAttribute('data-at-embedded') != null) {
+              last = c
+              return true
+            }
+          })
+          if (last) {
+            e.preventDefault()
+            e.stopPropagation()
+            const r = getRange()
+            if (r) {
+              r.setStartBefore(last)
+              r.deleteContents()
+              applyRange(r)
+              this.handleInput()
+            }
+          }
+          return
+        }
+
         const { atItems, members, suffix, deleteMatch, itemName } = this
         const text = range.toString()
         const { at, index } = getAtAndIndex(text, atItems)
+
         if (index > -1) {
           const chunk = text.slice(index + at.length)
           const has = members.some(v => {
@@ -332,47 +372,79 @@ export default {
     },
 
     // todo: 抽离成库并测试
-    insertText (text, r, suffix) {
+    insertText (text, r) {
       r.deleteContents()
       const node = r.endContainer
       if (node.nodeType === Node.TEXT_NODE) {
-
         const cut = r.endOffset
-
-        var secondPart = node.splitText(cut);
-        var newElement = this.htmlToElement(text);
-        if (newElement.setAttribute) {
-          newElement.setAttribute("contenteditable", false);
-        }
-        node.parentNode.insertBefore(newElement, secondPart);
-        secondPart.data = suffix + secondPart.data;
-
-         r.setEnd(secondPart, 1);
+        node.data = node.data.slice(0, cut) +
+          text + node.data.slice(cut)
+        r.setEnd(node, cut + text.length)
       } else {
         const t = document.createTextNode(text)
-
         r.insertNode(t)
         r.setEndAfter(t)
       }
       r.collapse(false) // 参数在IE下必传
       applyRange(r)
     },
+
+    insertHtml (html, r) {
+      r.deleteContents()
+      const node = r.endContainer
+      var newElement = document.createElement('span')
+
+      // Seems `contentediable=false` should includes spaces,
+      // otherwise, caret can't be placed well across them
+      newElement.appendChild(document.createTextNode(' '))
+      newElement.appendChild(this.htmlToElement(html))
+      newElement.appendChild(document.createTextNode(' '))
+      newElement.setAttribute('data-at-embedded', '')
+      newElement.setAttribute("contenteditable", false)
+
+      if (node.nodeType === Node.TEXT_NODE) {
+        const cut = r.endOffset
+        var secondPart = node.splitText(cut);
+        node.parentNode.insertBefore(newElement, secondPart);
+        r.setEndBefore(secondPart)
+      } else {
+        const t = document.createTextNode(suffix)
+        r.insertNode(newElement)
+        r.setEndAfter(newElement)
+        r.insertNode(t)
+        r.setEndAfter(t)
+      }
+      r.collapse(false) // 参数在IE下必传
+      applyRange(r)
+    },
+
     insertItem () {
       const { range, offset, list, cur } = this.atwho
-      const { suffix, atItems, itemName } = this
+      const { suffix, atItems, itemName, customsEmbedded } = this
       const r = range.cloneRange()
       const text = range.toString()
       const { at, index } = getAtAndIndex(text, atItems)
-      const start = index + at.length // 从@后第一位开始
+
+      // Leading `@` is automatically dropped as `customsEmbedded=true`
+      // You can fully custom the output inside the embedded slot
+      const start = customsEmbedded ? index : index + at.length
       r.setStart(r.endContainer, start)
+
       // hack: 连续两次 可以确保click后 focus回来 range真正生效
       applyRange(r)
       applyRange(r)
       const curItem = list[cur]
-      const t = itemName(curItem) + suffix
-      const { embeddedItem } = this.$refs;
 
-      this.insertText(embeddedItem.firstChild.innerHTML, r, suffix);
+      if (customsEmbedded) {
+        // `suffix` is ignored as `customsEmbedded=true` has to be
+        // wrapped around by spaces
+        const html = this.$refs.embeddedItem.firstChild.innerHTML
+        this.insertHtml(html, r);
+      } else {
+        const t = itemName(curItem) + suffix
+        this.insertText(t, r);
+      }
+
       this.$emit('insert', curItem)
       this.handleInput()
     },

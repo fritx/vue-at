@@ -16,14 +16,14 @@
         contenteditable></div>
     </at>
 
-    <at :members="members" name-key="name" v-model="html">
+    <at :members="members" name-key="name" v-model="html2">
       <!-- custom: same as default slot -->
       <!-- <template slot="item" scope="s">
         <span v-text="s.item"></span>
       </template> -->
 
-      <span slot="embeddedItem" slot-scope="item">
-        <span class="tag"><img class="avatar" :src="item.current.avatar"/>{{ item.current.name }}</span>
+      <span slot="embeddedItem" slot-scope="s">
+        <span class="tag"><img class="avatar" :src="s.current.avatar">{{ s.current.name }}</span>
       </span>
 
       <!-- custom: with avatars -->
@@ -79,7 +79,7 @@ export default {
   components: { At, AtTa },
   name: 'app',
   data () {
-    return {
+    const data = {
       members,
       text: `
 <<< Textarea >>>
@@ -108,6 +108,8 @@ Playback - Video player.
         <div>&lt;&lt;&lt; Content Editable Div &gt;&gt;&gt;</div><div>Awesome Electron&nbsp;<img style="max-width: 50px;" src="static/awesome.svg"></div><div><img style="max-width: 50px;" src="static/electron.svg"></div><div>Useful resources for creating apps with&nbsp;Electron</div><div>Inspired by the&nbsp;awesome&nbsp;list thing. You might also like&nbsp;awesome-nodejs.</div><div>Example apps</div><div>Some good apps written with Electron.</div><div>Open Source</div><div>Atom&nbsp;- Code editor.</div><div>Nuclide&nbsp;- Unified IDE.</div><div>Playback&nbsp;- Video player.</div>
       `.trim() // fix trailing abnormal nodes
     }
+    data.html2 = data.html
+    return data
   }
 }
 </script>
