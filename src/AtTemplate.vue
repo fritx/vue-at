@@ -32,6 +32,9 @@
         </div>
       </div>
     </div>
+    <span v-show="false" ref="embeddedItem">
+      <slot name="embeddedItem" :current="currentItem"><span>{{ itemName(currentItem) }}</span></slot>
+    </span>
     <slot></slot>
   </div>
 </template>
