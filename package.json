@@ -1,7 +1,7 @@
 {
   "name": "vue-at",
   "description": "At.js for Vue",
-  "version": "2.4.0-beta",
+  "version": "2.5.0-beta.1",
   "author": "Fritz Lin <uxfritz@163.com>",
   "repository": "https://github.com/fritx/vue-at",
   "scripts": {
