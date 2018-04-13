@@ -35,7 +35,7 @@ module.exports = {
   resolve: {
     alias: {
       // https://vuejs.org/v2/guide/installation.html#Standalone-vs-Runtime-only-Build
-      // 'vue$': 'vue/dist/vue.common.js'
+      'vue$': 'vue/dist/vue.common.js'
     }
   }
 }
