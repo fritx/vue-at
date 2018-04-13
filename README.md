@@ -98,7 +98,7 @@ npm i -S textarea-caret  # also, for textarea
 
 ## Custom Templates
 
-### List Templates
+### Custom List
 
 ```vue
 <template>
@@ -129,7 +129,7 @@ members: [{
 </style>
 ```
 
-#### Custom List Templates with Vue 1.x
+#### Custom List with Vue 1.x
 
 There is no "scoped slot" feature in Vue 1.<br>
 Use a "normal slot" with `data-` attribute instead.
@@ -142,12 +142,12 @@ Use a "normal slot" with `data-` attribute instead.
 </template>
 ```
 
-### Tag Template
+### Custom Tags
 
 This gives you the option of changing the style of inserted tagged items. It is only supported for ContentEditable version, not Textarea.
 
-```
-  <span slot="embeddedItem" slot-scope="item">
-    <span class="tag"><img class="avatar" :src="item.current.avatar"/>{{ item.current.name }}</span>
-  </span>
+```vue
+<span slot="embeddedItem" slot-scope="s">
+  <span class="tag"><img :src="s.current.avatar">{{ s.current.name }}</span>
+</span>
 ```
