@@ -34,6 +34,10 @@ export default {
       type: Boolean,
       default: true
     },
+    tabSelect: {
+      type: Boolean,
+      default: false
+    },
     avoidEmail: {
       type: Boolean,
       default: true
@@ -231,7 +235,7 @@ export default {
           }
           return
         }
-        if (e.keyCode === 13 || e.keyCode === 9) { // enter or tab
+        if (e.keyCode === 13 || (this.tabSelect && e.keyCode === 9)) { // enter or tab
           this.insertItem()
           e.preventDefault()
           e.stopPropagation()
