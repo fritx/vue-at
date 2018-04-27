@@ -231,7 +231,7 @@ export default {
           }
           return
         }
-        if (e.keyCode === 13) { // enter
+        if (e.keyCode === 13 || e.keyCode === 9) { // enter or tab
           this.insertItem()
           e.preventDefault()
           e.stopPropagation()

@@ -93,6 +93,8 @@ export default {
             this.closePanel()
           }
         }
+      } else {
+        this.closePanel()
       }
     },
 
