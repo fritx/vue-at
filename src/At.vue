@@ -42,6 +42,10 @@ export default {
       type: Boolean,
       default: true
     },
+    showUnique: {
+      type: Boolean,
+      default: true
+    },
     hoverSelect: {
       type: Boolean,
       default: true
@@ -276,7 +280,7 @@ export default {
 
       const range = getPrecedingRange()
       if (range) {
-        const { atItems, avoidEmail, allowSpaces } = this
+        const { atItems, avoidEmail, allowSpaces, showUnique } = this
 
         let show = true
         const text = range.toString()
@@ -312,7 +316,19 @@ export default {
             const name = itemName(v)
             return filterMatch(name, chunk, at)
           })
+
+          show = false
           if (matched.length) {
+            show = true
+            if (!showUnique) {
+              let item = matched[0]
+              if (chunk === itemName(item)) {
+                show = false
+              }
+            }
+          }
+
+          if (show) {
             this.openPanel(matched, range, index, at)
           } else {
             this.closePanel()
