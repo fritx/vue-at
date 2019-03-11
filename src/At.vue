@@ -71,6 +71,14 @@ export default {
     scrollRef: {
       type: String,
       default: ''
+    },
+    maxLoadUsers: {
+        type: Number,
+        default: 10
+    },
+    enableHighlight: {
+        type: Boolean,
+        default: true
     }
   },
 
@@ -327,6 +335,9 @@ export default {
       }
     },
     openPanel (list, range, offset, at) {
+      if(this.maxLoadUsers != -1) {
+          list = list.slice(0,this.maxLoadUsers);
+      }
       const fn = () => {
         const r = range.cloneRange()
         r.setStart(r.endContainer, offset + at.length) // 从@后第一位开始
@@ -392,6 +403,33 @@ export default {
       r.collapse(false) // 参数在IE下必传
       applyRange(r)
     },
+    insertMentions(text, r){
+        r.deleteContents();
+        var e = r.endContainer;
+        var chars = e.data.split("");
+        var last = r.startOffset - 1;
+        while(chars[last] != '@' && last > -1) {
+            last--;
+        }
+        var after =  e.data.substr(r.startOffset);
+        e.data = e.data.substr(0, last);
+        var parent = e.parentNode;
+        var highlightElement = document.createElement("span");
+        highlightElement.innerText = text.trim();
+        highlightElement.className += "mentioned";
+        parent.appendChild(highlightElement);
+
+        var space = document.createElement("span");
+        space.innerHTML = "&nbsp; ";
+        parent.appendChild(space);
+        r.setEndAfter(space);
+
+        var textAfter = document.createTextNode(after);
+        parent.appendChild(textAfter);
+        this.handleInput();
+        applyRange(r);
+        r.collapse(false);
+    } ,
 
     insertHtml (html, r) {
       r.deleteContents()
@@ -440,13 +478,19 @@ export default {
       const curItem = list[cur]
 
       if (customsEmbedded) {
+          console.log("ok fin qui");
         // `suffix` is ignored as `customsEmbedded=true` has to be
         // wrapped around by spaces
         const html = this.$refs.embeddedItem.firstChild.innerHTML
         this.insertHtml(html, r);
       } else {
-        const t = itemName(curItem) + suffix
-        this.insertText(t, r);
+        const t = itemName(curItem) + suffix;
+        if(this.enableHighlight) {
+            this.insertMentions(t, r);
+        } else {
+            this.insertText(t,r);
+        }
+
       }
 
       this.$emit('insert', curItem)
