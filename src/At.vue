@@ -46,10 +46,6 @@ export default {
       type: Boolean,
       default: true
     },
-    members: {
-      type: Array,
-      default: () => []
-    },
     nameKey: {
       type: String,
       default: ''
@@ -89,12 +85,13 @@ export default {
       bindsValue: this.value != null,
       customsEmbedded: false,
       hasComposition: false,
-      atwho: null
+      atwho: null,
+      type: ""
     }
   },
   computed: {
     atItems () {
-      return this.at ? [this.at] : this.ats
+      return this.ats.map(at => at.symbol)
     },
 
     currentItem () {
@@ -290,7 +287,9 @@ export default {
         const text = range.toString()
 
         const { at, index } = getAtAndIndex(text, atItems)
-
+        var startedCharIndex = this.atItems.indexOf(at);
+        this.members = this.ats[startedCharIndex].data;
+        this.type = at;
         if (index < 0) show = false
         const prev = text[index - 1]
 
@@ -478,7 +477,6 @@ export default {
       const curItem = list[cur]
 
       if (customsEmbedded) {
-          console.log("ok fin qui");
         // `suffix` is ignored as `customsEmbedded=true` has to be
         // wrapped around by spaces
         const html = this.$refs.embeddedItem.firstChild.innerHTML
