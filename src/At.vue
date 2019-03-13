@@ -170,6 +170,17 @@ export default {
     handleDelete (e) {
       const range = getPrecedingRange()
       if (range) {
+        var node = range.commonAncestorContainer.parentNode;
+        /**
+        *  When you remove a char of a computed element, it is necessary remove
+        *  all the html element.
+        */
+        if(node.tagName == "SPAN" && node.classList.contains("at-computed")) {
+          node.remove();
+          e.preventDefault()
+          e.stopPropagation()
+          return;
+        }
         // fixme: Very bad code from me
         if (this.customsEmbedded && range.endOffset >= 1) {
           let a = range.endContainer.childNodes[range.endOffset]
@@ -402,33 +413,38 @@ export default {
       r.collapse(false) // 参数在IE下必传
       applyRange(r)
     },
-    insertMentions(text, r){
-        r.deleteContents();
-        var e = r.endContainer;
-        var chars = e.data.split("");
-        var last = r.startOffset - 1;
-        while(chars[last] != '@' && last > -1) {
-            last--;
-        }
-        var after =  e.data.substr(r.startOffset);
-        e.data = e.data.substr(0, last);
-        var parent = e.parentNode;
-        var highlightElement = document.createElement("span");
-        highlightElement.innerText = text.trim();
-        highlightElement.className += "mentioned";
-        parent.appendChild(highlightElement);
+    insertMentions(text, r) {
+      r.deleteContents();
 
-        var space = document.createElement("span");
-        space.innerHTML = "&nbsp; ";
-        parent.appendChild(space);
-        r.setEndAfter(space);
+      var e = r.endContainer;
+      var chars = e.data.split("");
+      var last = r.startOffset - 1;
 
-        var textAfter = document.createTextNode(after);
-        parent.appendChild(textAfter);
-        this.handleInput();
-        applyRange(r);
-        r.collapse(false);
-    } ,
+      var classes = this.ats[this.atItems.indexOf(this.type)].cssClass;
+      while (chars[last] != this.type && last > -1) {
+          last--;
+      }
+      var after = e.data.substr(r.startOffset);
+      e.data = e.data.substr(0, last);
+      var parent = r.startContainer.parentElement;
+      while(parent.tagName!="DIV" && parent.hasAttribute("contenteditable")){
+          parent = parent.parentElement;
+      }
+      var highlightElement = document.createElement("span");
+      highlightElement.innerText = text.trim();
+      highlightElement.className += classes;
+      highlightElement.classList.add("at-computed")
+      parent.appendChild(highlightElement);
+
+      var space = document.createElement("span");
+      space.innerHTML = "&nbsp; " + after;
+      parent.appendChild(space);
+      r.setEndAfter(space);
+
+      this.handleInput();
+      applyRange(r);
+      r.collapse(false);
+    },
 
     insertHtml (html, r) {
       r.deleteContents()
