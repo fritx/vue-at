@@ -251,7 +251,8 @@ export default {
           }
           return
         }
-        if (e.keyCode === 13 || (this.tabSelect && e.keyCode === 9)) { // enter or tab
+          var onlyInSet = this.ats[this.atItems.indexOf(this.type)].onlyInSet
+          if (e.keyCode === 13 || (this.tabSelect && e.keyCode === 9) || (e.keyCode === 32 && !onlyInSet)) { // enter or tab or space if i can accept words not in the set.
           this.insertItem()
           e.preventDefault()
           e.stopPropagation()
@@ -330,10 +331,20 @@ export default {
             const name = itemName(v)
             return filterMatch(name, chunk, at)
           })
+          /**
+           * If the following property is true, the component not accept other
+           * different values.
+           */
+          var onlyInSet = this.ats[this.atItems.indexOf(this.type)].onlyInSet
+          if(matched.length == 0 && !onlyInSet) {
+              matched.push({
+                  name: "#" + chunk
+              });
+          }
           if (matched.length) {
-            this.openPanel(matched, range, index, at)
+              this.openPanel(matched, range, index, at)
           } else {
-            this.closePanel()
+              this.closePanel()
           }
         }
       }
