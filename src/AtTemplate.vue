@@ -6,7 +6,7 @@
     @compositionstart="handleCompositionStart"
     @compositionend="handleCompositionEnd"
     @input="handleInput()"
-    @keydown="handleKeyDown"
+    @keydown.capture="handleKeyDown"
   >
     <div v-if="atwho"
       class="atwho-panel"
