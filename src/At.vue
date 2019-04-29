@@ -150,7 +150,13 @@ export default {
       const el = this.$el.querySelector('[contenteditable]')
       if (value !== el.innerHTML) { // avoid range reset
         el.innerHTML = value
+        this.dispatchInput()
       }
+    },
+    dispatchInput () {
+      let el = this.$el.querySelector('[contenteditable]')
+      let ev = new Event('input', { bubbles: true })
+      el.dispatchEvent(ev)
     },
 
     handleItemHover (e) {
