@@ -47,6 +47,16 @@
 
       <textarea class="editor"></textarea>
     </at-ta>
+
+    <at-ta :members="members" name-key="name" v-model="text2">
+      <!-- custom: with avatars -->
+      <template slot="item" scope="s">
+        <img :src="s.item.avatar">
+        <span v-text="s.item.name"></span>
+      </template>
+
+      <v-textarea class="vuetify-editor"></v-textarea>
+    </at-ta>
   </div>
 </template>
 
@@ -108,6 +118,7 @@ Playback - Video player.
         <div>&lt;&lt;&lt; Content Editable Div &gt;&gt;&gt;</div><div>Awesome Electron&nbsp;<img style="max-width: 50px;" src="static/awesome.svg"></div><div><img style="max-width: 50px;" src="static/electron.svg"></div><div>Useful resources for creating apps with&nbsp;Electron</div><div>Inspired by the&nbsp;awesome&nbsp;list thing. You might also like&nbsp;awesome-nodejs.</div><div>Example apps</div><div>Some good apps written with Electron.</div><div>Open Source</div><div>Atom&nbsp;- Code editor.</div><div>Nuclide&nbsp;- Unified IDE.</div><div>Playback&nbsp;- Video player.</div>
       `.trim() // fix trailing abnormal nodes
     }
+    data.text2 = data.text
     data.html2 = data.html
     return data
   }
@@ -128,12 +139,21 @@ Playback - Video player.
   background: beige;
   border: 1ps outset yellow;
 }
+
 .editor {
   width: 400px;
   height: 200px;
   overflow: auto;
   white-space: pre-wrap;
   border: solid 2px rgba(0,0,0,.5);
+}
+.vuetify-editor {
+  width: 400px;
+  margin: 0;
+  padding: 0;
+}
+.vuetify-editor textarea {
+  height: 200px;
 }
 
 .avatar {

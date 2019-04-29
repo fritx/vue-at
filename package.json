@@ -23,14 +23,16 @@
     "cross-env": "^3.0.0",
     "css-loader": "^0.25.0",
     "file-loader": "^0.9.0",
-    "node-sass": "^4.0.0",
+    "node-sass": "^4.12.0",
     "sass-loader": "^4.1.0",
+    "style-loader": "^0.23.1",
     "textarea-caret": "^3.0.2",
     "uglifyjs-webpack-plugin": "^1.2.2",
     "vue": "^2.1.0",
     "vue-loader": "^10.3.0",
     "vue-style-loader": "^1.0.0",
     "vue-template-compiler": "^2.2.4",
+    "vuetify": "^1.5.13",
     "webpack": "^2.1.0-beta.25",
     "webpack-dev-server": "^2.1.0-beta.9"
   }
