@@ -26,7 +26,13 @@ export default {
       const el = this.$el.querySelector('textarea')
       if (value !== el.value) { // avoid range reset
         el.value = value
+        this.dispatchInput()
       }
+    },
+    dispatchInput () {
+      let el = this.$el.querySelector('textarea')
+      let ev = new Event('input', { bubbles: true })
+      el.dispatchEvent(ev)
     },
 
     handleDelete (e) {
@@ -129,6 +135,7 @@ export default {
       const newEnd = start + text.length
       ta.selectionStart = newEnd
       ta.selectionEnd = newEnd
+      this.dispatchInput()
     },
     insertItem () {
       const { chunk, offset, list, cur, atEnd } = this.atwho
