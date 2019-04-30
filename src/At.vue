@@ -46,10 +46,6 @@ export default {
       type: Boolean,
       default: true
     },
-    members: {
-      type: Array,
-      default: () => []
-    },
     nameKey: {
       type: String,
       default: ''
@@ -71,6 +67,14 @@ export default {
     scrollRef: {
       type: String,
       default: ''
+    },
+    maxLoadUsers: {
+        type: Number,
+        default: 10
+    },
+    enableHighlight: {
+        type: Boolean,
+        default: true
     }
   },
 
@@ -81,12 +85,13 @@ export default {
       bindsValue: this.value != null,
       customsEmbedded: false,
       hasComposition: false,
-      atwho: null
+      atwho: null,
+      type: ""
     }
   },
   computed: {
     atItems () {
-      return this.at ? [this.at] : this.ats
+      return this.ats.map(at => at.symbol)
     },
 
     currentItem () {
@@ -165,6 +170,17 @@ export default {
     handleDelete (e) {
       const range = getPrecedingRange()
       if (range) {
+        var node = range.commonAncestorContainer.parentNode;
+        /**
+        *  When you remove a char of a computed element, it is necessary remove
+        *  all the html element.
+        */
+        if(node.tagName == "SPAN" && node.classList.contains("at-computed")) {
+          node.remove();
+          e.preventDefault()
+          e.stopPropagation()
+          return;
+        }
         // fixme: Very bad code from me
         if (this.customsEmbedded && range.endOffset >= 1) {
           let a = range.endContainer.childNodes[range.endOffset]
@@ -235,7 +251,8 @@ export default {
           }
           return
         }
-        if (e.keyCode === 13 || (this.tabSelect && e.keyCode === 9)) { // enter or tab
+          var onlyInSet = this.ats[this.atItems.indexOf(this.type)].onlyInSet
+          if (e.keyCode === 13 || (this.tabSelect && e.keyCode === 9) || (e.keyCode === 32 && !onlyInSet)) { // enter or tab or space if i can accept words not in the set.
           this.insertItem()
           e.preventDefault()
           e.stopPropagation()
@@ -282,7 +299,9 @@ export default {
         const text = range.toString()
 
         const { at, index } = getAtAndIndex(text, atItems)
-
+        var startedCharIndex = this.atItems.indexOf(at);
+        this.members = this.ats[startedCharIndex].data;
+        this.type = at;
         if (index < 0) show = false
         const prev = text[index - 1]
 
@@ -312,10 +331,20 @@ export default {
             const name = itemName(v)
             return filterMatch(name, chunk, at)
           })
+          /**
+           * If the following property is true, the component not accept other
+           * different values.
+           */
+          var onlyInSet = this.ats[this.atItems.indexOf(this.type)].onlyInSet
+          if(matched.length == 0 && !onlyInSet) {
+              matched.push({
+                  name: "#" + chunk
+              });
+          }
           if (matched.length) {
-            this.openPanel(matched, range, index, at)
+              this.openPanel(matched, range, index, at)
           } else {
-            this.closePanel()
+              this.closePanel()
           }
         }
       }
@@ -327,6 +356,9 @@ export default {
       }
     },
     openPanel (list, range, offset, at) {
+      if(this.maxLoadUsers != -1) {
+          list = list.slice(0,this.maxLoadUsers);
+      }
       const fn = () => {
         const r = range.cloneRange()
         r.setStart(r.endContainer, offset + at.length) // 从@后第一位开始
@@ -392,6 +424,38 @@ export default {
       r.collapse(false) // 参数在IE下必传
       applyRange(r)
     },
+    insertMentions(text, r) {
+      r.deleteContents();
+
+      var e = r.endContainer;
+      var chars = e.data.split("");
+      var last = r.startOffset - 1;
+
+      var classes = this.ats[this.atItems.indexOf(this.type)].cssClass;
+      while (chars[last] != this.type && last > -1) {
+          last--;
+      }
+      var after = e.data.substr(r.startOffset);
+      e.data = e.data.substr(0, last);
+      var parent = r.startContainer.parentElement;
+      while(parent.tagName!="DIV" && parent.hasAttribute("contenteditable")){
+          parent = parent.parentElement;
+      }
+      var highlightElement = document.createElement("span");
+      highlightElement.innerText = text.trim();
+      highlightElement.className += classes;
+      highlightElement.classList.add("at-computed")
+      parent.appendChild(highlightElement);
+
+      var space = document.createElement("span");
+      space.innerHTML = "&nbsp; " + after;
+      parent.appendChild(space);
+      r.setEndAfter(space);
+
+      this.handleInput();
+      applyRange(r);
+      r.collapse(false);
+    },
 
     insertHtml (html, r) {
       r.deleteContents()
@@ -445,8 +509,13 @@ export default {
         const html = this.$refs.embeddedItem.firstChild.innerHTML
         this.insertHtml(html, r);
       } else {
-        const t = itemName(curItem) + suffix
-        this.insertText(t, r);
+        const t = itemName(curItem) + suffix;
+        if(this.enableHighlight) {
+            this.insertMentions(t, r);
+        } else {
+            this.insertText(t,r);
+        }
+
       }
 
       this.$emit('insert', curItem)
