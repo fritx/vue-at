@@ -397,6 +397,7 @@ export default {
       }
       r.collapse(false) // 参数在IE下必传
       applyRange(r)
+      this.dispatchInput()
     },
 
     insertHtml (html, r) {

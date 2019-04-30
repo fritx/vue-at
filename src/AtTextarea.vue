@@ -135,6 +135,7 @@ export default {
       const newEnd = start + text.length
       ta.selectionStart = newEnd
       ta.selectionEnd = newEnd
+      this.dispatchInput()
     },
     insertItem () {
       const { chunk, offset, list, cur, atEnd } = this.atwho
