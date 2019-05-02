@@ -26,7 +26,13 @@ export default {
       const el = this.$el.querySelector('textarea')
       if (value !== el.value) { // avoid range reset
         el.value = value
+        this.dispatchInput()
       }
+    },
+    dispatchInput () {
+      let el = this.$el.querySelector('textarea')
+      let ev = new Event('input', { bubbles: true })
+      el.dispatchEvent(ev)
     },
 
     handleDelete (e) {
@@ -80,7 +86,7 @@ export default {
           this.closePanel()
         } else {
           const { members, filterMatch, itemName } = this
-          if (!keep) {
+          if (!keep) { // fixme: should be consistent with At.vue
             this.$emit('at', chunk)
           }
           const matched = members.filter(v => {
@@ -93,6 +99,8 @@ export default {
             this.closePanel()
           }
         }
+      } else {
+        this.closePanel()
       }
     },
 
@@ -127,6 +135,7 @@ export default {
       const newEnd = start + text.length
       ta.selectionStart = newEnd
       ta.selectionEnd = newEnd
+      this.dispatchInput()
     },
     insertItem () {
       const { chunk, offset, list, cur, atEnd } = this.atwho
@@ -137,8 +146,10 @@ export default {
       const start = index + at.length // 从@后第一位开始
       el.selectionStart = start
       el.focus() // textarea必须focus回来
-      const t = itemName(list[cur]) + suffix
+      const curItem = list[cur]
+      const t = itemName(curItem) + suffix
       this.insertText(t, el)
+      this.$emit('insert', curItem)
       this.handleInput()
     }
   }

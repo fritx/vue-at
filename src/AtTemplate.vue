@@ -6,7 +6,7 @@
     @compositionstart="handleCompositionStart"
     @compositionend="handleCompositionEnd"
     @input="handleInput()"
-    @keydown="handleKeyDown"
+    @keydown.capture="handleKeyDown"
   >
     <div v-if="atwho"
       class="atwho-panel"
@@ -17,6 +17,7 @@
           <ul class="atwho-ul">
             <li v-for="(item, index) in atwho.list"
               class="atwho-li"
+              :key="index"
               :class="isCur(index) && 'atwho-cur'"
               :ref="isCur(index) && 'cur'"
               :data-index="index"
@@ -31,6 +32,9 @@
         </div>
       </div>
     </div>
+    <span v-show="false" ref="embeddedItem">
+      <slot name="embeddedItem" :current="currentItem"></slot>
+    </span>
     <slot></slot>
   </div>
 </template>

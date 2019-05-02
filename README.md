@@ -1,5 +1,7 @@
 # vue-at
 
+<a href="https://www.npmjs.com/package/vue-at"><img height="20" src="https://img.shields.io/npm/dm/vue-at.svg"></a>&nbsp;&nbsp;<a href="https://github.com/fritx/vue-at"><img width="90" height="20" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" /></a>&nbsp;&nbsp;<a href="https://github.com/fritx/vue-at"><img width="84" height="20" src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
+
 <img width="262" height="218" src="https://raw.githubusercontent.com/fritx/vue-at/master/WechatIMG1.jpeg">&nbsp;&nbsp;<img width="262" height="218" src="https://raw.githubusercontent.com/fritx/vue-at/master/WechatIMG2.jpeg">
 
 Live Demo & Documentation: https://fritx.github.io/vue-at
@@ -96,6 +98,8 @@ npm i -S textarea-caret  # also, for textarea
 
 ## Custom Templates
 
+### Custom List
+
 ```vue
 <template>
   <at :members="members" name-key="name">
@@ -125,7 +129,7 @@ members: [{
 </style>
 ```
 
-### Custom Templates with Vue 1.x
+#### Custom List with Vue 1.x
 
 There is no "scoped slot" feature in Vue 1.<br>
 Use a "normal slot" with `data-` attribute instead.
@@ -136,4 +140,14 @@ Use a "normal slot" with `data-` attribute instead.
   <img data-src="item.avatar">
   <span data-text="item.name"></span>
 </template>
+```
+
+### Custom Tags
+
+This gives you the option of changing the style of inserted tagged items. It is only supported for ContentEditable version, not Textarea.
+
+```vue
+<span slot="embeddedItem" slot-scope="s">
+  <span class="tag"><img :src="s.current.avatar">{{ s.current.name }}</span>
+</span>
 ```
