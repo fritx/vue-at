@@ -5,6 +5,25 @@
 
 `Vue-At` strictly follows [Semantic Versioning 2.0.0](http://semver.org/).
 
+## <span class="title-version">v2.4.0-beta</span> - 2018-03-04
+
+- Merge branch 'feat/v-model' into dev, ref [#29](https://github.com/fritx/vue-at/issues/29), [#41](https://github.com/fritx/vue-at/issues/41), [#43](https://github.com/fritx/vue-at/issues/43)
+  - docs: demo switched to v-model
+  - feat(v-model): support both editable and textarea
+  - fix(v-model): textarea v-model should be optional (non-breaking), ref [#38](https://github.com/fritx/vue-at/pull/38#issuecomment-363238410)
+- Merge branch 'Brimstedt-dev' into feat/v-model (by [@Brimstedt](https://github.com/Brimstedt))
+  - handled changed values
+  - implement v-model
+
+## <span class="title-version">v2.3.2</span> - 2018-03-03
+
+- Merge branch 'fix/vueify-scss' into dev
+  - chore: switched to uglifyjs-webpack-plugin 1.x, ref [vuejs-templates/webpack@webpack.prod.conf](https://github.com/vuejs-templates/webpack/blob/cd4d7d957c9af3d37092c79bf490b56b8d88b108/template/build/webpack.prod.conf.js#L37)
+  - fix(vueify): apply uglifyjs when build, to support vueify (package size would reduce)
+  - chore: remove At.css in favor of uglifyjs to work with vueify, ref [#37](https://github.com/fritx/vue-at/pull/37#issuecomment-361233085)
+- Merge branch 'Alideniz-dev' into fix/vueify-scss (by [@Alideniz](https://github.com/Alideniz))
+  - At.scss compiled to css
+
 ## <span class="title-version">v2.3.1</span> - 2017-12-16
 
 - Emit at event only when chunk isn't empty (by [@AlexanderMisel](https://github.com/fritx/vue-at/commits?author=AlexanderMisel))
