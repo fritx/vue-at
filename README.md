@@ -1,6 +1,6 @@
 # vue-at
 
-<a href="https://www.npmjs.com/package/vue-at"><img height="20" src="https://img.shields.io/npm/dm/vue-at.svg"></a>&nbsp;&nbsp;<a href="https://github.com/fritx/vue-at"><img width="90" height="20" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" /></a>&nbsp;&nbsp;<a href="https://github.com/fritx/vue-at"><img width="84" height="20" src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
+<a href="https://www.npmjs.com/package/vue-at"><img height="20" src="https://img.shields.io/npm/dm/vue-at.svg"></a>&nbsp;&nbsp;<a href="https://github.com/fritx/vue-at"><img width="90" height="20" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" /></a>&nbsp;&nbsp;<a href="https://github.com/fritx/vue-at"><img width="84" height="20" src="https://img.shields.io/badge/license-MIT-blue.svg"></a><a href="#backers"><img src="https://opencollective.com/vue-at/backers/badge.svg"></a> <a href="#sponsors"><img src="https://opencollective.com/vue-at/sponsors/badge.svg"></a>
 
 <img width="262" height="218" src="https://raw.githubusercontent.com/fritx/vue-at/master/WechatIMG1.jpeg">&nbsp;&nbsp;<img width="262" height="218" src="https://raw.githubusercontent.com/fritx/vue-at/master/WechatIMG2.jpeg">
 
@@ -151,3 +151,33 @@ This gives you the option of changing the style of inserted tagged items. It is 
   <span class="tag"><img :src="s.current.avatar">{{ s.current.name }}</span>
 </span>
 ```
+
+## Contributors
+
+This project exists thanks to all the people who contribute. 
+<a href="https://github.com/fritx/vue-at/graphs/contributors"><img src="https://opencollective.com/vue-at/contributors.svg?width=890&button=false" /></a>
+
+
+## Backers
+
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/vue-at#backer)]
+
+<a href="https://opencollective.com/vue-at#backers" target="_blank"><img src="https://opencollective.com/vue-at/backers.svg?width=890"></a>
+
+
+## Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/vue-at#sponsor)]
+
+<a href="https://opencollective.com/vue-at/sponsor/0/website" target="_blank"><img src="https://opencollective.com/vue-at/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/vue-at/sponsor/1/website" target="_blank"><img src="https://opencollective.com/vue-at/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/vue-at/sponsor/2/website" target="_blank"><img src="https://opencollective.com/vue-at/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/vue-at/sponsor/3/website" target="_blank"><img src="https://opencollective.com/vue-at/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/vue-at/sponsor/4/website" target="_blank"><img src="https://opencollective.com/vue-at/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/vue-at/sponsor/5/website" target="_blank"><img src="https://opencollective.com/vue-at/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/vue-at/sponsor/6/website" target="_blank"><img src="https://opencollective.com/vue-at/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/vue-at/sponsor/7/website" target="_blank"><img src="https://opencollective.com/vue-at/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/vue-at/sponsor/8/website" target="_blank"><img src="https://opencollective.com/vue-at/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/vue-at/sponsor/9/website" target="_blank"><img src="https://opencollective.com/vue-at/sponsor/9/avatar.svg"></a>
+
+
