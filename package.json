@@ -8,10 +8,14 @@
     "dev": "webpack-dev-server --config webpack/demo --open --inline --hot",
     "demo": "webpack --config webpack/demo --progress --hide-modules",
     "build": "webpack --config webpack/prod --progress --hide-modules",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "postinstall": "opencollective-postinstall"
   },
   "main": "dist/vue-at.js",
-  "dependencies": {},
+  "dependencies": {
+    "opencollective-postinstall": "^2.0.2",
+    "opencollective": "^1.0.3"
+  },
   "peerDependencies": {
     "vue": "2.x"
   },
@@ -35,5 +39,9 @@
     "vuetify": "^1.5.13",
     "webpack": "^2.1.0-beta.25",
     "webpack-dev-server": "^2.1.0-beta.9"
+  },
+  "collective": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/vue-at"
   }
 }
