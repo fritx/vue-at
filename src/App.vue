@@ -48,14 +48,26 @@
       <textarea class="editor"></textarea>
     </at-ta>
 
-    <at-ta :members="members" name-key="name" v-model="text2">
+    <at-ta :members="members" name-key="name">
       <!-- custom: with avatars -->
       <template slot="item" scope="s">
         <img :src="s.item.avatar">
         <span v-text="s.item.name"></span>
       </template>
 
-      <v-textarea class="vuetify-editor"></v-textarea>
+      <v-textarea class="vuetify-editor" v-model="text2"></v-textarea>
+    </at-ta>
+
+    <br />
+
+    <at-ta :members="members" name-key="name">
+      <!-- custom: with avatars -->
+      <template slot="item" scope="s">
+        <img :src="s.item.avatar">
+        <span v-text="s.item.name"></span>
+      </template>
+
+      <el-input type="textarea" v-model="text3" class="element-editor"></el-input>
     </at-ta>
   </div>
 </template>
@@ -119,6 +131,7 @@ Playback - Video player.
       `.trim() // fix trailing abnormal nodes
     }
     data.text2 = data.text
+    data.text3 = data.text
     data.html2 = data.html
     return data
   }
@@ -147,12 +160,29 @@ Playback - Video player.
   white-space: pre-wrap;
   border: solid 2px rgba(0,0,0,.5);
 }
+textarea {
+  display: block;
+}
+
 .vuetify-editor {
   width: 400px;
   margin: 0;
   padding: 0;
 }
 .vuetify-editor textarea {
+  height: 200px;
+}
+.v-input__slot {
+  margin: 0;
+}
+.v-text-field__details {
+  display: none;
+}
+
+.element-editor {
+  width: 400px;
+}
+.element-editor textarea {
   height: 200px;
 }
 

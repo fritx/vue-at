@@ -28,6 +28,10 @@ module.exports = {
         loader: 'style-loader!css-loader'
       },
       {
+        test: /\.(ttf|woff)$/,
+        loader: 'url-loader'
+      },
+      {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {

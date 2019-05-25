@@ -16,6 +16,8 @@ Live Demo & Documentation: https://fritx.github.io/vue-at
 - [x] ContentEditable/Textarea
 - [x] Avatars, custom templates
 - [x] Vue2/Vue1
+- [x] Vuetify v-textarea
+- [x] Element el-input
 
 See also: [react-at](https://github.com/fritx/react-at)
 
@@ -63,16 +65,16 @@ export default {
 
 ## Using V-Model (Recommended)
 
-Notice that `<editor v-model>` could be buggy,<br>
-and should be like `<at v-model><editor></at>` instead.
+~~Notice that `<editor v-model>` could be buggy,<br>
+and should be like `<at v-model><editor></at>` instead.~~
 
 ```vue
 <at v-model="html">
   <div contenteditable></div>
 </at>
 
-<at-ta v-model="text">
-  <textarea></textarea>
+<at-ta>
+  <textarea v-model="text"></textarea>
 </at-ta>
 ```
 
@@ -153,4 +155,22 @@ This gives you the option of changing the style of inserted tagged items. It is 
 <span slot="embeddedItem" slot-scope="s">
   <span class="tag"><img :src="s.current.avatar">{{ s.current.name }}</span>
 </span>
+```
+
+### Vuetify v-textarea
+
+```vue
+<at-ta :members="members">
+  <!-- slots -->
+  <v-textarea v-model="text" class="vuetify-editor"></v-textarea>
+</at-ta>
+```
+
+### Element-UI el-input
+
+```vue
+<at-ta :members="members">
+  <!-- slots -->
+  <el-input v-model="text" type="textarea" class="element-editor"></el-input>
+</at-ta>
 ```
