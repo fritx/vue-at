@@ -2,12 +2,12 @@
   <div id="app">
     <at :members="members" name-key="name" v-model="html">
       <!-- custom: same as default slot -->
-      <!-- <template slot="item" scope="s">
+      <!-- <template v-slot:item="s">
         <span v-text="s.item"></span>
       </template> -->
 
       <!-- custom: with avatars -->
-      <template slot="item" scope="s">
+      <template v-slot:item="s">
         <img class="avatar" :src="s.item.avatar">
         <span v-text="s.item.name"></span>
       </template>
@@ -17,17 +17,12 @@
     </at>
 
     <at :members="members" name-key="name" v-model="html2">
-      <!-- custom: same as default slot -->
-      <!-- <template slot="item" scope="s">
-        <span v-text="s.item"></span>
-      </template> -->
-
-      <span slot="embeddedItem" slot-scope="s">
-        <span class="tag"><img class="avatar" :src="s.current.avatar">{{ s.current.name }}</span>
-      </span>
+      <template v-slot:embeddedItem="s">
+        <span><span class="tag"><img class="avatar" :src="s.current.avatar">{{ s.current.name }}</span></span>
+      </template>
 
       <!-- custom: with avatars -->
-      <template slot="item" scope="s">
+      <template v-slot:item="s">
         <img :src="s.item.avatar">
         <span v-text="s.item.name"></span>
       </template>
@@ -40,7 +35,7 @@
 
     <at-ta :members="members" name-key="name" v-model="text">
       <!-- custom: with avatars -->
-      <template slot="item" scope="s">
+      <template v-slot:item="s">
         <img :src="s.item.avatar">
         <span v-text="s.item.name"></span>
       </template>
@@ -50,7 +45,7 @@
 
     <at-ta :members="members" name-key="name">
       <!-- custom: with avatars -->
-      <template slot="item" scope="s">
+      <template v-slot:item="s">
         <img :src="s.item.avatar">
         <span v-text="s.item.name"></span>
       </template>
@@ -62,7 +57,7 @@
 
     <at-ta :members="members" name-key="name">
       <!-- custom: with avatars -->
-      <template slot="item" scope="s">
+      <template v-slot:item="s">
         <img :src="s.item.avatar">
         <span v-text="s.item.name"></span>
       </template>

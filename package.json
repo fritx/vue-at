@@ -30,10 +30,10 @@
     "textarea-caret": "^3.0.2",
     "uglifyjs-webpack-plugin": "^1.2.2",
     "url-loader": "^1.1.2",
-    "vue": "^2.1.0",
+    "vue": "^2.6.10",
     "vue-loader": "^10.3.0",
     "vue-style-loader": "^1.0.0",
-    "vue-template-compiler": "^2.2.4",
+    "vue-template-compiler": "^2.6.10",
     "vuetify": "^1.5.13",
     "webpack": "^2.1.0-beta.25",
     "webpack-dev-server": "^2.1.0-beta.9"
