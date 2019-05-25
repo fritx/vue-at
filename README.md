@@ -11,13 +11,13 @@ Live Demo & Documentation: https://fritx.github.io/vue-at
 
 *Docs is powered by [At-UI](https://github.com/AT-UI/at-ui).*
 
-- [x] Chrome/Firefox/Edge/IE9~IE11
+- [x] Chrome / Firefox / Edge / IE9~IE11
 - [x] Plain-text based, no jQuery, no extra nodes
-- [x] ContentEditable/Textarea
+- [x] Content-Editable / Textarea
 - [x] Avatars, custom templates
-- [x] Vue2/Vue1
-- [x] Vuetify v-textarea
-- [x] Element el-input
+- [x] Vue2 / Vue1
+- [x] Vuetify / Element-UI
+- [ ] Vue-CLI 3 migration
 
 See also: [react-at](https://github.com/fritx/react-at)
 
@@ -65,8 +65,8 @@ export default {
 
 ## Using V-Model (Recommended)
 
-~~Notice that `<editor v-model>` could be buggy,<br>
-and should be like `<at v-model><editor></at>` instead.~~
+With Content-Editable, `v-model` should be bound in `<at>` container.<br>
+With Textarea, `v-model` should be bound in `<textarea>` itself.
 
 ```vue
 <at v-model="html">
@@ -108,7 +108,7 @@ npm i -S textarea-caret  # also, for textarea
 ```vue
 <template>
   <at :members="members" name-key="name">
-    <template slot="item" scope="s">
+    <template slot="item" slot-scope="s">
       <img :src="s.item.avatar">
       <span v-text="s.item.name"></span>
     </template>
@@ -155,14 +155,22 @@ This gives you the option of changing the style of inserted tagged items. It is 
 <span slot="embeddedItem" slot-scope="s">
   <span class="tag"><img :src="s.current.avatar">{{ s.current.name }}</span>
 </span>
+
+<!-- with Vue 2.6+ 'v-slot' directive -->
+<!-- note at least two '<span>' wrapper are required to work -->
+<template v-slot:embeddedItem="s">
+  <span><span class="tag"><img class="avatar" :src="s.current.avatar">{{ s.current.name }}</span></span>
+</template>
 ```
+
+## Used with 3rd-party libraries
 
 ### Vuetify v-textarea
 
 ```vue
 <at-ta :members="members">
   <!-- slots -->
-  <v-textarea v-model="text" class="vuetify-editor"></v-textarea>
+  <v-textarea v-model="text"></v-textarea>
 </at-ta>
 ```
 
@@ -171,6 +179,6 @@ This gives you the option of changing the style of inserted tagged items. It is 
 ```vue
 <at-ta :members="members">
   <!-- slots -->
-  <el-input v-model="text" type="textarea" class="element-editor"></el-input>
+  <el-input v-model="text" type="textarea"></el-input>
 </at-ta>
 ```
