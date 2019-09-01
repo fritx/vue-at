@@ -14,7 +14,7 @@
     >
       <div class="atwho-inner">
         <div class="atwho-view">
-          <ul class="atwho-ul">
+          <ul class="atwho-ul" v-if="atwho.list.length > 0">
             <li v-for="(item, index) in atwho.list"
               class="atwho-li"
               :key="index"
@@ -29,9 +29,18 @@
               </slot>
             </li>
           </ul>
+          <!--   to improve UX, we can display something when the list is empty   -->
+          <ul class="atwho-ul" v-if="atwho.list.length === 0">
+            <li class="atwho-li">
+              <slot name="emptyList">
+                <span v-text="isListMembersEmpty"></span>
+              </slot>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
+
     <span v-show="false" ref="embeddedItem">
       <slot name="embeddedItem" :current="currentItem"></slot>
     </span>
