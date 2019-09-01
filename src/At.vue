@@ -50,17 +50,21 @@ export default {
       type: Boolean,
       default: true
     },
-    members: {
-      type: Array,
-      default: () => []
-    },
+      listMembers: {
+          type: Array,
+          default: () => []
+      },
+      isListMembersEmpty: {
+          type: String,
+          default: 'There is no one to tag'
+      },
     nameKey: {
       type: String,
       default: ''
     },
     filterMatch: {
       type: Function,
-      default: (name, chunk, at) => {
+      default: (name = this.value, chunk, at) => {
         // match at lower-case
         return name.toLowerCase()
           .indexOf(chunk.toLowerCase()) > -1
@@ -83,6 +87,7 @@ export default {
       // at[v-model] mode should be on only when
       // initial :value/v-model is present (not nil)
       bindsValue: this.value != null,
+        members: this.listMembers,
       customsEmbedded: false,
       hasComposition: false,
       atwho: null
@@ -118,14 +123,14 @@ export default {
   },
   watch: {
     'atwho.cur' (index) {
-      if (index != null) { // cur index exists
+      if (index !== null) { // cur index exists
         this.$nextTick(() => {
           this.scrollToCur()
         })
       }
     },
-    members () {
-      this.handleInput(true)
+    listMembers (nextValue) {
+        this.members = nextValue
     },
     value (value, oldValue) {
       if (this.bindsValue) {
@@ -144,8 +149,14 @@ export default {
 
   methods: {
     itemName (v) {
-      const { nameKey } = this
-      return nameKey ? v[nameKey] : v
+        /**
+         * checks if list is empty, we return empty string
+         */
+        if (v) {
+            const { nameKey } = this
+            return nameKey ? v[nameKey] : v
+        }
+        return ''
     },
     isCur (index) {
       return index === this.atwho.cur
@@ -323,16 +334,16 @@ export default {
             return filterMatch(name, chunk, at)
           })
 
-          show = false
-          if (matched.length) {
+            /**
+             * we open the modal regardless
+             */
             show = true
             if (!showUnique) {
-              let item = matched[0]
-              if (chunk === itemName(item)) {
-                show = false
-              }
+                let item = matched[0]
+                if (chunk === itemName(item)) {
+                    show = false
+                }
             }
-          }
 
           if (show) {
             this.openPanel(matched, range, index, at)
@@ -357,7 +368,8 @@ export default {
         this.atwho = {
           range,
           offset,
-          list,
+            // sets empty list to handle how to display empty list
+          list: list.length > 0 ? list : [],
           x: rect.left,
           y: rect.top - 4,
           cur: 0 // todo: 尽可能记录
@@ -371,9 +383,21 @@ export default {
     },
 
     scrollToCur () {
-      const curEl = this.$refs.cur[0]
-      const scrollParent = curEl.parentElement.parentElement // .atwho-view
-      scrollIntoView(curEl, scrollParent)
+        /**
+         * checks if li element li.atwho-li.atwho-cur exists
+         * we need to check because if list is empty, we display empty message
+         */
+        if(this.$refs.cur) {
+            /**
+             * checks that the fist element of the list is defined
+             * and avoid making this function error out
+             */
+            if (this.$refs.cur[0]) {
+                const curEl = this.$refs.cur[0]
+                const scrollParent = curEl.parentElement.parentElement // .atwho-view
+                scrollIntoView(curEl, scrollParent)
+            }
+        }
     },
     selectByMouse (e) {
       const el = closest(e.target, d => {
@@ -386,7 +410,7 @@ export default {
       }
     },
     selectByKeyboard (e) {
-      const offset = e.keyCode === 38 ? -1 : 1
+        const offset = e.keyCode === 38 || e.keyCode === 13 ? -1 : 1;
       const { cur, list } = this.atwho
       const nextCur = this.loop
         ? (cur + offset + list.length) % list.length
