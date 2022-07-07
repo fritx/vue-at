@@ -285,6 +285,17 @@ export default {
       this.$emit('input', el.innerHTML)
 
       const range = getPrecedingRange()
+
+      if (keep) {
+        // exit the function if the range is not inside this.$el
+        let container = range.commonAncestorContainer;
+        while (container) {
+          if (container === this.$el) break;
+          container = container.parentElement;
+          if (!container) return;
+        }
+      }
+
       if (range) {
         const { atItems, avoidEmail, allowSpaces, showUnique } = this
 
