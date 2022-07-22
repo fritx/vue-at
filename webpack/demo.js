@@ -17,7 +17,7 @@ Object.assign(config, {
     historyApiFallback: true,
     noInfo: true
   },
-  devtool: isProd ? false : '#eval-source-map',
+  devtool: isProd ? false : 'eval-source-map',
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {

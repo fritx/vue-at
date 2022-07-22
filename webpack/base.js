@@ -6,42 +6,53 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          loaders: {
-            // Since sass-loader (weirdly) has SCSS as its default parse mode, we map
-            // the "scss" and "sass" values for the lang attribute to the right configs here.
-            // other preprocessors should work out of the box, no loader config like this nessessary.
-            'scss': 'vue-style-loader!css-loader!sass-loader',
-            'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
-          }
-          // other vue-loader options go here
-        }
+        use: ['vue-loader']
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+          'sass-loader',
+        ]
+      },
+      {
+        test: /\.sass$/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+          'sass-loader?indentedSyntax',
+        ]
       },
       {
         test: /\.js$/,
-        loader: 'babel-loader',
+        use: ['babel-loader'],
         exclude: /node_modules/
       },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader'
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.(ttf|woff)$/,
-        loader: 'url-loader'
+        use: ['url-loader'],
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]?[hash]'
-        }
+        use: [
+          {  
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]?[hash]'
+            }
+          }
+        ]
       }
     ]
   },
   resolve: {
     alias: {
+      'vue$': 'vue/dist/vue.esm.js' // 'vue/dist/vue.common.js' webpack 
       // https://vuejs.org/v2/guide/installation.html#Standalone-vs-Runtime-only-Build
       // 'vue$': 'vue/dist/vue.common.js'
     }

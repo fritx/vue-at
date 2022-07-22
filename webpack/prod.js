@@ -14,7 +14,7 @@ Object.assign(config, {
     filename: '[name].js',
     libraryTarget: 'commonjs2'
   },
-  devtool: '#source-map',
+  devtool: 'source-map',
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
