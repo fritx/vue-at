@@ -1,4 +1,4 @@
-var UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const TerserPlugin = require("terser-webpack-plugin");
 var path = require('path')
 var webpack = require('webpack')
 var base = require('./base')
@@ -14,7 +14,7 @@ Object.assign(config, {
     filename: '[name].js',
     libraryTarget: 'commonjs2'
   },
-  devtool: '#source-map',
+  devtool: 'source-map',
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
@@ -28,24 +28,17 @@ Object.assign(config, {
       'vue',
       'textarea-caret'
     ]),
-    // todo: upgrade webpack to 3.x
-    // switched to uglifyjs-webpack-plugin
-    // https://github.com/vuejs-templates/webpack/blob/cd4d7d957c9af3d37092c79bf490b56b8d88b108/template/build/webpack.prod.conf.js#L37
-    new UglifyJsPlugin({
-      uglifyOptions: {
-        compress: {
-          warnings: false
+  ],
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        parallel: true,
+        terserOptions: {
+          compress: true,
+          sourceMap: true
         }
-      },
-      sourceMap: true,
-      parallel: true
-    })
-    // http://vue-loader.vuejs.org/en/workflow/production.html
-    // new webpack.optimize.UglifyJsPlugin({
-    //   sourceMap: true,
-    //   compress: {
-    //     warnings: false
-    //   }
-    // })
-  ]
+      }),
+    ]
+  }
 })
