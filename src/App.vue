@@ -8,7 +8,7 @@
 
       <!-- custom: with avatars -->
       <template v-slot:item="s">
-        <img class="avatar" :src="s.item.avatar">
+        <img :src="s.item.avatar">
         <span v-text="s.item.name"></span>
       </template>
 
@@ -181,7 +181,11 @@ textarea {
   height: 200px;
 }
 
-.avatar {
+.editor img {
+  max-width: 10em;
+  vertical-align: bottom;
+}
+.tag .avatar {
   max-width: 1em;
   vertical-align: middle;
 }
