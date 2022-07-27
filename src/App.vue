@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <at :members="members" name-key="name" v-model="html">
+    <at :list-members="membersEmpty" name-key="name" v-model="html">
       <!-- custom: same as default slot -->
       <!-- <template v-slot:item="s">
         <span v-text="s.item"></span>
@@ -16,7 +16,7 @@
         contenteditable></div>
     </at>
 
-    <at :members="members" name-key="name" v-model="html2">
+    <at :list-members="members" name-key="name" v-model="html2">
       <template v-slot:embeddedItem="s">
         <span><span class="tag"><img class="avatar" :src="s.current.avatar">{{ s.current.name }}</span></span>
       </template>
@@ -33,7 +33,7 @@
 
     <br />
 
-    <at-ta :members="members" name-key="name" v-model="text">
+    <at-ta :list-members="members" name-key="name" v-model="text">
       <!-- custom: with avatars -->
       <template v-slot:item="s">
         <img :src="s.item.avatar">
@@ -43,7 +43,7 @@
       <textarea class="editor"></textarea>
     </at-ta>
 
-    <at-ta :members="members" name-key="name">
+    <at-ta :list-members="members" name-key="name">
       <!-- custom: with avatars -->
       <template v-slot:item="s">
         <img :src="s.item.avatar">
@@ -55,7 +55,7 @@
 
     <br />
 
-    <at-ta :members="members" name-key="name">
+    <at-ta :list-members="members" name-key="name">
       <!-- custom: with avatars -->
       <template v-slot:item="s">
         <img :src="s.item.avatar">
@@ -74,6 +74,7 @@
 import At from './At.vue'
 import AtTa from './AtTextarea.vue'
 
+let membersEmpty = []
 let members = [
   /* eslint-disable */
   "Roxie Miles","grace.carroll",
@@ -97,6 +98,7 @@ export default {
   name: 'app',
   data () {
     const data = {
+      membersEmpty,
       members,
       text: `
 <<< Textarea >>>
