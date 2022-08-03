@@ -32,6 +32,8 @@ See also: [react-at](https://github.com/fritx/react-at)
 Finally I ended up creating this.
 
 ```plain
+npm i vue-at@3.0.0-alpha.0  # for Vue3 (🚧 Working in Progress...)
+
 npm i vue-at@2.x  # for Vue2  <----
 npm i vue-at@1.x  # for Vue1 (branch vue1-legacy)
 npm i vue1-at  # for Vue1 (branch vue1-new)
@@ -40,7 +42,7 @@ npm i vue1-at  # for Vue1 (branch vue1-new)
 ```vue
 <template>
   <at :members="members">
-    <div contenteditable></div>
+    <div :contenteditable="true"></div>
   </at>
 </template>
 
@@ -69,12 +71,12 @@ With Content-Editable, `v-model` should be bound in `<at>` container.<br>
 With Textarea, `v-model` should be bound in `<textarea>` itself.
 
 ```vue
-<at v-model="html">
-  <div contenteditable></div>
+<at v-model:value="html">
+  <div :contenteditable="true"></div>
 </at>
 
 <at-ta>
-  <textarea v-model="text"></textarea>
+  <textarea v-model:value="text"></textarea>
 </at-ta>
 ```
 
@@ -97,10 +99,6 @@ export default {
 </script>
 ```
 
-```plain
-npm i -S textarea-caret  # also, for textarea
-```
-
 ## Custom Templates
 
 ### Custom List
@@ -112,7 +110,7 @@ npm i -S textarea-caret  # also, for textarea
       <img :src="s.item.avatar">
       <span v-text="s.item.name"></span>
     </template>
-    <div contenteditable></div>
+    <div :contenteditable="true"></div>
   </at>
 </template>
 
@@ -170,7 +168,7 @@ This gives you the option of changing the style of inserted tagged items. It is 
 ```vue
 <at-ta :members="members">
   <!-- slots -->
-  <v-textarea v-model="text"></v-textarea>
+  <v-textarea v-model:value="text"></v-textarea>
 </at-ta>
 ```
 
@@ -179,6 +177,6 @@ This gives you the option of changing the style of inserted tagged items. It is 
 ```vue
 <at-ta :members="members">
   <!-- slots -->
-  <el-input v-model="text" type="textarea"></el-input>
+  <el-input v-model:value="text" type="textarea"></el-input>
 </at-ta>
 ```

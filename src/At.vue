@@ -1,4 +1,11 @@
 <script>
+
+// fixme: todo: migration.6
+// [Vue warn]: Missing ref owner context. ref cannot be used on hoisted vnodes.
+// A vnode with ref must be created inside the render function.
+// at selectByMouse
+// at handleItemHover
+
 import {
   closest, getOffset, getPrecedingRange,
   getRange, applyRange,
@@ -134,7 +141,10 @@ export default {
     }
   },
   mounted () {
-    if (this.$scopedSlots.embeddedItem) {
+    // migration.5
+    // [Vue warn]: (deprecation INSTANCE_SCOPED_SLOTS) vm.$scopedSlots has been removed. Use vm.$slots instead.
+    // Details: https://v3-migration.vuejs.org/breaking-changes/slots-unification.html
+    if (this.$slots.embeddedItem) {
       this.customsEmbedded = true
     }
     if (this.bindsValue) {
