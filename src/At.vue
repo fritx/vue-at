@@ -435,7 +435,7 @@ export default {
         node.parentNode.insertBefore(newElement, secondPart);
         r.setEndBefore(secondPart)
       } else {
-        const t = document.createTextNode(suffix)
+        const t = document.createTextNode(this.suffix)
         r.insertNode(newElement)
         r.setEndAfter(newElement)
         r.insertNode(t)
