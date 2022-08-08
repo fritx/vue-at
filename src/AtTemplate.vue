@@ -19,7 +19,6 @@
               class="atwho-li"
               :key="index"
               :class="isCur(index) && 'atwho-cur'"
-              :ref="isCur(index) && 'cur'"
               :data-index="index"
               @mouseenter="handleItemHover"
               @click="handleItemClick"

@@ -1,11 +1,4 @@
 <script>
-
-// fixme: todo: migration.6
-// [Vue warn]: Missing ref owner context. ref cannot be used on hoisted vnodes.
-// A vnode with ref must be created inside the render function.
-// at selectByMouse
-// at handleItemHover
-
 import {
   closest, getOffset, getPrecedingRange,
   getRange, applyRange,
@@ -141,7 +134,7 @@ export default {
     }
   },
   mounted () {
-    // migration.5
+    // vue3 migration.5
     // [Vue warn]: (deprecation INSTANCE_SCOPED_SLOTS) vm.$scopedSlots has been removed. Use vm.$slots instead.
     // Details: https://v3-migration.vuejs.org/breaking-changes/slots-unification.html
     if (this.$slots.embeddedItem) {
@@ -381,7 +374,16 @@ export default {
     },
 
     scrollToCur () {
-      const curEl = this.$refs.cur[0]
+      // vue3 migration.6
+      // fix: [Vue warn]: Missing ref owner context. ref cannot be used on hoisted vnodes.
+      // A vnode with ref must be created inside the render function.
+      // at selectByMouse
+      // at handleItemHover
+      // const curEl = this.$refs.cur[0]
+      let { wrap } = this.$refs
+      let { cur } = this.atwho
+      const curEl = wrap.querySelector(`.atwho-li[data-index="${cur}"]`)
+
       const scrollParent = curEl.parentElement.parentElement // .atwho-view
       scrollIntoView(curEl, scrollParent)
     },
@@ -475,8 +477,15 @@ export default {
       if (customsEmbedded) {
         // `suffix` is ignored as `customsEmbedded=true` has to be
         // wrapped around by spaces
-        const html = this.$refs.embeddedItem.firstChild.innerHTML
-        this.insertHtml(html, r);
+
+        // vue3 migration.7
+        // fix: Uncaught TypeError: Cannot read properties of undefined (reading 'innerHTML')
+        // at Proxy.insertItem (At.vue?075e:490:1)
+        // at Proxy.handleItemClick (At.vue?075e:184:1)
+        // const html = this.$refs.embeddedItem.firstChild.innerHTML
+        const html = this.$refs.embeddedItem.firstElementChild.innerHTML
+
+        this.insertHtml(html, r)
       } else {
         const t = itemName(curItem) + suffix
         this.insertText(t, r);

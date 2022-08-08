@@ -2,7 +2,7 @@
   <div id="app">
 
     <!--
-      migration.2
+      vue3 migration.2
       fix: [Vue warn]: (deprecation COMPONENT_V_MODEL) v-model usage on component has changed in Vue 3. Component that expects to work with v-model should now use the "modelValue" prop and emit the "update:modelValue" event. You can update the usage and then opt-in to Vue 3 behavior on a per-component basis with `compatConfig: { COMPONENT_V_MODEL: false }`.
       Details: https://v3-migration.vuejs.org/breaking-changes/v-model.html
     -->
@@ -19,7 +19,7 @@
       </template>
 
       <!--
-        migration.4
+        // vue3 migration.4
         fix: [Vue warn]: (deprecation ATTR_ENUMERATED_COERCION) Enumerated attribute "contenteditable" with v-bind value `` will render the value as-is instead of coercing the value to "true" in Vue 3. Always use explicit "true" or "false" values for enumerated attributes. If the usage is intended, you can disable the compat behavior and suppress this warning with:
           configureCompat({ ATTR_ENUMERATED_COERCION: false })
         Details: https://v3-migration.vuejs.org/breaking-changes/attribute-coercion.html
