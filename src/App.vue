@@ -63,17 +63,17 @@
       <v-textarea class="vuetify-editor" v-model:value="text2"></v-textarea>
     </at-ta>
 
-    <br />
+    <br> -->
 
     <at-ta :members="members" name-key="name">
-      <!- custom: with avatars ->
-      <template v-slot:item="s">
+      <!-- custom: with avatars -->
+      <template #item="s">
         <img :src="s.item.avatar">
-        <span v-text="s.item.name"></span>
+        <span v-text="s.item.name" />
       </template>
 
-      <el-input type="textarea" v-model:value="text3" class="element-editor"></el-input>
-    </at-ta> -->
+      <el-input type="textarea" v-model="text3" class="element-editor" />
+    </at-ta>
   </div>
 </template>
 

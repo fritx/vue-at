@@ -1,12 +1,17 @@
 // import 'element-ui/lib/theme-chalk/index.css'
+import 'element-plus/dist/index.css'
 // import 'vuetify/dist/vuetify.min.css'
 // import Vuetify from 'vuetify'
 // import ElementUI from 'element-ui'
-import { createApp, configureCompat } from 'vue'
+import ElementPlus from 'element-plus'
+// import { createApp, configureCompat } from 'vue'
+import { createApp } from 'vue'
 import App from './App.vue'
 
 // Vue.use(Vuetify)
 // Vue.use(ElementUI)
+
+let configureCompat = () => {}
 
 configureCompat({
   // vue3 migration.3
@@ -26,4 +31,7 @@ configureCompat({
 // fix: [Vue warn]: (deprecation GLOBAL_MOUNT) The global app bootstrapping API has changed: vm.$mount() and the "el" option have been removed. Use createApp(RootComponent).mount() instead.
 // Details: https://v3-migration.vuejs.org/breaking-changes/global-api.html#mounting-app-instance
 let app = createApp(App)
+
+app.use(ElementPlus)
+
 app.mount('#app')

@@ -16,7 +16,7 @@ Live Demo & Documentation: https://fritx.github.io/vue-at
 - [x] Content-Editable / Textarea
 - [x] Avatars, custom templates
 - [x] Vue2 / Vue1
-- [x] Vuetify / Element-UI
+- [x] Vuetify / Element-UI / Element Plus
 - [ ] Vue-CLI 3 migration
 
 See also: [react-at](https://github.com/fritx/react-at)
@@ -172,11 +172,11 @@ This gives you the option of changing the style of inserted tagged items. It is 
 </at-ta>
 ```
 
-### Element-UI el-input
+### Element UI / Element-Plus el-input
 
 ```vue
 <at-ta :members="members">
   <!-- slots -->
-  <el-input v-model:value="text" type="textarea"></el-input>
+  <el-input v-model="text" type="textarea"></el-input>
 </at-ta>
 ```
