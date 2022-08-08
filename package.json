@@ -5,6 +5,8 @@
   "author": "Fritz Lin <uxfritz@163.com>",
   "repository": "https://github.com/fritx/vue-at",
   "scripts": {
+    "lint:fix": "vue-cli-service lint",
+    "lint": "vue-cli-service lint --no-fix",
     "dev": "vue-cli-service serve",
     "demo": "vue-cli-service build",
     "build:at": "vue-cli-service build ./src/At.vue --target lib --name vue-at",
@@ -24,9 +26,13 @@
   },
   "devDependencies": {
     "@babel/core": "^7.18.9",
+    "@vue/cli-plugin-eslint": "^5.0.8",
     "@vue/cli-service": "^5.0.8",
     "@vue/compat": "^3.1.0",
     "@vue/compiler-sfc": "^3.1.0",
+    "@vue/eslint-config-standard": "^8.0.1",
+    "eslint": "^8.21.0",
+    "eslint-plugin-vue": "^9.3.0",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",
     "sass": "^1.53.0",

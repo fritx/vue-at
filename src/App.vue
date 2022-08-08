@@ -13,9 +13,9 @@
       </template> -->
 
       <!-- custom: with avatars -->
-      <template v-slot:item="s">
+      <template #item="s">
         <img :src="s.item.avatar">
-        <span v-text="s.item.name"></span>
+        <span v-text="s.item.name" />
       </template>
 
       <!--
@@ -24,33 +24,33 @@
           configureCompat({ ATTR_ENUMERATED_COERCION: false })
         Details: https://v3-migration.vuejs.org/breaking-changes/attribute-coercion.html
       -->
-      <div class="editor" :contenteditable="true"></div>
+      <div class="editor" :contenteditable="true" />
     </at>
 
     <at :members="members" name-key="name" v-model:value="html2">
-      <template v-slot:embeddedItem="s">
+      <template #embeddedItem="s">
         <span><span class="tag"><img class="avatar" :src="s.current.avatar">{{ s.current.name }}</span></span>
       </template>
 
       <!-- custom: with avatars -->
-      <template v-slot:item="s">
+      <template #item="s">
         <img :src="s.item.avatar">
-        <span v-text="s.item.name"></span>
+        <span v-text="s.item.name" />
       </template>
 
-      <div class="editor" :contenteditable="true"></div>
+      <div class="editor" :contenteditable="true" />
     </at>
 
-    <br />
+    <br>
 
     <at-ta :members="members" name-key="name" v-model:value="text">
       <!-- custom: with avatars -->
-      <template v-slot:item="s">
+      <template #item="s">
         <img :src="s.item.avatar">
-        <span v-text="s.item.name"></span>
+        <span v-text="s.item.name" />
       </template>
 
-      <textarea class="editor"></textarea>
+      <textarea class="editor" />
     </at-ta>
 
     <!-- <at-ta :members="members" name-key="name">
@@ -104,13 +104,13 @@ members = members.map((v, i) => {
 
 export default {
   components: { At, AtTa },
-  name: 'app',
+  name: 'App',
   data () {
     const data = {
       members,
       text: `
 <<< Textarea >>>
-Awesome Electron 
+Awesome Electron
 Useful resources for creating apps with Electron
 Inspired by the awesome list thing. You might also like awesome-nodejs.
 Example apps
@@ -119,7 +119,7 @@ Open Source
 Atom - Code editor.
 Nuclide - Unified IDE.
 Playback - Video player.
-Awesome Electron 
+Awesome Electron
 Useful resources for creating apps with Electron
 Inspired by the awesome list thing. You might also like awesome-nodejs.
 Example apps

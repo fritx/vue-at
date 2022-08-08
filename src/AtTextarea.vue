@@ -6,6 +6,7 @@ import { getAtAndIndex } from './util'
 export default {
   extends: At,
   name: 'AtTextarea',
+  emits: ['input', 'at', 'insert'],
   computed: {
     style () {
       if (this.atwho) {

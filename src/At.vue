@@ -7,8 +7,9 @@ import {
 import AtTemplate from './AtTemplate.vue'
 
 export default {
-  name: 'At',
+  name: 'VueAt',
   mixins: [AtTemplate],
+  emits: ['input', 'at', 'insert'],
   props: {
     value: {
       type: String, // value not required
@@ -95,9 +96,9 @@ export default {
 
     currentItem () {
       if (this.atwho) {
-        return this.atwho.list[this.atwho.cur];
+        return this.atwho.list[this.atwho.cur]
       }
-      return '';
+      return ''
     },
 
     style () {
@@ -180,8 +181,8 @@ export default {
       if (range) {
         // fixme: Very bad code from me
         if (this.customsEmbedded && range.endOffset >= 1) {
-          let a = range.endContainer.childNodes[range.endOffset]
-            || range.endContainer.childNodes[range.endOffset - 1]
+          let a = range.endContainer.childNodes[range.endOffset] ||
+            range.endContainer.childNodes[range.endOffset - 1]
           if (!a || a.nodeType === Node.TEXT_NODE && !/^\s?$/.test(a.data)) {
             return
           } else if (a.nodeType === Node.TEXT_NODE) {
@@ -431,7 +432,7 @@ export default {
     insertHtml (html, r) {
       r.deleteContents()
       const node = r.endContainer
-      var newElement = document.createElement('span')
+      const newElement = document.createElement('span')
 
       // Seems `contentediable=false` should includes spaces,
       // otherwise, caret can't be placed well across them
@@ -439,15 +440,15 @@ export default {
       newElement.appendChild(this.htmlToElement(html))
       newElement.appendChild(document.createTextNode(' '))
       newElement.setAttribute('data-at-embedded', '')
-      newElement.setAttribute("contenteditable", false)
+      newElement.setAttribute('contenteditable', false)
 
       if (node.nodeType === Node.TEXT_NODE) {
         const cut = r.endOffset
-        var secondPart = node.splitText(cut);
-        node.parentNode.insertBefore(newElement, secondPart);
+        let secondPart = node.splitText(cut)
+        node.parentNode.insertBefore(newElement, secondPart)
         r.setEndBefore(secondPart)
       } else {
-        const t = document.createTextNode(suffix)
+        const t = document.createTextNode(this.suffix)
         r.insertNode(newElement)
         r.setEndAfter(newElement)
         r.insertNode(t)
@@ -488,17 +489,17 @@ export default {
         this.insertHtml(html, r)
       } else {
         const t = itemName(curItem) + suffix
-        this.insertText(t, r);
+        this.insertText(t, r)
       }
 
       this.$emit('insert', curItem)
       this.handleInput()
     },
     htmlToElement (html) {
-        var template = document.createElement('template');
-        html = html.trim(); // Never return a text node of whitespace as the result
-        template.innerHTML = html;
-        return template.content.firstChild;
+      const template = document.createElement('template')
+      html = html.trim() // Never return a text node of whitespace as the result
+      template.innerHTML = html
+      return template.content.firstChild
     }
   }
 }

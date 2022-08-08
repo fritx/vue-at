@@ -1,6 +1,6 @@
 // bug report: https://github.com/vuejs/awesome-vue/pull/1028
 // https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoViewIfNeeded
-export function scrollIntoView(el, scrollParent) {
+export function scrollIntoView (el, scrollParent) {
   if (el.scrollIntoViewIfNeeded) {
     el.scrollIntoViewIfNeeded(false) // alignToCenter=false
   } else {
@@ -14,21 +14,21 @@ export function scrollIntoView(el, scrollParent) {
   }
 }
 
-export function applyRange(range) {
+export function applyRange (range) {
   const selection = window.getSelection()
   if (selection) { // 容错
     selection.removeAllRanges()
     selection.addRange(range)
   }
 }
-export function getRange() {
+export function getRange () {
   const selection = window.getSelection()
   if (selection && selection.rangeCount > 0) {
     return selection.getRangeAt(0)
   }
 }
 
-export function getAtAndIndex(text, ats) {
+export function getAtAndIndex (text, ats) {
   return ats.map((at) => {
     return { at, index: text.lastIndexOf(at) }
   }).reduce((a, b) => {
