@@ -47,7 +47,8 @@ npm i vue1-at  # for Vue1 (branch vue1-new)
 </template>
 
 <script>
-import At from 'vue-at'
+import 'vue-at/dist/style.css' // import style
+import At from 'vue-at' // import components
 
 export default {
   components: { At },
@@ -90,6 +91,7 @@ With Textarea, `v-model` should be bound in `<textarea>` itself.
 </template>
 
 <script>
+import 'vue-at/dist/style.css' // import style
 // import At from 'vue-at' // for content-editable
 import AtTa from 'vue-at/dist/vue-at-textarea' // for textarea
 
