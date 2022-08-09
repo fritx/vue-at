@@ -471,6 +471,7 @@ export default {
         const t = itemName(curItem) + suffix
         this.insertText(t, r);
       }
+      scrollIntoView(window.getSelection())
 
       this.$emit('insert', curItem)
       this.handleInput()

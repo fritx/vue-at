@@ -1,14 +1,43 @@
+// Scrolling The Selection Into View
+// http://roysharon.com/blog/37
+export function scrollIntoView(t, scrollParent) {
+  if (typeof (t) !== 'object') return
+
+  if (t.getRangeAt) {
+    // we have a Selection object
+    if (t.rangeCount == 0) return
+    t = t.getRangeAt(0)
+  }
+
+  if (t.cloneRange) {
+    // we have a Range object
+    let r = t.cloneRange()	// do not modify the source range
+    r.collapse(true)		// collapse to start
+    t = r.startContainer
+    // if start is an element, then startOffset is the child number
+    // in which the range starts
+    if (t.nodeType == 1) t = t.childNodes[r.startOffset]
+  }
+
+  // if t is not an element node, then we need to skip back until we find the
+  // previous element with which we can call scrollIntoView()
+  let o = t
+  while (o && o.nodeType != 1) o = o.previousSibling
+  t = o || t.parentNode
+  if (t) scrollIntoViewElement(t, scrollParent)
+}
+
 // bug report: https://github.com/vuejs/awesome-vue/pull/1028
 // https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoViewIfNeeded
-export function scrollIntoView(el, scrollParent) {
+export function scrollIntoViewElement(el, scrollParent) {
   if (el.scrollIntoViewIfNeeded) {
     el.scrollIntoViewIfNeeded(false) // alignToCenter=false
   } else {
     // should not use `el.scrollIntoView(false)` // alignToTop=false
     // bug report: https://stackoverflow.com/questions/11039885/scrollintoview-causing-the-whole-page-to-move
+    scrollParent = scrollParent || el.parentElement
     const diff = el.offsetTop - scrollParent.scrollTop
     if (diff < 0 || diff > scrollParent.offsetHeight - el.offsetHeight) {
-      scrollParent = scrollParent || el.parentElement
       scrollParent.scrollTop = el.offsetTop
     }
   }
