@@ -1,5 +1,7 @@
 # vue-at
 
+[![Join the chat at https://gitter.im/fritx/vue-at](https://badges.gitter.im/fritx/vue-at.svg)](https://gitter.im/fritx/vue-at?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 <a href="https://github.com/fritx/vue-at/graphs/contributors"><img width="600" src="https://opencollective.com/vue-at/contributors.svg?width=890&button=false"></a><br>
 <a href="https://opencollective.com/vue-at#backers"><img src="https://opencollective.com/vue-at/backers.svg?width=890"></a>
 
