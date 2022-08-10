@@ -13,9 +13,9 @@ Live Demo & Documentation: https://fritx.github.io/vue-at
 - [x] Content-Editable / Textarea
 - [x] Avatars, custom templates
 - [x] Vue3 / Vue2 / Vue1
-- [x] Vuetify / Element-UI / Element-Plus
-- [ ] Vue-CLI 3 migration
-- [ ] Vite Migration
+- [x] Vuetify / Element UI / Element Plus
+- [ ] Vue-CLI migration
+- [ ] Vite migration
 
 See also: [react-at](https://github.com/fritx/react-at)
 
@@ -29,10 +29,10 @@ See also: [react-at](https://github.com/fritx/react-at)
 
 Finally I ended up creating this.
 
-for Vue3, read [this](https://github.com/fritx/vue-at/tree/wip-vue3) instead.
+for Vue3, read [this one](https://github.com/fritx/vue-at/tree/vue3#readme) instead.
 
 ```plain
-npm i vue-at@3.x  # for Vue3 (branch wip-vue3)
+npm i vue-at@next  # for Vue3 (branch wip-vue3)
 
 npm i vue-at@2.x  # for Vue2  <----
 npm i vue-at@1.x  # for Vue1 (branch vue1-legacy)

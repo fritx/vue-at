@@ -1,7 +1,7 @@
 {
   "name": "vue-at",
   "description": "At.js for Vue",
-  "version": "2.5.0-beta.2",
+  "version": "2.5.0",
   "author": "Fritz Lin <uxfritz@163.com>",
   "repository": "https://github.com/fritx/vue-at",
   "scripts": {
@@ -11,8 +11,11 @@
     "prepublish": "npm run build"
   },
   "main": "dist/vue-at.js",
+  "files": [
+    "dist"
+  ],
   "engines": {
-    "node": "14.x"
+    "node": ">= 14.x"
   },
   "peerDependencies": {
     "vue": "2.x"
@@ -49,6 +52,7 @@
     "textarea-caret": "^3.1.0",
     "url-loader": "^4.1.1",
     "vue": "^2.7.8",
+    "vue-hot-reload-api": "^2.3.4",
     "vue-loader": "^14.2.4",
     "vue-style-loader": "^4.1.3",
     "vue-template-compiler": "^2.7.8",
