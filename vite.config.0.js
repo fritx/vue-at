@@ -3,12 +3,17 @@
 // import { createVuePlugin as vue } from 'vite-plugin-vue2'
 // vue3
 import vue from '@vitejs/plugin-vue'
-
-// todo: vite should support css.extract=false
-// pending https://github.com/vitejs/vite/issues/4345
+import ViteSingleCssPlugin from './build/ViteSingleCssPlugin'
 
 export default {
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    // supports vite css.extract=false.
+    // credits: @ruofee
+    // https://github.com/vitejs/vite/issues/4345#issuecomment-1073734133
+    // https://github.com/ruofee/vue-dynamic-form-component/blob/vite/build/ViteSingleCssPlugin.js
+    ViteSingleCssPlugin()
+  ],
   build: {
     emptyOutDir: false,
     rollupOptions: {

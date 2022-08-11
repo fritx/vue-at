@@ -15,7 +15,7 @@ Live Demo & Documentation: https://fritx.github.io/vue-at
 - [x] Vue3 / Vue2 / Vue1
 - [x] Vuetify / Element UI / Element Plus
 - [x] Vue-CLI migration
-- [ ] Vite migration
+- [x] Vite migration. See [example](https://github.com/we-demo/vue-at-vite-app).
 
 See also: [react-at](https://github.com/fritx/react-at)
 
@@ -47,7 +47,6 @@ npm i vue1-at  # for Vue1 (branch vue1-new)
 </template>
 
 <script>
-import 'vue-at/dist/style.css' // import style
 import At from 'vue-at' // import components
 
 export default {
@@ -91,7 +90,6 @@ With Textarea, `v-model` should be bound in `<textarea>` itself.
 </template>
 
 <script>
-import 'vue-at/dist/style.css' // import style
 // import At from 'vue-at' // for content-editable
 import AtTa from 'vue-at/dist/vue-at-textarea' // for textarea
 
