@@ -16,6 +16,7 @@ export default {
   ],
   build: {
     emptyOutDir: false,
+    sourcemap: true,
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
       // into your library
