@@ -18,6 +18,7 @@ export function scrollIntoView(t, scrollParent) {
     // in which the range starts
     if (t.nodeType == 1) t = t.childNodes[r.startOffset]
   }
+  if (!t) return
 
   // if t is not an element node, then we need to skip back until we find the
   // previous element with which we can call scrollIntoView()

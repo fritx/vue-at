@@ -246,9 +246,9 @@ export default {
           return
         }
         if (e.keyCode === 13 || (this.tabSelect && e.keyCode === 9)) { // enter or tab
-          this.insertItem()
           e.preventDefault()
           e.stopPropagation()
+          this.insertItem()
           return
         }
         if (e.keyCode === 27) { // esc
@@ -471,10 +471,13 @@ export default {
         const t = itemName(curItem) + suffix
         this.insertText(t, r);
       }
-      scrollIntoView(window.getSelection())
 
       this.$emit('insert', curItem)
       this.handleInput()
+
+      // fix safari: use `r` instead of `window.getSelection()`
+      // scrollIntoView(window.getSelection())
+      scrollIntoView(r)
     },
     htmlToElement (html) {
         var template = document.createElement('template');
