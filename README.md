@@ -16,25 +16,15 @@ Live Demo & Documentation: https://fritx.github.io/vue-at
 - [x] Vuetify / Element UI / Element Plus
 - [x] Vue-CLI migration
 - [ ] Vite migration
+- [x] CommonJS / UMD Support
 
 See also: [react-at](https://github.com/fritx/react-at)
-
-## Motivation
-
-[At.js](https://github.com/ichord/At.js) is awesome, but:
-
-- It is based on jQuery and jQuery-Caret.
-- It introduces extra node wrappers.
-- It could be unstable on content edit/copy/paste.
-
-Finally I ended up creating this.
 
 for Vue2, read [this one](https://github.com/fritx/vue-at/tree/vue2#readme) instead.
 
 ```plain
-npm i vue-at@next  # for Vue3 (branch wip-vue3)
-
-npm i vue-at@2.x  # for Vue2  <----
+npm i vue-at@next  # for Vue3 (branch vue3)
+npm i vue-at@2.x  # for Vue2 (branch vue2)
 npm i vue-at@1.x  # for Vue1 (branch vue1-legacy)
 npm i vue1-at  # for Vue1 (branch vue1-new)
 ```
@@ -44,13 +34,17 @@ npm i vue1-at  # for Vue1 (branch vue1-new)
   <at :members="members">
     <div :contenteditable="true"></div>
   </at>
+  <at-ta :members="members">
+    <textarea></textarea>
+  </at-ta>
 </template>
 
 <script>
-import At from 'vue-at'
+import At from 'vue-at' // for content-editable
+import AtTa from 'vue-at/dist/vue-at-textarea' // for textarea
 
 export default {
-  components: { At },
+  components: { At, AtTa },
   data () {
     return {
       members: ['Roxie Miles', 'grace.carroll', '小浩']
@@ -65,38 +59,50 @@ export default {
 </style>
 ```
 
+## UMD Also Supported
+
+```html
+<!-- for Vue2 -->
+<script src="//unpkg.com/vue@2"></script>
+<script src="//unpkg.com/vue-at@2/dist/vue-at.umd.js"></script>
+<script src="//unpkg.com/vue-at@2/dist/vue-at-textarea.umd.js"></script>
+<!-- ...-->
+
+<!-- for Vue3 -->
+<script src="//unpkg.com/vue@3"></script>
+<script src="//unpkg.com/vue-at@next/dist/vue-at.umd.js"></script>
+<script src="//unpkg.com/vue-at@next/dist/vue-at-textarea.umd.js"></script>
+<div id="app">
+  <at v-model:value="html">
+    <div contenteditable></div>
+  </at>
+  <at-textarea>
+    <textarea v-model="text"></textarea>
+  </at-textarea>
+</div>
+<script>
+Vue.createApp({
+  components: { At, AtTextarea },
+  // ...
+}).mount('#app')
+</script>
+```
+
 ## Using V-Model (Recommended)
 
-With Content-Editable, `v-model` should be bound in `<at>` container.<br>
-With Textarea, `v-model` should be bound in `<textarea>` itself.
+With Content-Editable, use `<at v-model:value="v">`<br>
+With Textarea, you can use either `<at-ta v-model:value="v">` or `<textarea v-model="v">`
 
 ```vue
 <at v-model:value="html">
   <div :contenteditable="true"></div>
 </at>
-
-<at-ta>
-  <textarea v-model:value="text"></textarea>
+<at-ta v-model:value="text">
+  <textarea></textarea>
 </at-ta>
-```
-
-## Textarea
-
-```vue
-<template>
-  <at-ta>
-    <textarea></textarea>
-  </at-ta>
-</template>
-
-<script>
-// import At from 'vue-at' // for content-editable
-import AtTa from 'vue-at/dist/vue-at-textarea' // for textarea
-
-export default {
-  components: { AtTa }
-}
-</script>
+<at-ta>
+  <textarea v-model="text"></textarea>
+</at-ta>
 ```
 
 ## Custom Templates

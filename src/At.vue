@@ -9,7 +9,7 @@ import AtTemplate from './AtTemplate.vue'
 export default {
   name: 'VueAt',
   mixins: [AtTemplate],
-  emits: ['input', 'at', 'insert'],
+  emits: ['update:value', 'at', 'insert'],
   props: {
     value: {
       type: String, // value not required
@@ -286,7 +286,12 @@ export default {
     handleInput (keep) {
       if (this.hasComposition) return
       const el = this.$el.querySelector('[contenteditable]')
-      this.$emit('input', el.innerHTML)
+
+      // vue3 migration.2.1
+      // https://vuejs.org/guide/components/events.html#usage-with-v-model
+      // https://laracasts.com/discuss/channels/vue/how-do-emit-to-v-model-in-vue-3
+      // this.$emit('input', el.innerHTML)
+      this.$emit('update:value', el.innerHTML)
 
       const range = getPrecedingRange()
       if (range) {

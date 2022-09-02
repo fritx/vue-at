@@ -9,9 +9,9 @@
     "lint": "vue-cli-service lint --no-fix",
     "dev:dist": "vue-cli-service serve --skip-plugins eslint",
     "dev": "vue-cli-service serve",
-    "demo": "vue-cli-service build",
-    "build:at": "vue-cli-service build ./src/At.vue --target lib --name vue-at && shx mv dist/vue-at.common.js dist/vue-at.js",
-    "build:at-ta": "vue-cli-service build ./src/AtTextarea.vue --target lib --name vue-at-textarea && shx mv dist/vue-at-textarea.common.js dist/vue-at-textarea.js",
+    "demo": "vue-cli-service build --dest dist_demo",
+    "build:at": "vue-cli-service build ./src/At.vue --target lib --name At --filename vue-at && shx mv dist/vue-at.common.js dist/vue-at.js",
+    "build:at-ta": "vue-cli-service build ./src/AtTextarea.vue --target lib --name AtTextarea --filename vue-at-textarea && shx mv dist/vue-at-textarea.common.js dist/vue-at-textarea.js",
     "build": "shx rm -rf dist && run-p build:at build:at-ta && shx rm dist/demo.html",
     "prepublish": "npm run build"
   },

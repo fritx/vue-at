@@ -1,5 +1,6 @@
 
 module.exports = {
+  publicPath: './',
   css: {
     extract: false, // inline css into js
     loaderOptions: {
