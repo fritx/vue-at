@@ -1,0 +1,42 @@
+<meta charset="utf8">
+
+<!-- for Vue3 -->
+<!-- <script src="//unpkg.com/vue@3"></script> -->
+<!-- for Vue2 -->
+<script src="//unpkg.com/vue@2"></script>
+
+<script src="dist/vue-at.umd.js"></script>
+<script src="dist/vue-at-textarea.umd.js"></script>
+
+<div id="app">
+  <h2>UMD: Vue2 x Vue-At</h2>
+  <at v-model="html">
+    <div contenteditable></div>
+  </at>
+  <at-ta v-model="text">
+    <textarea></textarea>
+  </at-ta>
+  <at-ta>
+    <textarea v-model="text1"></textarea>
+  </at-ta>
+  <br>
+  html: {{html}}
+  <br>
+  text: {{text}}
+  <br>
+  text1: {{text1}}
+</div>
+
+<script>
+new Vue({
+  components: { At, AtTa: AtTextarea },
+  el: '#app',
+  data() {
+    return {
+      html: 'content-editable',
+      text: 'textarea',
+      text1: 'textarea'
+    }
+  }
+})
+</script>

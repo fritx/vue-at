@@ -68,20 +68,8 @@
 </template>
 
 <script>
-import At from './At.vue'
-import AtTa from './AtTextarea.vue'
-
-// testing dist
-// import At from '../dist/vue-at'
-// import AtTa from '../dist/vue-at-textarea'
-
-// testing npm_pack
-// import At from '../package/dist/vue-at'
-// import AtTa from '../package/dist/vue-at-textarea'
-
-// testing node_modules
-// import At from 'vue-at'
-// import AtTa from 'vue-at/dist/vue-at-textarea'
+import At from 'vue-at'
+import AtTa from 'vue-at/dist/vue-at-textarea'
 
 let members = [
   /* eslint-disable */
@@ -130,8 +118,8 @@ Playback - Video player.
       `.trim(), // fix trailing abnormal nodes
       html: `
         <div>&lt;&lt;&lt; Content Editable Div &gt;&gt;&gt;</div><div>Awesome Electron&nbsp;
-        <img src="static/awesome.svg"></div><div><img style="max-width: 50px;" src="static/electron.svg"></div><div>Useful resources for creating apps with&nbsp;Electron</div><div>Inspired by the&nbsp;awesome&nbsp;list thing. You might also like&nbsp;awesome-nodejs.</div><div>Example apps</div><div>Some good apps written with Electron.</div><div>Open Source</div><div>Atom&nbsp;- Code editor.</div><div>Nuclide&nbsp;- Unified IDE.</div><div>Playback&nbsp;- Video player.</div>
-        <div>&lt;&lt;&lt; Content Editable Div &gt;&gt;&gt;</div><div>Awesome Electron&nbsp;<img style="max-width: 50px;" src="static/awesome.svg"></div><div><img style="max-width: 50px;" src="static/electron.svg"></div><div>Useful resources for creating apps with&nbsp;Electron</div><div>Inspired by the&nbsp;awesome&nbsp;list thing. You might also like&nbsp;awesome-nodejs.</div><div>Example apps</div><div>Some good apps written with Electron.</div><div>Open Source</div><div>Atom&nbsp;- Code editor.</div><div>Nuclide&nbsp;- Unified IDE.</div><div>Playback&nbsp;- Video player.</div>
+        <img src="demo/awesome.svg"></div><div><img style="max-width: 50px;" src="demo/electron.svg"></div><div>Useful resources for creating apps with&nbsp;Electron</div><div>Inspired by the&nbsp;awesome&nbsp;list thing. You might also like&nbsp;awesome-nodejs.</div><div>Example apps</div><div>Some good apps written with Electron.</div><div>Open Source</div><div>Atom&nbsp;- Code editor.</div><div>Nuclide&nbsp;- Unified IDE.</div><div>Playback&nbsp;- Video player.</div>
+        <div>&lt;&lt;&lt; Content Editable Div &gt;&gt;&gt;</div><div>Awesome Electron&nbsp;<img style="max-width: 50px;" src="demo/awesome.svg"></div><div><img style="max-width: 50px;" src="demo/electron.svg"></div><div>Useful resources for creating apps with&nbsp;Electron</div><div>Inspired by the&nbsp;awesome&nbsp;list thing. You might also like&nbsp;awesome-nodejs.</div><div>Example apps</div><div>Some good apps written with Electron.</div><div>Open Source</div><div>Atom&nbsp;- Code editor.</div><div>Nuclide&nbsp;- Unified IDE.</div><div>Playback&nbsp;- Video player.</div>
       `.trim() // fix trailing abnormal nodes
     }
     data.text2 = data.text
