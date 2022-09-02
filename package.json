@@ -10,6 +10,12 @@
     "build": "webpack --config webpack/prod --progress --hide-modules",
     "prepublish": "npm run build"
   },
+  "engines": {
+    "pnpm": "please-use-yarn",
+    "npm": "please-use-yarn",
+    "yarn": "*",
+    "node": "12.x"
+  },
   "main": "dist/vue-at.js",
   "dependencies": {},
   "peerDependencies": {
