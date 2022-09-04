@@ -8,7 +8,7 @@
     -->
     <at :members="members" name-key="name" v-model:value="html">
       <!-- custom: same as default slot -->
-      <!-- <template v-slot:item="s">
+      <!-- <template #item="s">
         <span v-text="s.item"></span>
       </template> -->
 
@@ -53,17 +53,17 @@
       <textarea class="editor" />
     </at-ta>
 
-    <!-- <at-ta :members="members" name-key="name">
-      <!- custom: with avatars ->
-      <template v-slot:item="s">
+    <at-ta :members="members" name-key="name">
+      <!-- custom: with avatars -->
+      <template #item="s">
         <img :src="s.item.avatar">
-        <span v-text="s.item.name"></span>
+        <span v-text="s.item.name" />
       </template>
 
-      <v-textarea class="vuetify-editor" v-model:value="text2"></v-textarea>
+      <v-textarea class="vuetify-editor" v-model="text2" />
     </at-ta>
 
-    <br> -->
+    <br>
 
     <at-ta :members="members" name-key="name">
       <!-- custom: with avatars -->
@@ -180,14 +180,9 @@ textarea {
 
 .vuetify-editor {
   width: 400px;
-  margin: 0;
-  padding: 0;
 }
 .vuetify-editor textarea {
   height: 200px;
-}
-.v-input__slot {
-  margin: 0;
 }
 .v-text-field__details {
   display: none;
@@ -221,6 +216,7 @@ textarea {
 #app .atwho-li img {
   height: 100%;
   width: auto;
+  transform: scale(.8);
   -webkit-transform: scale(.8);
 }
 #app .atwho-li span {

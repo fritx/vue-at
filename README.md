@@ -160,9 +160,9 @@ This gives you the option of changing the style of inserted tagged items. It is 
   <span class="tag"><img :src="s.current.avatar">{{ s.current.name }}</span>
 </span>
 
-<!-- with Vue 2.6+ 'v-slot' directive -->
+<!-- with Vue 2.6+ 'v-slot' / '#slot' directive -->
 <!-- note at least two '<span>' wrapper are required to work -->
-<template v-slot:embeddedItem="s">
+<template #embeddedItem="s">
   <span><span class="tag"><img class="avatar" :src="s.current.avatar">{{ s.current.name }}</span></span>
 </template>
 ```
@@ -174,7 +174,7 @@ This gives you the option of changing the style of inserted tagged items. It is 
 ```vue
 <at-ta :members="members">
   <!-- slots -->
-  <v-textarea v-model:value="text"></v-textarea>
+  <v-textarea v-model="text"></v-textarea>
 </at-ta>
 ```
 

@@ -1,15 +1,17 @@
+// Element-Plus x Vue3
 // import 'element-ui/lib/theme-chalk/index.css'
 import 'element-plus/dist/index.css'
-// import 'vuetify/dist/vuetify.min.css'
-// import Vuetify from 'vuetify'
-// import ElementUI from 'element-ui'
 import ElementPlus from 'element-plus'
+
+// Vuetify x Vue3
+// https://next.vuetifyjs.com/en/getting-started/installation/
+import 'vuetify/styles'
+import { VTextarea } from 'vuetify/components'
+import { createVuetify } from 'vuetify'
+
 // import { createApp, configureCompat } from 'vue'
 import { createApp } from 'vue'
 import App from './App.vue'
-
-// Vue.use(Vuetify)
-// Vue.use(ElementUI)
 
 let configureCompat = () => {}
 
@@ -32,6 +34,11 @@ configureCompat({
 // Details: https://v3-migration.vuejs.org/breaking-changes/global-api.html#mounting-app-instance
 let app = createApp(App)
 
+let vuetify = createVuetify({
+  components: { VTextarea }
+})
+
+app.use(vuetify)
 app.use(ElementPlus)
 
 app.mount('#app')
