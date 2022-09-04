@@ -1,5 +1,8 @@
 .DS_Store
 node_modules*/
 dist/
+dist_demo/
+package/
+*.tgz
 npm-debug.log
 yarn-error.log
