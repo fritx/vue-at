@@ -12,10 +12,8 @@ Live Demo & Documentation: https://fritx.github.io/vue-at
 - [x] Plain-text based, no jQuery, no extra nodes
 - [x] Content-Editable / Textarea
 - [x] Avatars, custom templates
-- [x] Vue3 / Vue2 / Vue1
+- [x] Vite / Vue3 / Vue2 / Vue1
 - [x] Vuetify / Element UI / Element Plus
-- [x] Vue-CLI migration
-- [ ] Vite migration
 - [x] CommonJS / UMD Support
 
 See also: [react-at](https://github.com/fritx/react-at)
@@ -52,11 +50,6 @@ export default {
   }
 }
 </script>
-
-<style>
-#app .atwho-view { /* more */ }
-#app .atwho-ul { /* more */ }
-</style>
 ```
 
 ## UMD Also Supported
