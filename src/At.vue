@@ -168,9 +168,10 @@ export default {
         this.selectByMouse(e)
       }
     },
-    handleItemClick (e) {
-      this.selectByMouse(e)
-      this.insertItem()
+    handleViewClick (e) {
+      if (this.selectByMouse(e)) {
+        this.insertItem()
+      }
     },
     handleDelete (e) {
       const range = getPrecedingRange()
@@ -371,7 +372,8 @@ export default {
     },
 
     scrollToCur () {
-      const curEl = this.$refs.cur[0]
+      const curEl = this.$refs.cur && this.$refs.cur[0] ||
+        this.$refs.view.querySelector('.atwho-cur')
       const scrollParent = curEl.parentElement.parentElement // .atwho-view
       scrollIntoView(curEl, scrollParent)
     },
@@ -379,11 +381,13 @@ export default {
       const el = closest(e.target, d => {
         return d.getAttribute('data-index')
       })
+      if (!el) return false
       const cur = +el.getAttribute('data-index')
       this.atwho = {
         ...this.atwho,
         cur
       }
+      return true
     },
     selectByKeyboard (e) {
       const offset = e.keyCode === 38 ? -1 : 1

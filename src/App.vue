@@ -64,6 +64,24 @@
 
       <el-input type="textarea" v-model="text3" class="element-editor"></el-input>
     </at-ta>
+
+    <at-ta ref="demo4" :members="members" name-key="name" v-model="demo4.text">
+      <!-- custom list -->
+      <template v-slot:list="s">
+        <ul class="atwho-ul">
+          <li v-for="(item, index) in s.atwho.list"
+            :key="index"
+            class="atwho-li"
+            :class="index=== s.atwho.cur && 'atwho-cur'"
+            :data-index="index"
+            @mouseenter="demo4_handleItemHover"
+          >
+            <span v-text="item.name"></span>
+          </li>
+        </ul>
+      </template>
+      <textarea class="editor"></textarea>
+    </at-ta>
   </div>
 </template>
 
@@ -137,7 +155,13 @@ Playback - Video player.
     data.text2 = data.text
     data.text3 = data.text
     data.html2 = data.html
+    data.demo4 = { text: data.text }
     return data
+  },
+  methods: {
+    demo4_handleItemHover(e) {
+      this.$refs.demo4.handleItemHover(e)
+    },
   }
 }
 </script>

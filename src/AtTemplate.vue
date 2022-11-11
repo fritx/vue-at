@@ -13,22 +13,23 @@
       :style="style"
     >
       <div class="atwho-inner">
-        <div class="atwho-view">
-          <ul class="atwho-ul">
-            <li v-for="(item, index) in atwho.list"
-              class="atwho-li"
-              :key="index"
-              :class="isCur(index) && 'atwho-cur'"
-              :ref="isCur(index) && 'cur'"
-              :data-index="index"
-              @mouseenter="handleItemHover"
-              @click="handleItemClick"
-            >
-              <slot name="item" :item="item">
-                <span v-text="itemName(item)"></span>
-              </slot>
-            </li>
-          </ul>
+        <div class="atwho-view" ref="view" @click="handleViewClick">
+          <slot name="list" :atwho="atwho">
+            <ul class="atwho-ul">
+              <li v-for="(item, index) in atwho.list"
+                class="atwho-li"
+                :key="index"
+                :class="isCur(index) && 'atwho-cur'"
+                :ref="isCur(index) && 'cur'"
+                :data-index="index"
+                @mouseenter="handleItemHover"
+              >
+                <slot name="item" :item="item">
+                  <span v-text="itemName(item)"></span>
+                </slot>
+              </li>
+            </ul>
+          </slot>
         </div>
       </div>
     </div>
