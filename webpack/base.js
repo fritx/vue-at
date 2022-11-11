@@ -22,10 +22,14 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: [
-          /node_modules/,
+          /node_modules(?!.*vue-virtual-scroller)/, // fits pnpm also
           path.resolve(__dirname, '../dist'),
           path.resolve(__dirname, '../package'),
-        ]
+        ],
+        include: [
+          // path.resolve(__dirname, '../node_modules/vue-virtual-scroller'),
+          /node_modules.*vue-virtual-scroller/, // fits pnpm also
+        ],
       },
       {
         test: /\.css$/,

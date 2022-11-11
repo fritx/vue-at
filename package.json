@@ -41,6 +41,7 @@
     "vue-loader": "^10.3.0",
     "vue-style-loader": "^1.0.0",
     "vue-template-compiler": "^2.6.14",
+    "vue-virtual-scroller": "^1.1.2",
     "vuetify": "^2.6.1",
     "webpack": "^2.1.0-beta.25",
     "webpack-dev-server": "^2.1.0-beta.9"

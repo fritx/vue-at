@@ -374,6 +374,7 @@ export default {
     scrollToCur () {
       const curEl = this.$refs.cur && this.$refs.cur[0] ||
         this.$refs.view.querySelector('.atwho-cur')
+      if (!curEl) return
       const scrollParent = curEl.parentElement.parentElement // .atwho-view
       scrollIntoView(curEl, scrollParent)
     },

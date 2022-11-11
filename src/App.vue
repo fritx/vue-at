@@ -82,10 +82,36 @@
       </template>
       <textarea class="editor"></textarea>
     </at-ta>
+
+    <br />
+
+    <at ref="demo5" :members="members" name-key="name" v-model="demo5.html">
+      <!-- custom list -->
+      <template v-slot:list="s">
+        <ul class="atwho-ul">
+          <RecycleScroller
+            class="scroller"
+            :items="s.atwho.list"
+            :item-size="27"
+            key-field="name"
+            v-slot="{ item, index }"
+          >
+            <li class="atwho-li"
+              :class="index=== s.atwho.cur && 'atwho-cur'"
+              :data-index="index"
+              @mouseenter="demo5_handleItemHover"
+            >{{ item.name }}</li>
+          </RecycleScroller>
+        </ul>
+      </template>
+      <div class="editor" contenteditable></div>
+    </at>
   </div>
 </template>
 
 <script>
+import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
+import { RecycleScroller } from 'vue-virtual-scroller'
 import At from './At.vue'
 import AtTa from './AtTextarea.vue'
 
@@ -120,7 +146,7 @@ members = members.map((v, i) => {
 })
 
 export default {
-  components: { At, AtTa },
+  components: { At, AtTa, RecycleScroller },
   name: 'app',
   data () {
     const data = {
@@ -156,11 +182,15 @@ Playback - Video player.
     data.text3 = data.text
     data.html2 = data.html
     data.demo4 = { text: data.text }
+    data.demo5 = { html: data.html }
     return data
   },
   methods: {
     demo4_handleItemHover(e) {
       this.$refs.demo4.handleItemHover(e)
+    },
+    demo5_handleItemHover(e) {
+      this.$refs.demo5.handleItemHover(e)
     },
   }
 }
@@ -172,7 +202,7 @@ Playback - Video player.
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  margin-top: 30px;
+  margin: 30px 0 60px;
 }
 
 .tag {
