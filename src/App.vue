@@ -106,12 +106,29 @@
       </template>
       <div class="editor" contenteditable></div>
     </at>
+
+    <at ref="demo6" :members="members" name-key="name" v-model="demo6.html">
+      <!-- custom list -->
+      <template v-slot:list="s">
+        <ul class="atwho-ul">
+          <virtual-list
+            data-key="name"
+            :data-sources="demo6_mapList(s.atwho.list)"
+            :data-component="demo6.itemComponent"
+            @item-hover="demo6_handleItemHover"
+          />
+        </ul>
+      </template>
+      <div class="editor" contenteditable></div>
+    </at>
   </div>
 </template>
 
 <script>
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 import { RecycleScroller } from 'vue-virtual-scroller'
+import VirtualList from 'vue-virtual-scroll-list'
+import Demo6_Item from './Demo6_Item.vue'
 import At from './At.vue'
 import AtTa from './AtTextarea.vue'
 
@@ -146,7 +163,7 @@ members = members.map((v, i) => {
 })
 
 export default {
-  components: { At, AtTa, RecycleScroller },
+  components: { At, AtTa, RecycleScroller, VirtualList },
   name: 'app',
   data () {
     const data = {
@@ -183,6 +200,7 @@ Playback - Video player.
     data.html2 = data.html
     data.demo4 = { text: data.text }
     data.demo5 = { html: data.html }
+    data.demo6 = { html: data.html, itemComponent: Demo6_Item }
     return data
   },
   methods: {
@@ -191,6 +209,13 @@ Playback - Video player.
     },
     demo5_handleItemHover(e) {
       this.$refs.demo5.handleItemHover(e)
+    },
+    demo6_handleItemHover(e) {
+      this.$refs.demo6.handleItemHover(e)
+    },
+    demo6_mapList(list) {
+      let { cur } = this.$refs.demo6.atwho
+      return list.map(item => ({ ...item, cur }))
     },
   }
 }
