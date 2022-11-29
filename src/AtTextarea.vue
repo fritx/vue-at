@@ -38,6 +38,9 @@ export default {
 
     handleDelete (e) {
       const el = this.$el.querySelector('textarea')
+      // fix https://github.com/fritx/vue-at/issues/139
+      const hasSelection = el.selectionEnd - el.selectionStart > 0
+      if (hasSelection) return
       const text = el.value.slice(0, el.selectionEnd)
       if (text) {
         const { atItems, members, suffix, deleteMatch, itemName } = this
