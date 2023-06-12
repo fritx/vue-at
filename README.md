@@ -1,26 +1,25 @@
 # vue-at
 
-<a href="https://www.npmjs.com/package/vue-at"><img height="20" src="https://img.shields.io/npm/dm/vue-at.svg"></a>&nbsp;&nbsp;<a href="https://github.com/fritx/vue-at"><img width="90" height="20" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" /></a>&nbsp;&nbsp;<a href="https://github.com/fritx/vue-at"><img width="84" height="20" src="https://img.shields.io/badge/license-MIT-blue.svg"></a>&nbsp;&nbsp;<a href="https://gitter.im/fritx/vue-at?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge"><img width="92" src="https://badges.gitter.im/fritx/vue-at.svg" alt="Join the chat at https://gitter.im/fritx/vue-at"></a>
+<a href="https://we-demo.github.io/vue-at-vite-app/"><img width="76" height="20" src="https://img.shields.io/website?url=https%3A%2F%2Fwe-demo.github.io%2Fvue-at-vite-app%2F"></a>&nbsp;&nbsp;<a href="https://www.npmjs.com/package/vue-at"><img height="20" src="https://img.shields.io/npm/dm/vue-at.svg"></a>&nbsp;&nbsp;<a href="https://github.com/fritx/vue-at"><img width="90" height="20" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" /></a>&nbsp;&nbsp;<a href="https://github.com/fritx/vue-at"><img width="84" height="20" src="https://img.shields.io/badge/license-MIT-blue.svg"></a>&nbsp;&nbsp;<a href="https://gitter.im/fritx/vue-at?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge"><img width="92" src="https://badges.gitter.im/fritx/vue-at.svg" alt="Join the chat at https://gitter.im/fritx/vue-at"></a>
 
 <img width="262" height="218" src="https://raw.githubusercontent.com/fritx/vue-at/master/WechatIMG1.jpeg">&nbsp;&nbsp;<img width="262" height="218" src="https://raw.githubusercontent.com/fritx/vue-at/master/WechatIMG2.jpeg">
-
-Live Demo & Documentation: https://fritx.github.io/vue-at
-
-*Docs is powered by [At-UI](https://github.com/AT-UI/at-ui).*
 
 - [x] Chrome / Firefox / Edge / IE9~IE11
 - [x] Plain-text based, no jQuery, no extra nodes
 - [x] Content-Editable / Textarea
 - [x] Avatars, custom templates
-- [x] Vue3 / Vue2 / Vue1
+- [x] Vite / Vue3 / Vue2 / Vue1
 - [x] Vuetify / Element UI / Element Plus
-- [x] Vue-CLI migration
-- [ ] Vite migration
+- [x] Vue-CLI build migration
+- [ ] Vite build migration
 - [x] CommonJS / UMD Support
 
+Playground: https://we-demo.github.io/vue-at-vite-app/<br>
+Vue2 Docs: https://github.com/fritx/vue-at/tree/vue2#readme<br>
+Vue3 Docs: See below<br>
 See also: [react-at](https://github.com/fritx/react-at)
 
-for Vue2, read [this one](https://github.com/fritx/vue-at/tree/vue2#readme) instead.
+**If you're using Vue2, read [branch vue2](https://github.com/fritx/vue-at/tree/vue2#readme) instead.**
 
 ```plain
 npm i vue-at@next  # for Vue3 (branch vue3)
