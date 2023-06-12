@@ -4,9 +4,6 @@
 
 <img width="262" height="218" src="https://raw.githubusercontent.com/fritx/vue-at/master/WechatIMG1.jpeg">&nbsp;&nbsp;<img width="262" height="218" src="https://raw.githubusercontent.com/fritx/vue-at/master/WechatIMG2.jpeg">
 
-Playground: https://we-demo.github.io/vue-at-vite-app/<br>
-Documentation: https://fritx.github.io/vue-at
-
 - [x] Chrome / Firefox / Edge / IE9~IE11
 - [x] Plain-text based, no jQuery, no extra nodes
 - [x] Content-Editable / Textarea
@@ -16,6 +13,9 @@ Documentation: https://fritx.github.io/vue-at
 - [ ] Vue-CLI migration
 - [ ] Vite migration
 
+Playground: https://we-demo.github.io/vue-at-vite-app/<br>
+Vue3 Docs: https://github.com/fritx/vue-at/tree/vue3#readme<br>
+Vue2 Docs: https://fritx.github.io/vue-at/ or see below<br>
 See also: [react-at](https://github.com/fritx/react-at)
 
 ## Motivation
@@ -28,12 +28,11 @@ See also: [react-at](https://github.com/fritx/react-at)
 
 Finally I ended up creating this.
 
-for Vue3, read [this one](https://github.com/fritx/vue-at/tree/vue3#readme) instead.
+**If you're using Vue3, read [branch vue3](https://github.com/fritx/vue-at/tree/vue3#readme) instead.**
 
 ```plain
-npm i vue-at@next  # for Vue3 (branch wip-vue3)
-
-npm i vue-at@2.x  # for Vue2  <----
+npm i vue-at@next  # for Vue3 (branch vue3)
+npm i vue-at@2.x  # for Vue2 (branch vue2)
 npm i vue-at@1.x  # for Vue1 (branch vue1-legacy)
 npm i vue1-at  # for Vue1 (branch vue1-new)
 ```

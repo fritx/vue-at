@@ -6,8 +6,8 @@
   "repository": "https://github.com/fritx/vue-at",
   "scripts": {
     "dev": "webpack serve --config webpack/demo --open --inline --hot --mode development",
-    "demo": "webpack --config webpack/demo --progress --mode development",
-    "build": "webpack --config webpack/prod --progress --mode production",
+    "demo": "shx rm -rf dist && webpack --config webpack/demo --progress --mode development",
+    "build": "shx rm -rf dist && webpack --config webpack/prod --progress --mode production",
     "prepublish": "npm run build"
   },
   "main": "dist/vue-at.js",
@@ -47,6 +47,7 @@
     "file-loader": "^6.2.0",
     "sass": "^1.53.0",
     "sass-loader": "^13.0.2",
+    "shx": "^0.3.4",
     "style-loader": "^3.3.1",
     "terser-webpack-plugin": "^5.3.3",
     "textarea-caret": "^3.1.0",
