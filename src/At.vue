@@ -65,7 +65,7 @@ export default {
     },
     filterMatch: {
       type: Function,
-      default: (name, chunk, at) => {
+      default: (name, chunk, at, v) => {
         // match at lower-case
         return name.toLowerCase().indexOf(chunk.toLowerCase()) > -1;
       },
@@ -343,7 +343,7 @@ export default {
           }
           const matched = members.filter((v) => {
             const name = itemName(v);
-            return filterMatch(name, chunk, at);
+            return filterMatch(name, chunk, at, v);
           });
 
           show = false;
