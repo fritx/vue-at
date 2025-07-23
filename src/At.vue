@@ -293,10 +293,10 @@ export default {
           while (container) {
             if (container === this.$el) break;
             container = container.parentElement;
-            if (!container) return;
           }
+          if (!container) return;
         }
-        
+
         const { atItems, avoidEmail, allowSpaces, showUnique } = this
 
         let show = true

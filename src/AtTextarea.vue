@@ -69,12 +69,12 @@ export default {
       if (keep) {
         // exit the function if the range is not inside this.$el
         const range = getPrecedingRange()
-        let container = range.commonAncestorContainer;
+        let container = range && range.commonAncestorContainer;
         while (container) {
           if (container === this.$el) break;
           container = container.parentElement;
-          if (!container) return;
         }
+        if (!container) return;
       }
 
       const text = el.value.slice(0, el.selectionEnd)
