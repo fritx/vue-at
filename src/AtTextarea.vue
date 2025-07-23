@@ -1,7 +1,7 @@
 <script>
 import At from './At.vue'
 import getCaretCoordinates from 'textarea-caret'
-import { getAtAndIndex } from './util'
+import { getAtAndIndex, getPrecedingRange } from './util'
 
 export default {
   extends: At,
@@ -71,6 +71,17 @@ export default {
       // https://laracasts.com/discuss/channels/vue/how-do-emit-to-v-model-in-vue-3
       // this.$emit('input', el.value)
       this.$emit('update:value', el.value)
+
+      if (keep) {
+        // exit the function if the range is not inside this.$el
+        const range = getPrecedingRange()
+        let container = range && range.commonAncestorContainer;
+        while (container) {
+          if (container === this.$el) break;
+          container = container.parentElement;
+        }
+        if (!container) return;
+      }
 
       const text = el.value.slice(0, el.selectionEnd)
       if (text) {
